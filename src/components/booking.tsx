@@ -110,6 +110,14 @@ export function Booking() {
             "numberOfGuests": 4,
             "customerId": "623b85d54396b96c57bde7c3"
         },
+        {
+            "id": "623b85d54396b96c57bde7c3",
+            "restaurantId": "623b85d54396b96c57bde7c3",
+            "date": "2022-01-01",
+            "time": "18:00",
+            "numberOfGuests": 4,
+            "customerId": "623b85d54396b96c57bde7c3"
+        },
 
         {
             "id": "623b85d54396b96c57bde7c3",
@@ -231,13 +239,21 @@ export function Booking() {
             "time": "21:00",
             "numberOfGuests": 4,
             "customerId": "623b85d54396b96c57bde7c3"
+        },
+        {
+            "id": "623b85d54396b96c57bde7c3",
+            "restaurantId": "623b85d54396b96c57bde7c3",
+            "date": "2022-01-01",
+            "time": "21:00",
+            "numberOfGuests": 4,
+            "customerId": "623b85d54396b96c57bde7c3"
         }
 
 
     ]
 
-    const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(0);
-    const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(0);
+    const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(-1);
+    const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(-1);
 
     const [chosenDate, setChosenDate] = useState<string>("");
     const [chosenTime, setChosenTime] = useState<string>("");
@@ -251,8 +267,17 @@ export function Booking() {
     })
 
     const [showUserForm, setShowUserForm] = useState(false);
+    const [showError, setShowError] = useState(false)
+    const [showRequiredError, setShowRequiredError] = useState(false)
+    const [showBookingDone, setShowBookingDone] = useState(false)
 
     function checkIfOpenTable() {
+
+        if (chosenDate === "" || chosenAmountOfGuests === "") {
+          
+            setShowRequiredError(true)
+            return
+        }
 
         let checkDate: string = chosenDate
 
@@ -273,6 +298,7 @@ export function Booking() {
 
         SetTablesAt6oClock(numberOfTablesAt6Left)
         SetTablesAt9oClock(numberOfTablesAt9Left)
+        setShowRequiredError(false)
 
     }
 
@@ -301,19 +327,31 @@ export function Booking() {
 
     function makeBooking() {
 
+        if (newUser.firstname === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
+
+            setShowError(true)
+            
+            return
+        }
+
         let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
 
         let booking = new Bookings("testId", chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
+
+        setShowError(false)
+
+        setShowUserForm(false)
+
+        setShowBookingDone(true)
 
         console.log(booking);
         
 
     }
 
-
     return (<>
         <div>Booking Works</div>
-        {!showUserForm && <div>
+        {!showBookingDone && <div>
 
             <p>välj datum och antal personer som ska äta</p>
             <input type="date" onChange={handleChosenDate} />
@@ -326,10 +364,12 @@ export function Booking() {
                 <option value="5">5</option>
                 <option value="6">6</option>
             </select>
-
+            <br />
+            {showRequiredError && <div>Vänligen välj datum och antal gäster</div> }
             <button onClick={checkIfOpenTable}>testa boka</button>
             {tablesAt6oClock > 0 && <div>finns {tablesAt6oClock} lediga bord kl 18 <button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
             {tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21 <button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div>Det fanns inga lediga bord det datumet, vänligen prova ett annat datum</div> }
 
 
         </div>}
@@ -349,6 +389,8 @@ export function Booking() {
                 <button onClick={makeBooking}>spara bokning</button>
                 <button onClick={cancelBooking}>avbryt</button>
             </div>
+            {showError && <div>alla fällt är obligatoriska</div> }
         </div>}
+        {showBookingDone && <div>Bokning klar, tack!</div> }
     </>)
 }
