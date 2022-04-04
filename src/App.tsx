@@ -1,24 +1,42 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { Home } from './components/home';
+import { Booking } from './components/booking';
+import { Contact } from './components/contact';
+import { Admin } from './components/admin';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <header>
+          <nav>
+            <h1 className='logo'>Welcome to restaurant</h1>
+            <div>
+              <ul className='navigation'>
+                <li> <Link to="/">Hem</Link> </li>
+                <li> <Link to="/booking">Boka bord</Link> </li>
+                <li> <Link to="/contact">Kontakt</Link> </li>
+                <li> <Link to="/admin">Admin</Link> </li>
+              </ul>
+            </div>
+
+          </nav>
+        </header>
+        <Routes>
+          <Route path='/' element={<Home></Home>}> </Route>
+
+          <Route path='/booking' element={<Booking></Booking>}> </Route>
+
+          <Route path='/contact' element={<Contact></Contact>}> </Route>
+
+          <Route path='/admin' element={<Admin></Admin>}> </Route>
+
+        </Routes>
+      </BrowserRouter>
+
     </div>
   );
 }
