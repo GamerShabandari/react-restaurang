@@ -107,14 +107,6 @@ export function Booking() {
             "numberOfGuests": 4,
             "customerId": "623b85d54396b96c57bde7c3"
         },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
 
         {
             "id": "623b85d54396b96c57bde7c3",
@@ -274,11 +266,18 @@ export function Booking() {
 
     }
 
+    function choseTimeForDinner(chosenTime:string) {
+
+        console.log("du valde: " + chosenTime);
+        
+
+    }
+
 
     return (<>
         <div>Booking Works</div>
         <button onClick={checkIfOpenTable}>testa boka</button>
-        { tablesAt6oClock > 0 && <div>finns lediga bord kl 18</div> }
-        { tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21</div> }
+        {tablesAt6oClock > 0 && <div>finns {tablesAt6oClock} lediga bord kl 18 <button onClick={()=>{choseTimeForDinner("18:00")}}>Välj denna tid</button> </div>}
+        {tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21 <button onClick={()=>{choseTimeForDinner("21:00")}}>Välj denna tid</button></div>}
     </>)
 }
