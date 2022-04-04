@@ -1,0 +1,21 @@
+{
+    "bookings": [
+    
+    {
+            "id":1,
+            "table": 3,
+            "food": "spaghetti"
+    },
+    {
+            "id":2,
+            "table": 7,
+            "food": "pizza"
+    },
+    {
+            "id":3,
+            "table": 11,
+            "food": "hamburgare"
+    }
+    ]
+    
+    }
