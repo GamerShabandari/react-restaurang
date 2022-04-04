@@ -110,6 +110,14 @@ export function Booking() {
             "numberOfGuests": 4,
             "customerId": "623b85d54396b96c57bde7c3"
         },
+        {
+            "id": "623b85d54396b96c57bde7c3",
+            "restaurantId": "623b85d54396b96c57bde7c3",
+            "date": "2022-01-01",
+            "time": "18:00",
+            "numberOfGuests": 4,
+            "customerId": "623b85d54396b96c57bde7c3"
+        },
 
         {
             "id": "623b85d54396b96c57bde7c3",
@@ -231,13 +239,21 @@ export function Booking() {
             "time": "21:00",
             "numberOfGuests": 4,
             "customerId": "623b85d54396b96c57bde7c3"
+        },
+        {
+            "id": "623b85d54396b96c57bde7c3",
+            "restaurantId": "623b85d54396b96c57bde7c3",
+            "date": "2022-01-01",
+            "time": "21:00",
+            "numberOfGuests": 4,
+            "customerId": "623b85d54396b96c57bde7c3"
         }
 
 
     ]
 
-    const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(0);
-    const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(0);
+    const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(-1);
+    const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(-1);
 
     const [chosenDate, setChosenDate] = useState<string>("");
     const [chosenTime, setChosenTime] = useState<string>("");
@@ -353,6 +369,7 @@ export function Booking() {
             <button onClick={checkIfOpenTable}>testa boka</button>
             {tablesAt6oClock > 0 && <div>finns {tablesAt6oClock} lediga bord kl 18 <button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
             {tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21 <button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div>Det fanns inga lediga bord det datumet, vänligen prova ett annat datum</div> }
 
 
         </div>}
