@@ -326,7 +326,7 @@ export function Booking() {
                 <option value="5">5</option>
                 <option value="6">6</option>
             </select>
-
+            <br />
             <button onClick={checkIfOpenTable}>testa boka</button>
             {tablesAt6oClock > 0 && <div>finns {tablesAt6oClock} lediga bord kl 18 <button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
             {tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21 <button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
