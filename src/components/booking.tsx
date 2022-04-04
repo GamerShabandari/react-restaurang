@@ -1,4 +1,7 @@
 import { ChangeEvent, useState } from "react"
+import { INewUser } from "./models/INewUser";
+import { User } from "./models/User";
+import { Bookings } from "./models/Bookings";
 
 export function Booking() {
 
@@ -240,6 +243,13 @@ export function Booking() {
     const [chosenTime, setChosenTime] = useState<string>("");
     const [chosenAmountOfGuests, setChosenAmountOfGuests] = useState<string>("");
 
+    const [newUser, setNewUser] = useState<INewUser>({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: ""
+    })
+
     const [showUserForm, setShowUserForm] = useState(false);
 
     function checkIfOpenTable() {
@@ -279,20 +289,25 @@ export function Booking() {
         setChosenAmountOfGuests(e.target.value)
     }
 
-    function cancelBooking(){
+    function cancelBooking() {
         setShowUserForm(false)
     }
 
-    function makeBooking(){
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        let name = e.target.name;
 
-        console.log("här");
-        
-        // validera att alla uppgiter är ifyllda i form !!!!!
+        setNewUser({ ...newUser, [name]: e.target.value })
+    }
 
-       // skapa en ny user med färdiga klassen som finns. 
-       //skapa sedan en ny booking innehållandes ovan user också
-       // kör allt till api
+    function makeBooking() {
+
+        let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
+
+        let booking = new Bookings("testId", chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
+
+        console.log(booking);
         
+
     }
 
 
@@ -302,7 +317,7 @@ export function Booking() {
 
             <p>välj datum och antal personer som ska äta</p>
             <input type="date" onChange={handleChosenDate} />
-          
+
             <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -311,11 +326,11 @@ export function Booking() {
                 <option value="5">5</option>
                 <option value="6">6</option>
             </select>
-            
+
             <button onClick={checkIfOpenTable}>testa boka</button>
             {tablesAt6oClock > 0 && <div>finns {tablesAt6oClock} lediga bord kl 18 <button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
             {tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21 <button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
-           
+
 
         </div>}
 
@@ -326,10 +341,10 @@ export function Booking() {
                     <p>dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <form>
-                    <input type="text" placeholder="förnamn" />
-                    <input type="text" placeholder="efternamn" />
-                    <input type="email" placeholder="epost" />
-                    <input type="tel" placeholder="telefon" />
+                    <input type="text" name="firstname" value={newUser.firstname} onChange={handleChange} placeholder="förnamn" />
+                    <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
+                    <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
+                    <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
                 </form>
                 <button onClick={makeBooking}>spara bokning</button>
                 <button onClick={cancelBooking}>avbryt</button>
