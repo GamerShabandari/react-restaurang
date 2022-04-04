@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 export function Booking() {
 
     let mockData = [
@@ -234,21 +236,16 @@ export function Booking() {
             "time": "21:00",
             "numberOfGuests": 4,
             "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
         }
 
 
     ]
 
+    const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(0);
+    const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(0);
+
     function checkIfOpenTable() {
-        console.log("testar");
+
 
         let chosenDate: string = "2022-01-01"
 
@@ -260,11 +257,11 @@ export function Booking() {
 
             if (order.date === chosenDate && order.time === "18:00") {
                 numberOfTablesAt6Left--
-                console.log(numberOfTablesAt6Left);
 
-            } else if(order.date === chosenDate && order.time === "21:00") {
+
+            } else if (order.date === chosenDate && order.time === "21:00") {
                 numberOfTablesAt9Left--
-                console.log(numberOfTablesAt9Left);
+
 
             }
 
@@ -272,7 +269,8 @@ export function Booking() {
 
         console.log("här fanns det " + numberOfTablesAt6Left + " bord kvar kl 18 och " + numberOfTablesAt9Left + " bord kvar kl 21");
 
-
+        SetTablesAt6oClock(numberOfTablesAt6Left)
+        SetTablesAt9oClock(numberOfTablesAt9Left)
 
     }
 
@@ -280,5 +278,7 @@ export function Booking() {
     return (<>
         <div>Booking Works</div>
         <button onClick={checkIfOpenTable}>testa boka</button>
+        { tablesAt6oClock > 0 && <div>finns lediga bord kl 18</div> }
+        { tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21</div> }
     </>)
 }
