@@ -269,6 +269,7 @@ export function Booking() {
     const [showUserForm, setShowUserForm] = useState(false);
     const [showError, setShowError] = useState(false)
     const [showRequiredError, setShowRequiredError] = useState(false)
+    const [showEmailError, setShowEmailError] = useState(false)
     const [showBookingDone, setShowBookingDone] = useState(false)
 
     function checkIfOpenTable() {
@@ -327,12 +328,22 @@ export function Booking() {
 
     function makeBooking() {
 
+
         if (newUser.firstname === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
             
             return
         }
+
+        if (!/\S+@\S+\.\S+/.test(newUser.email)) {
+            
+            setShowEmailError(true)
+
+            return
+        }
+
+       
 
         let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
 
@@ -390,6 +401,7 @@ export function Booking() {
                 <button onClick={cancelBooking}>avbryt</button>
             </div>
             {showError && <div>alla fällt är obligatoriska</div> }
+            {showEmailError && <div>vänligen ange en giltig email</div> }
         </div>}
         {showBookingDone && <div>Bokning klar, tack!</div> }
     </>)
