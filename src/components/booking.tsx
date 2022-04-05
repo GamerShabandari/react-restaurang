@@ -370,7 +370,7 @@ export function Booking() {
 
     }
 
-    return (<main className="bookingContainer animate__animated">
+    return (<main className="bookingContainer animate__animated animate__fadeIn">
 
         {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
 
