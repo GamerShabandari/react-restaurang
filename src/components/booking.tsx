@@ -3,6 +3,8 @@ import { INewUser } from "./models/INewUser";
 import { User } from "./models/User";
 import { Bookings } from "./models/Bookings";
 
+import "./booking.css"
+
 export function Booking() {
 
     let mockData = [
@@ -345,14 +347,14 @@ export function Booking() {
         }
 
         if (!/^\d+$/.test(newUser.phone)) {
-            
+
             setShowPhoneError(true)
-            
+
             return
-            
+
         }
 
-        
+
 
         let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
 
@@ -368,9 +370,9 @@ export function Booking() {
 
     }
 
-    return (<>
-        
-        {!showBookingDone && <div>
+    return (<main className="bookingContainer">
+
+        {!showBookingDone && <div className="inputContainer">
 
             <p>Vänligen välj datum och antal gäster.</p>
             <input type="date" onChange={handleChosenDate} />
@@ -383,7 +385,7 @@ export function Booking() {
                 <option value="5">5 pers</option>
                 <option value="6">6 pers</option>
             </select>
-            {showRequiredError && <div>Du måste ange ett datum och antal gäster</div> }
+            {showRequiredError && <div>Du måste ange ett datum och antal gäster</div>}
             <button onClick={checkIfOpenTable}>sök ledigt bord</button>
 
             {tablesAt6oClock > 0 && <div>Det finns {tablesAt6oClock} lediga bord kl 18.<button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
@@ -393,7 +395,7 @@ export function Booking() {
 
         </div>}
 
-        {showUserForm && <div>
+        {showUserForm && <div className="formContainer">
             <div>
                 <h1>Fyll i resterande uppgifter för att slutföra bokning</h1>
                 <div>
@@ -410,8 +412,8 @@ export function Booking() {
             </div>
             {showError && <div>Alla fällt är obligatoriska</div>}
             {showEmailError && <div>Vänligen ange en giltig email</div>}
-            {showPhoneError && <div>Telefonnummer får bara bestå utav siffor</div> }
+            {showPhoneError && <div>Telefonnummer får bara bestå utav siffor</div>}
         </div>}
         {showBookingDone && <div>Din bokning är nu klar, vi ses!</div>}
-    </>)
+    </main>)
 }
