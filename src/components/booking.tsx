@@ -385,7 +385,7 @@ export function Booking() {
                 <option value="5">5 pers</option>
                 <option value="6">6 pers</option>
             </select>
-            {showRequiredError && <div>Du måste ange ett datum och antal gäster</div>}
+            {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button onClick={checkIfOpenTable}>sök ledigt bord</button>
 
             {tablesAt6oClock > 0 && <div>Det finns {tablesAt6oClock} lediga bord kl 18.<button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
@@ -410,9 +410,9 @@ export function Booking() {
                 <button onClick={makeBooking}>spara bokning</button>
                 <button onClick={cancelBooking}>avbryt</button>
             </div>
-            {showError && <div>Alla fällt är obligatoriska</div>}
-            {showEmailError && <div>Vänligen ange en giltig email</div>}
-            {showPhoneError && <div>Telefonnummer får bara bestå utav siffor</div>}
+            {showError && <div className="warning">Alla fällt är obligatoriska</div>}
+            {showEmailError && <div className="warning">Vänligen ange en giltig email</div>}
+            {showPhoneError && <div className="warning">Telefonnummer får bara bestå utav siffor</div>}
         </div>}
         {showBookingDone && <div>Din bokning är nu klar, vi ses!</div>}
     </main>)

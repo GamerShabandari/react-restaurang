@@ -1,11 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './components/home';
 import { Booking } from './components/booking';
 import { Contact } from './components/contact';
 import { Admin } from './components/admin';
+import "animate.css"
 
 function App() {
   return (
