@@ -6,6 +6,7 @@ import { Home } from './components/home';
 import { Booking } from './components/booking';
 import { Contact } from './components/contact';
 import { Admin } from './components/admin';
+import { Footer} from './components/footer';
 
 function App() {
   return (
@@ -35,7 +36,10 @@ function App() {
           <Route path='/admin' element={<Admin></Admin>}> </Route>
 
         </Routes>
+
       </BrowserRouter>
+
+      <Footer></Footer>
 
     </div>
   );

@@ -1,0 +1,78 @@
+.container-layout {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+article {
+    width:75%;
+}
+
+aside {
+    width: 25%;
+}
+
+.container-food {
+    display:flex;
+    flex-direction: column;
+}
+
+.food-title {
+    color: white;
+}
+
+.container-openhour {
+    margin-left: 3rem;
+    text-align: left;
+}
+
+.container-menu, .container-drink, .container-desert {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    margin-left: 50px;
+}
+
+.openhour-title {
+    font-size: 1.5rem;
+}
+
+img {
+    width:200px;
+    height:200px;
+}
+
+p {
+    color: white;
+    margin-top: 0;
+}
+
+li {
+    list-style: none;
+    padding: 10px 0 10px 0;
+    color: white;
+}
+
+.button {
+    width: 600px;
+    height: 80px;
+    border: 10px solid white;
+    margin: 50px;
+    padding-top: 20px;
+    font-size: 3rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+
+.button-a {
+    text-decoration: none;
+    color: white;
+    margin: 20px;
+}
+  
+/* mouse over link */
+.button:hover {
+    color: white;
+  }
