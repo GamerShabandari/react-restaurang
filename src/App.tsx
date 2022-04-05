@@ -11,11 +11,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header>
+        <header className='animate__animated animate__fadeInDown'>
           <nav>
             <h1 className='logo'>Welcome to restaurant</h1>
             <div>
-              <ul className='navigation'>
+              <ul className='navigation animate__animated animate__backInDown'>
                 <li> <Link to="/">Hem</Link> </li>
                 <li> <Link to="/booking">Boka bord</Link> </li>
                 <li> <Link to="/contact">Kontakt</Link> </li>
