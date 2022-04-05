@@ -267,15 +267,16 @@ export function Booking() {
     })
 
     const [showUserForm, setShowUserForm] = useState(false);
-    const [showError, setShowError] = useState(false)
-    const [showRequiredError, setShowRequiredError] = useState(false)
-    const [showEmailError, setShowEmailError] = useState(false)
-    const [showBookingDone, setShowBookingDone] = useState(false)
+    const [showError, setShowError] = useState(false);
+    const [showRequiredError, setShowRequiredError] = useState(false);
+    const [showEmailError, setShowEmailError] = useState(false);
+    const [showPhoneError, setShowPhoneError] = useState(false);
+    const [showBookingDone, setShowBookingDone] = useState(false);
 
     function checkIfOpenTable() {
 
         if (chosenDate === "" || chosenAmountOfGuests === "") {
-          
+
             setShowRequiredError(true)
             return
         }
@@ -332,18 +333,26 @@ export function Booking() {
         if (newUser.firstname === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
-            
+
             return
         }
 
         if (!/\S+@\S+\.\S+/.test(newUser.email)) {
-            
+
             setShowEmailError(true)
 
             return
         }
 
-       
+        if (!/^\d+$/.test(newUser.phone)) {
+            
+            setShowPhoneError(true)
+            
+            return
+            
+        }
+
+        
 
         let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
 
@@ -356,31 +365,30 @@ export function Booking() {
         setShowBookingDone(true)
 
         console.log(booking);
-        
 
     }
 
     return (<>
-        <div>Booking Works</div>
+        
         {!showBookingDone && <div>
 
-            <p>välj datum och antal personer som ska äta</p>
+            <p>Vänligen välj datum och antal gäster.</p>
             <input type="date" onChange={handleChosenDate} />
 
             <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
+                <option value="1">1 pers</option>
+                <option value="2">2 pers</option>
+                <option value="3">3 pers</option>
+                <option value="4">4 pers</option>
+                <option value="5">5 pers</option>
+                <option value="6">6 pers</option>
             </select>
-            <br />
-            {showRequiredError && <div>Vänligen välj datum och antal gäster</div> }
-            <button onClick={checkIfOpenTable}>testa boka</button>
-            {tablesAt6oClock > 0 && <div>finns {tablesAt6oClock} lediga bord kl 18 <button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
-            {tablesAt9oClock > 0 && <div>finns {tablesAt9oClock} lediga bord kl 21 <button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
-            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div>Det fanns inga lediga bord det datumet, vänligen prova ett annat datum</div> }
+            {showRequiredError && <div>Du måste ange ett datum och antal gäster</div> }
+            <button onClick={checkIfOpenTable}>sök ledigt bord</button>
+
+            {tablesAt6oClock > 0 && <div>Det finns {tablesAt6oClock} lediga bord kl 18.<button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
+            {tablesAt9oClock > 0 && <div>Det finns {tablesAt9oClock} lediga bord kl 21.<button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div>Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
 
         </div>}
@@ -389,7 +397,7 @@ export function Booking() {
             <div>
                 <h1>Fyll i resterande uppgifter för att slutföra bokning</h1>
                 <div>
-                    <p>dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
+                    <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <form>
                     <input type="text" name="firstname" value={newUser.firstname} onChange={handleChange} placeholder="förnamn" />
@@ -400,9 +408,10 @@ export function Booking() {
                 <button onClick={makeBooking}>spara bokning</button>
                 <button onClick={cancelBooking}>avbryt</button>
             </div>
-            {showError && <div>alla fällt är obligatoriska</div> }
-            {showEmailError && <div>vänligen ange en giltig email</div> }
+            {showError && <div>Alla fällt är obligatoriska</div>}
+            {showEmailError && <div>Vänligen ange en giltig email</div>}
+            {showPhoneError && <div>Telefonnummer får bara bestå utav siffor</div> }
         </div>}
-        {showBookingDone && <div>Bokning klar, tack!</div> }
+        {showBookingDone && <div>Din bokning är nu klar, vi ses!</div>}
     </>)
 }
