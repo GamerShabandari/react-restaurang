@@ -370,9 +370,9 @@ export function Booking() {
 
     }
 
-    return (<main className="bookingContainer">
+    return (<main className="bookingContainer animate__animated">
 
-        {!showBookingDone && <div className="inputContainer">
+        {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
 
             <p>Vänligen välj datum och antal gäster.</p>
             <input type="date" onChange={handleChosenDate} />
@@ -395,7 +395,7 @@ export function Booking() {
 
         </div>}
 
-        {showUserForm && <div className="formContainer">
+        {showUserForm && <div className="formContainer animate__animated animate__backInDown">
             <div>
                 <h1>Fyll i resterande uppgifter för att slutföra bokning</h1>
                 <div>
@@ -410,9 +410,9 @@ export function Booking() {
                 <button onClick={makeBooking}>spara bokning</button>
                 <button onClick={cancelBooking}>avbryt</button>
             </div>
-            {showError && <div className="warning">Alla fällt är obligatoriska</div>}
-            {showEmailError && <div className="warning">Vänligen ange en giltig email</div>}
-            {showPhoneError && <div className="warning">Telefonnummer får bara bestå utav siffor</div>}
+            {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
+            {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
+            {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav siffor</div>}
         </div>}
         {showBookingDone && <div>Din bokning är nu klar, vi ses!</div>}
     </main>)
