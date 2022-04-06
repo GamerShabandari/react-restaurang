@@ -37,6 +37,11 @@
     margin: 0 auto;
 }
 
+.formContainer form button{
+    width: fit-content;
+    align-self: center;
+}
+
 @media screen and (min-width: 1000px) {
     .bookingContainer {
       display: flex;

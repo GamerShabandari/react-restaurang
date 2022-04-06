@@ -386,6 +386,7 @@ export function Booking() {
         setShowError(false)
 
         setShowUserForm(false)
+        
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
             .then(response => {
                 setShowBookingDone(true)
@@ -435,14 +436,15 @@ export function Booking() {
                     <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
-                </form>
-                <button onClick={makeBooking}>spara bokning</button>
+                    <button onClick={makeBooking}>spara bokning</button>
                 <button onClick={cancelBooking}>avbryt</button>
+                </form>
+                
             </div>
             {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
             {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
             {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav siffor</div>}
         </div>}
-        {showBookingDone && <div>Din bokning är nu klar, vi ses!</div>}
+        {showBookingDone && <div className="animate__animated animate__backInDown">Din bokning är nu klar, vi ses!</div>}
     </main>)
 }
