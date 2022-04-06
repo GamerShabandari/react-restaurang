@@ -1,4 +1,5 @@
 .bookingContainer{
+    width:auto;
     border: 2px solid green;
     min-height: 100vh;
     display: flex;
@@ -26,7 +27,14 @@
     align-items: center;
     justify-content: center;
     padding: 30px;
-    gap: 10px;
+}
+
+.formContainer form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
+    margin: 0 auto;
 }
 
 @media screen and (min-width: 1000px) {
@@ -37,6 +45,7 @@
       align-items:flex-start;
       gap: 20px;
       min-height: 100vh;
+      width: auto;
       padding: 30px;
     }
   }

@@ -257,13 +257,13 @@ export function Booking() {
     // ]
 
     let restaurantID = "624db995d80b65d5c561f68d"
-    
+
     let katanaSushi = {
         name: "Katana Sushi",
         address: {
-          street: "Kungsgatan 1",
-          zip: "753 16",
-          city: "Uppsala"
+            street: "Kungsgatan 1",
+            zip: "753 16",
+            city: "Uppsala"
         }
     };
 
@@ -291,12 +291,12 @@ export function Booking() {
     const [showBookingDone, setShowBookingDone] = useState(false);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get<IBooking[]>("https://school-restaurant-api.azurewebsites.net/booking/restaurant/624db995d80b65d5c561f68d")
-        .then(response =>  {
-            console.log(response.data);
-            setBookingsFromApi([...response.data])
-        })
+            .then(response => {
+                console.log(response.data);
+                setBookingsFromApi([...response.data])
+            })
     }, [])
 
 
@@ -386,29 +386,24 @@ export function Booking() {
         setShowError(false)
 
         setShowUserForm(false)
-        axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, {headers: {"content-type": "application/json"}})
-        .then(response =>{ console.log(response.data);
-            setShowBookingDone(true)
-        })
-        .catch(error => { console.log(error);
+        axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
+            .then(response => {
+                setShowBookingDone(true)
+            })
+            .catch(error => {
+                console.log(error);
 
-            /// här kan du skapa ett felmeddelande och state för UI
-         })
-        // setShowBookingDone(true)
-
-        console.log(booking);
-
+                alert("något gick tyvärr fel, försök igen senare.")
+            })
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
-       TESTAR API DATA LÄNGD!!! {bookingsFromApi.length}
-      
         {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
 
-            <p>Vänligen välj datum och antal gäster.</p>
+            <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
 
             <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
@@ -431,7 +426,7 @@ export function Booking() {
 
         {showUserForm && <div className="formContainer animate__animated animate__backInDown">
             <div>
-                <h1>Fyll i resterande uppgifter för att slutföra bokning</h1>
+                <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
                 <div>
                     <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
