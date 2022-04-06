@@ -79,7 +79,7 @@ export function Home(){
         <article className='container-drink'>
         <div>
            <img src='images/sakeHaku2.png' alt='menu picture' />
-           <p>Sake:Hakutaka</p>
+           <p>Sake Hakutaka</p>
            </div>
 
            <div>
@@ -98,11 +98,11 @@ export function Home(){
            </div>
         </article>{/*container-drink*/}
 
-        <h2 className='food-title'>Efterrätt</h2>
-        <article className='container-desert'>
+        <h2 className='food-title'>EFTERRÄTT</h2>
+        <article className='container-dessert'>
         <div>
            <img src='images/greenteaglass.png' alt='menu picture' />
-           <p>grönt te glass</p>
+           <p>Grönt te glass</p>
            </div>
 
            <div>
@@ -119,15 +119,14 @@ export function Home(){
            <img src='images/cherrymochi.png' alt='menu picture' />
            <p>Sakura mochi</p>
            </div>
-        </article>{/*container-desert*/}
+        </article>{/*container-dessert*/}
         </div>{/*container-food*/}
 
         <aside className='container-openhour'>
             <ul>
                 <li className='openhour-title'>ÖPPETTIDER</li>
-                <li>måndag - fredag:  18-23</li>
-                <li>lördag:  18-01</li>
-                <li>söndag:  Stängt</li>
+                <li>alla dagar  18-23</li>
+                
             </ul>
         </aside>{/*container-openhour*/}
       </section>{/*container-layout*/}
