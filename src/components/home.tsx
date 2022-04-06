@@ -1,12 +1,55 @@
 import './home.css';
 import { Fragment } from "react";
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 export function Home(){
 
+    {/*Google map karta*/} 
+    const Map = () => {
+        const mapStyles = {
+        height: "60%",
+        width: "50%"
+    };
+
+    const defaultCenter = {
+        lat: 59.3255, lng: 17.8887,
+    };
+
+    const locations = [
+        {
+            name: "Location 1",
+            location: {
+                lat: 59.3255,
+                lng: 17.8887,
+            },
+        },
+    ];
+
+    return (
+        <LoadScript googleMapsApiKey='AIzaSyDyGEW9BNtdNTTs9dTsjDT1PJGmdb4e0lM'>
+            <GoogleMap
+                mapContainerStyle={mapStyles}
+                zoom={13}
+                center={defaultCenter}>
+                {
+                    locations.map(item => {
+                        return (
+                            <Marker key={item.name} position={item.location} />
+                        )
+                    })
+                }
+            </GoogleMap>
+        </LoadScript>
+    )
+}
+
+
     return (
      <Fragment>
-      <body style={{ backgroundImage: "url(images/blackwall.png)" }}>
-
+      <body>
+      {/*background image*/}
+      <section style={{ backgroundImage: "url(images/blackwall.png)" }}>
+     
       {/*Link to Booking*/}
       <a href='/booking' className='button-a' ><p className='button'>BOKA BOARD</p></a>
 
@@ -78,22 +121,22 @@ export function Home(){
         <h2 className='food-title'>DRYCK</h2>
         <article className='container-drink'>
         <div>
-           <img src='images/sakeHaku2.png' alt='menu picture' />
+           <img src='images/sakeHaku2.png' alt='drink picture' />
            <p>Sake Hakutaka</p>
            </div>
 
            <div>
-           <img src='images/saketaru.png' alt='menu picture' />
+           <img src='images/saketaru.png' alt='drink picture' />
            <p>Tunna sake</p>
            </div>
 
            <div>
-           <img src='images/beer.png' alt='menu picture' />
+           <img src='images/beer.png' alt='drink picture' />
            <p>Asahi öl</p>
            </div>
 
            <div>
-           <img src='images/macha.png' alt='menu picture' />
+           <img src='images/macha.png' alt='drink picture' />
            <p>Macha Te</p>
            </div>
         </article>{/*container-drink*/}
@@ -101,22 +144,22 @@ export function Home(){
         <h2 className='food-title'>EFTERRÄTT</h2>
         <article className='container-dessert'>
         <div>
-           <img src='images/greenteaglass.png' alt='menu picture' />
+           <img src='images/greenteaglass.png' alt='dessert picture' />
            <p>Grönt te glass</p>
            </div>
 
            <div>
-           <img src='images/greencake.png' alt='menu picture' />
+           <img src='images/greencake.png' alt='dessert picture' />
            <p>Macha roll</p>
            </div>
 
            <div>
-           <img src='images/fruits.png' alt='menu picture' />
+           <img src='images/fruits.png' alt='dessert picture' />
            <p>Frukt parfait</p>
            </div>
 
            <div>
-           <img src='images/cherrymochi.png' alt='menu picture' />
+           <img src='images/cherrymochi.png' alt='dessert picture' />
            <p>Sakura mochi</p>
            </div>
         </article>{/*container-dessert*/}
@@ -130,6 +173,12 @@ export function Home(){
             </ul>
         </aside>{/*container-openhour*/}
       </section>{/*container-layout*/}
+      </section>{/*background image*/}
+
+      <section className='google-map'>
+          <h1>Katana sushi karta </h1>
+          {Map()}
+      </section>
 
       </body>
     </Fragment>

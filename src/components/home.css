@@ -1,7 +1,11 @@
+:root{
+    --mainFont: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
 .container-layout {
     display: flex;
     justify-content: space-between;
-    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    font-family: var(--mainFont);
 }
 
 article {
@@ -76,3 +80,13 @@ li {
 .button:hover {
     color: white;
   }
+
+/* google map */
+.google-map {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

@@ -1,0 +1,9 @@
+:root{
+    --mainFont: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.footer {
+    font-family: var(--mainFont);
+    background-color: grey;
+    justify-content:center;
+}
