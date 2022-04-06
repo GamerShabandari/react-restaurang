@@ -388,9 +388,9 @@ export function Booking() {
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button onClick={checkIfOpenTable}>sök ledigt bord</button>
 
-            {tablesAt6oClock > 0 && <div>Det finns {tablesAt6oClock} lediga bord kl 18.<button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
-            {tablesAt9oClock > 0 && <div>Det finns {tablesAt9oClock} lediga bord kl 21.<button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
-            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div>Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
+            {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
+            {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
 
         </div>}
