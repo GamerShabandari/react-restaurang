@@ -381,13 +381,20 @@ export function Booking() {
 
         let user = new User(newUser.name, newUser.lastname, newUser.email, newUser.phone)
 
-        let booking = new Bookings("testId", chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
+        let booking = new Bookings(restaurantID, chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
 
         setShowError(false)
 
         setShowUserForm(false)
+        axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, {headers: {"content-type": "application/json"}})
+        .then(response =>{ console.log(response.data);
+            setShowBookingDone(true)
+        })
+        .catch(error => { console.log(error);
 
-        setShowBookingDone(true)
+            /// här kan du skapa ett felmeddelande och state för UI
+         })
+        // setShowBookingDone(true)
 
         console.log(booking);
 
@@ -429,7 +436,7 @@ export function Booking() {
                     <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <form>
-                    <input type="text" name="firstname" value={newUser.name} onChange={handleChange} placeholder="förnamn" />
+                    <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" />
                     <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
