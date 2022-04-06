@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <header className='animate__animated animate__fadeInDown'>
           <nav>
-            <h1 className='logo'>Welcome to restaurant</h1>
+            <h1 className='logo'>Katana Sushi</h1>
             <div>
               <ul className='navigation animate__animated animate__backInDown'>
                 <li> <Link to="/">Hem</Link> </li>
