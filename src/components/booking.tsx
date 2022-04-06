@@ -1,259 +1,260 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { INewUser } from "./models/INewUser";
 import { User } from "./models/User";
 import { Bookings } from "./models/Bookings";
 
 import "./booking.css"
 import axios from "axios";
+import { IBooking } from "./models/IBooking";
 
 export function Booking() {
 
-    let mockData = [
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
+    // let mockData = [
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
 
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "18:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "18:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
 
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        },
-        {
-            "id": "623b85d54396b96c57bde7c3",
-            "restaurantId": "623b85d54396b96c57bde7c3",
-            "date": "2022-01-01",
-            "time": "21:00",
-            "numberOfGuests": 4,
-            "customerId": "623b85d54396b96c57bde7c3"
-        }
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     },
+    //     {
+    //         "id": "623b85d54396b96c57bde7c3",
+    //         "restaurantId": "623b85d54396b96c57bde7c3",
+    //         "date": "2022-01-01",
+    //         "time": "21:00",
+    //         "numberOfGuests": 4,
+    //         "customerId": "623b85d54396b96c57bde7c3"
+    //     }
 
 
-    ]
+    // ]
 
     let restaurantID = "624db995d80b65d5c561f68d"
     
@@ -266,6 +267,8 @@ export function Booking() {
         }
     };
 
+    const [bookingsFromApi, setBookingsFromApi] = useState<IBooking[]>([])
+
     const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(-1);
     const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(-1);
 
@@ -274,7 +277,7 @@ export function Booking() {
     const [chosenAmountOfGuests, setChosenAmountOfGuests] = useState<string>("");
 
     const [newUser, setNewUser] = useState<INewUser>({
-        firstname: "",
+        name: "",
         lastname: "",
         email: "",
         phone: ""
@@ -286,6 +289,16 @@ export function Booking() {
     const [showEmailError, setShowEmailError] = useState(false);
     const [showPhoneError, setShowPhoneError] = useState(false);
     const [showBookingDone, setShowBookingDone] = useState(false);
+
+
+    useEffect(()=>{
+        axios.get<IBooking[]>("https://school-restaurant-api.azurewebsites.net/booking/restaurant/624db995d80b65d5c561f68d")
+        .then(response =>  {
+            console.log(response.data);
+            setBookingsFromApi([...response.data])
+        })
+    }, [])
+
 
     function checkIfOpenTable() {
 
@@ -300,8 +313,8 @@ export function Booking() {
         let numberOfTablesAt6Left: number = 15
         let numberOfTablesAt9Left: number = 15
 
-        for (let i = 0; i < mockData.length; i++) {
-            const order = mockData[i];
+        for (let i = 0; i < bookingsFromApi.length; i++) {
+            const order = bookingsFromApi[i];
 
             if (order.date === checkDate && order.time === "18:00") {
                 numberOfTablesAt6Left--
@@ -344,7 +357,7 @@ export function Booking() {
     function makeBooking() {
 
 
-        if (newUser.firstname === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
+        if (newUser.name === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
 
@@ -366,7 +379,7 @@ export function Booking() {
 
         }
 
-        let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
+        let user = new User(newUser.name, newUser.lastname, newUser.email, newUser.phone)
 
         let booking = new Bookings("testId", chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
 
@@ -383,6 +396,8 @@ export function Booking() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<main className="bookingContainer animate__animated animate__fadeIn">
+
+       TESTAR API DATA LÄNGD!!! {bookingsFromApi.length}
       
         {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
 
@@ -414,7 +429,7 @@ export function Booking() {
                     <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <form>
-                    <input type="text" name="firstname" value={newUser.firstname} onChange={handleChange} placeholder="förnamn" />
+                    <input type="text" name="firstname" value={newUser.name} onChange={handleChange} placeholder="förnamn" />
                     <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
