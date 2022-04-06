@@ -5,7 +5,7 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './components/home';
 import { Booking } from './components/booking';
 import { Contact } from './components/contact';
-import { Admin } from './components/admin';
+import { Admin } from './components/Admin';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
                 <li> <Link to="/">Hem</Link> </li>
                 <li> <Link to="/booking">Boka bord</Link> </li>
                 <li> <Link to="/contact">Kontakt</Link> </li>
-                <li> <Link to="/admin">Admin</Link> </li>
+                <li> <Link to="/Admin">Admin</Link> </li>
               </ul>
             </div>
 
