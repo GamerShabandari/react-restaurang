@@ -4,6 +4,7 @@ import { User } from "./models/User";
 import { Bookings } from "./models/Bookings";
 
 import "./booking.css"
+import axios from "axios";
 
 export function Booking() {
 
@@ -254,6 +255,17 @@ export function Booking() {
 
     ]
 
+    let restaurantID = "624db995d80b65d5c561f68d"
+    
+    let katanaSushi = {
+        name: "Katana Sushi",
+        address: {
+          street: "Kungsgatan 1",
+          zip: "753 16",
+          city: "Uppsala"
+        }
+    };
+
     const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(-1);
     const [tablesAt9oClock, SetTablesAt9oClock] = useState<number>(-1);
 
@@ -354,8 +366,6 @@ export function Booking() {
 
         }
 
-
-
         let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
 
         let booking = new Bookings("testId", chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
@@ -370,8 +380,10 @@ export function Booking() {
 
     }
 
-    return (<main className="bookingContainer animate__animated animate__fadeIn">
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    return (<main className="bookingContainer animate__animated animate__fadeIn">
+      
         {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
 
             <p>Vänligen välj datum och antal gäster.</p>
