@@ -36,16 +36,17 @@ export function Booking() {
         phone: ""
     })
 
-   
+
 
     const [showError, setShowError] = useState(false);
     const [showRequiredError, setShowRequiredError] = useState(false);
     const [showEmailError, setShowEmailError] = useState(false);
     const [showPhoneError, setShowPhoneError] = useState(false);
-    const [GDPRstatus, setGDPRstatus] = useState(false);
 
     const [showUserForm, setShowUserForm] = useState(false);
     const [showBookingDone, setShowBookingDone] = useState(false);
+
+    const [GDPRstatus, setGDPRstatus] = useState(false)
 
 
     useEffect(() => {
@@ -110,12 +111,9 @@ export function Booking() {
         setNewUser({ ...newUser, [name]: e.target.value })
     }
 
-    function handleGDPR(e: ChangeEvent<HTMLInputElement>){
-       // console.log(e.target.checked);
-        let checkboxstatus = !GDPRstatus
-        setGDPRstatus(checkboxstatus)
-        console.log(GDPRstatus);
-        
+    function handleGDPR(e: ChangeEvent<HTMLInputElement>) {
+        console.log(e.target.checked);
+        setGDPRstatus(e.target.checked)
     }
 
     function makeBooking() {
@@ -193,20 +191,21 @@ export function Booking() {
                 <div>
                     <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
+                <div className="GDPRContainer">
+                    <label htmlFor="GDPR" className="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt GDPR</label>
+                    <input type="checkbox" id="GDPR" onChange={handleGDPR} />
+                </div>
                 <form>
-                    <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" />
-                    <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
-                    <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
-                    <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
+                    <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" disabled={!GDPRstatus} />
+                    <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" disabled={!GDPRstatus} />
+                    <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" disabled={!GDPRstatus} />
+                    <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" disabled={!GDPRstatus} />
                     {/* <button onClick={test}>spara bokning</button> av någon anledning strular koden om jag kör med denna knapp men om jag kör samma funktion med nedan div så fungerar det bra (!!???) */}
                     <div className="choiceContainer">
-                        <input type="checkbox" id="GDPR" onChange={handleGDPR}/>
-                        <label htmlFor="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt GDPR</label>
                         <button className="cancelBtn" onClick={cancelBooking}>avbryt</button>
                         <div className="Btn" onClick={makeBooking} >spara bokning</div>
                     </div>
                 </form>
-
             </div>
             {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
             {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}

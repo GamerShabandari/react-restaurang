@@ -122,8 +122,24 @@
     padding: 5px;
 }
 
+.formContainer form input:disabled{
+    background-color: rgba(255, 255, 255, 0.162);
+    color: #22293436;
+    border: 1px solid #c9464a34;
+}
+
 .formContainer form input:focus{
     outline: none;
+}
+
+.GDPRContainer{
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.GDPR {
+    color: #c9464a;
+    font-weight: 500;
 }
 
 @media screen and (min-width: 1000px) {
