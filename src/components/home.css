@@ -6,39 +6,19 @@
     display: flex;
     justify-content: space-between;
     font-family: var(--mainFont);
-}
-
-article {
-    width:75%;
-}
-
-aside {
-    width: 25%;
-}
-
-.container-food {
-    display:flex;
-    flex-direction: column;
+    margin-left: 15%;
+    margin-right: auto;
 }
 
 .food-title {
     color: white;
 }
 
-.container-openhour {
-    margin-left: 3rem;
-    text-align: left;
-}
-
 .container-menu, .container-drink, .container-dessert {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
-    margin-left: 50px;
-}
-
-.openhour-title {
-    font-size: 1.5rem;
+    place-items: center;
 }
 
 img {
@@ -57,7 +37,7 @@ li {
     color: white;
 }
 
-.button {
+.booking-message {
     width: 600px;
     height: 80px;
     border: 10px solid white;
@@ -67,7 +47,10 @@ li {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    vertical-align: middle;
+}
+
+.animate__bounceInLeft {
+    animation-duration: 10s;
 }
 
 .button-a {
@@ -77,16 +60,28 @@ li {
 }
   
 /* mouse over link */
-.button:hover {
-    color: white;
+.booking-message:hover {
+    color: rgba(255, 217, 0, 0.644);
+    border-color: rgba(255, 217, 0, 0.644);
   }
+
+/*about us */
+.about-us {
+    display: flex;
+    height: 85vh;
+}
 
 /* google map */
 .google-map {
-    width: 100%;
-    height: 100vh;
+    width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+
+.container-door {
+    width: 30%;
+    
+}
+

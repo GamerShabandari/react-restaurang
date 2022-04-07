@@ -12,19 +12,17 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header>
+        <header style={{ backgroundImage: "url(images/bamboo.png)"}}>
+        <h1 className='logo' >Katana Sushi</h1>
           <nav>
-            <h1 className='logo'>Welcome to restaurant</h1>
-            <div>
               <ul className='navigation'>
                 <li> <Link to="/">Hem</Link> </li>
                 <li> <Link to="/booking">Boka bord</Link> </li>
                 <li> <Link to="/contact">Kontakt</Link> </li>
                 <li> <Link to="/admin">Admin</Link> </li>
               </ul>
-            </div>
-
           </nav>
+          <p style={{ backgroundImage: "url(images/katana.png)"}}></p>
         </header>
         <Routes>
           <Route path='/' element={<Home></Home>}> </Route>

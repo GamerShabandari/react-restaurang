@@ -5,5 +5,27 @@
 .footer {
     font-family: var(--mainFont);
     background-color: grey;
-    justify-content:center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.address p,
+.copyright p,
+.openhour-title li  {
+    color: black;
+}
+
+.katana p {
+    font-size: 6rem;
+    color: black;
+}
+
+.footer-flex {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.copyright {
+    padding-bottom: 20px;
 }

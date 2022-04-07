@@ -4,14 +4,10 @@
  nav{
    display: flex;
    flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   width: 100%;
-   border: 1px solid red;
+   align-items: flex-end;
  }
 
  .navigation{
-   border: 1px solid blue;
    display: flex;
    flex-direction: row;
    justify-content: center;
@@ -19,3 +15,23 @@
    width: fit-content;
    gap: 20px;
  }
+
+ ul li a {
+  list-style-type: none;
+  margin: 10px;
+  color: black;
+  font-size: 1.5rem;
+  font-family:cursive;
+ }
+
+ header {
+   background-repeat: no-repeat;
+   border: 1px solid rgb(73, 72, 72);
+ }
+ .logo {
+   font-family:cursive;
+   font-size: 4rem;
+ }
+
+ 
+ 

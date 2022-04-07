@@ -10,16 +10,28 @@ export function Footer(){
 
     return(
     <Fragment>
-        <section className='footer'>
+        <section className='footer' style={{ backgroundImage: "url(images/whitewall.png)" }}>
+            <section className='footer-flex'>
             <article className='address'>
                 <p>Välkommenvägen123 </p>
                 <p>Stockholm 111111</p>
                 <p>08-123-4567</p>
-                <p>info@katanasushi.com</p>
+                <p>info@katanasushi.comcom</p>
                 {/*<FontAwesomeIcon icon="fa-brands fa-facebook-square" />*/}
-                
+            </article>
+            <article className='katana'>
+                <span>katana</span>
+                <p>刀</p>
             </article>
             <article>
+            <ul className='openhour-title'>
+                <li>ÖPPETTIDER</li>
+                <li>Alla dagar  18-23</li>
+            </ul>
+            </article>
+            </section>
+
+            <article className='copyright'>
                 <p>Katana Sushi AB</p>
                 <p>All rights reserved 2022</p>
             </article>

@@ -2,6 +2,9 @@ import './home.css';
 import { Fragment } from "react";
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
+import 'animate.css';
+
+
 export function Home(){
 
     {/*Google map karta*/} 
@@ -20,7 +23,7 @@ export function Home(){
             name: "Location 1",
             location: {
                 lat: 59.3255,
-                lng: 17.8887,
+                lng: 17.8887
             },
         },
     ];
@@ -31,27 +34,29 @@ export function Home(){
                 mapContainerStyle={mapStyles}
                 zoom={13}
                 center={defaultCenter}>
+
                 {
                     locations.map(item => {
-                        return (
-                            <Marker key={item.name} position={item.location} />
+                        return 
+                        (
+                        <Marker key={item.name} position={item.location} />
                         )
                     })
                 }
             </GoogleMap>
         </LoadScript>
     )
-}
-
+} 
+{/*Map() end*/}
 
     return (
      <Fragment>
-      <body>
+      
       {/*background image*/}
-      <section style={{ backgroundImage: "url(images/blackwall.png)" }}>
+      <section className='menu-bg' style={{ backgroundImage: "url(images/blackwall.png)" }}>
      
       {/*Link to Booking*/}
-      <a href='/booking' className='button-a' ><p className='button'>BOKA BOARD</p></a>
+      <a href='/booking' className='button-a' ><p className='animate__animated animate__bounceInLeft booking-message'>BOKA BOARD</p></a>
 
       <section className='container-layout'>
         <div className='container-food'>
@@ -164,23 +169,19 @@ export function Home(){
            </div>
         </article>{/*container-dessert*/}
         </div>{/*container-food*/}
-
-        <aside className='container-openhour'>
-            <ul>
-                <li className='openhour-title'>ÖPPETTIDER</li>
-                <li>alla dagar  18-23</li>
-                
-            </ul>
-        </aside>{/*container-openhour*/}
       </section>{/*container-layout*/}
       </section>{/*background image*/}
 
-      <section className='google-map'>
-          <h1>Katana sushi karta </h1>
+      <section className='about-us' >
+          <div className='google-map' style={{ backgroundImage: "url(images/shrine.png)" }}>
+          <p>Katana sushi karta </p>
           {Map()}
+          </div>
+          <div style={{ backgroundImage: "url(images/door.png)" }}className='container-door'>
+          </div>{/*container-openhour*/}
       </section>
 
-      </body>
+     
     </Fragment>
     )
 }
