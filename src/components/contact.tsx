@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react"
 import { text } from "stream/consumers";
+import './contact.css';
 
 export function Contact(){
 
