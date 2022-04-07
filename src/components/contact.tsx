@@ -1,21 +1,29 @@
-import { ChangeEvent, useState } from "react"
+import axios from "axios";
+import { ChangeEvent, useEffect, useState } from "react"
 import { text } from "stream/consumers";
 import './contact.css';
+import { INewUser } from "./models/INewUser";
+import { User } from "./models/User";
 
 export function Contact(){
 
-    interface INewContact {
-        firstname: string;
-        lastname: string;
-        email: string;
-        message: string;
-    }
-
-    const [newContact, setNewContact] = useState<INewContact>({
+    const [newContact, setNewContact] = useState<INewUser>({
         firstname: '',
         lastname: '',
         email: '',
-        message: '',
+        phone: '',
+    });
+
+    useEffect(() => {
+        axios.post("https://school-restaurant-api.azurewebsites.net/customer/create")
+        .then(response => {
+            setMessageSend(true)
+        })
+        .catch(error => {
+            console.log("Det blev feeeel!!");
+            alert("Ditt meddelande kunde tyvärr inte skickas!")
+            
+        })
     });
 
     const [messageSend, setMessageSend] = useState(false)
@@ -26,9 +34,13 @@ export function Contact(){
     }
 
     function handleSubmit(e: any) {
-        setMessageSend(true)
         e.preventDefault()
+
+        let customercontact = new User(newContact.firstname, newContact.lastname, newContact.email, newContact.phone)
         
+        console.log(customercontact);
+        
+
     }
 
 
@@ -38,11 +50,11 @@ export function Contact(){
             <label>Förnamn:</label>
             <input type="text" name="firstname" value={newContact.firstname} onChange={handleChange}></input>
             <label>Efternamn:</label>
-            <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange}></input>
+            <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange}></input><br></br>
             <label>E-post:</label>
             <input type="email" name="email" value={newContact.email} onChange={handleChange}></input>
-            <label>Meddelande:</label>
-            <input type="text" name="message" value={newContact.message} onChange={handleChange}></input>
+            <label>Telefon:</label>
+            <input type="text" name="phone" value={newContact.phone} onChange={handleChange}></input>
             <button type="submit" >Skicka meddelande!</button>
             {messageSend && <h3>Ditt meddelande är skickat!</h3>}
         </form>
