@@ -1,5 +1,5 @@
 export interface INewUser{
-    firstname:string;
+    name:string;
     lastname:string;
     email:string;
     phone:string;

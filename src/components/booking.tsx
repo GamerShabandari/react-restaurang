@@ -260,7 +260,7 @@ export function Booking() {
     const [chosenAmountOfGuests, setChosenAmountOfGuests] = useState<string>("");
 
     const [newUser, setNewUser] = useState<INewUser>({
-        firstname: "",
+        name: "",
         lastname: "",
         email: "",
         phone: ""
@@ -327,14 +327,14 @@ export function Booking() {
 
     function makeBooking() {
 
-        if (newUser.firstname === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
+        if (newUser.name === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
             
             return
         }
 
-        let user = new User(newUser.firstname, newUser.lastname, newUser.email, newUser.phone)
+        let user = new User(newUser.name, newUser.lastname, newUser.email, newUser.phone)
 
         let booking = new Bookings("testId", chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
 
@@ -381,7 +381,7 @@ export function Booking() {
                     <p>dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <form>
-                    <input type="text" name="firstname" value={newUser.firstname} onChange={handleChange} placeholder="förnamn" />
+                    <input type="text" name="firstname" value={newUser.name} onChange={handleChange} placeholder="förnamn" />
                     <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
