@@ -36,11 +36,15 @@ export function Booking() {
         phone: ""
     })
 
-    const [showUserForm, setShowUserForm] = useState(false);
+   
+
     const [showError, setShowError] = useState(false);
     const [showRequiredError, setShowRequiredError] = useState(false);
     const [showEmailError, setShowEmailError] = useState(false);
     const [showPhoneError, setShowPhoneError] = useState(false);
+    const [GDPRstatus, setGDPRstatus] = useState(false);
+
+    const [showUserForm, setShowUserForm] = useState(false);
     const [showBookingDone, setShowBookingDone] = useState(false);
 
 
@@ -106,8 +110,16 @@ export function Booking() {
         setNewUser({ ...newUser, [name]: e.target.value })
     }
 
-    function makeBooking() {  
+    function handleGDPR(e: ChangeEvent<HTMLInputElement>){
+       // console.log(e.target.checked);
+        let checkboxstatus = !GDPRstatus
+        setGDPRstatus(checkboxstatus)
+        console.log(GDPRstatus);
         
+    }
+
+    function makeBooking() {
+
         if (newUser.name === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
@@ -136,10 +148,10 @@ export function Booking() {
 
         setShowError(false)
 
-        setShowUserForm(false) 
+        setShowUserForm(false)
 
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
-            .then(response => {                
+            .then(response => {
                 setShowBookingDone(true)
             })
             .catch(error => {
@@ -168,8 +180,8 @@ export function Booking() {
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord</button>
 
-            {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button  className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
-            {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button  className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+            {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
+            {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
             {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
 
@@ -187,8 +199,12 @@ export function Booking() {
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
                     {/* <button onClick={test}>spara bokning</button> av någon anledning strular koden om jag kör med denna knapp men om jag kör samma funktion med nedan div så fungerar det bra (!!???) */}
-                    <button className="Btn" onClick={cancelBooking}>avbryt</button>
-                    <div className="Btn" onClick={makeBooking} >spara bokning</div>
+                    <div className="choiceContainer">
+                        <input type="checkbox" id="GDPR" onChange={handleGDPR}/>
+                        <label htmlFor="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt GDPR</label>
+                        <button className="cancelBtn" onClick={cancelBooking}>avbryt</button>
+                        <div className="Btn" onClick={makeBooking} >spara bokning</div>
+                    </div>
                 </form>
 
             </div>
