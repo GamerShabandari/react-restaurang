@@ -1,7 +1,7 @@
 .bookingContainer{
     width:auto;
     background-color: #f5f7eb;
-    color: #c9464a;
+    color:#222934;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -20,6 +20,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 30px;
     gap: 10px;
     width: 50%;
@@ -27,13 +28,42 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.inputContainer button{
+.inputContainer input{
+    color: #222934;
+    border: 1px solid #c9464a;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.inputContainer input:focus{
+    outline: none;
+}
+
+.inputContainer select{
+    color: #222934;
+    border: 1px solid #c9464a;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.inputContainer select:focus{
+    outline: none;
+}
+
+.Btn{
     background-color: #c9464a;
     color:#f5f7eb;
     font-size: 0.8rem;
     padding: 8px;
     border-radius: 5px;
     border: none;
+    width: fit-content;
+    align-self: center;
+    transition: 0.2s all;
+}
+
+.Btn:hover{
+    transform: scale(1.1);
 }
 
 .formContainer{
@@ -44,6 +74,7 @@
     justify-content: center;
     padding: 30px;
     border-radius: 5px;
+    text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -55,15 +86,15 @@
     margin: 0 auto;
 }
 
-.formContainer form button{
-    width: fit-content;
-    align-self: center;
-    background-color: #c9464a;
-    color:#f5f7eb;
-    font-size: 0.8rem;
-    padding: 8px;
+.formContainer form input{
+    color: #222934;
+    border: 1px solid #c9464a;
     border-radius: 5px;
-    border: none;
+    padding: 5px;
+}
+
+.formContainer form input:focus{
+    outline: none;
 }
 
 @media screen and (min-width: 1000px) {

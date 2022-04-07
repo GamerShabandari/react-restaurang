@@ -106,9 +106,8 @@ export function Booking() {
         setNewUser({ ...newUser, [name]: e.target.value })
     }
 
-    function makeBooking() {
-
-
+    function makeBooking() {  
+        
         if (newUser.name === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
@@ -137,15 +136,14 @@ export function Booking() {
 
         setShowError(false)
 
-        setShowUserForm(false)
+        setShowUserForm(false) 
 
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
-            .then(response => {
+            .then(response => {                
                 setShowBookingDone(true)
             })
             .catch(error => {
                 console.log(error);
-
                 alert("något gick tyvärr fel, försök igen senare.")
             })
     }
@@ -168,10 +166,10 @@ export function Booking() {
                 <option value="6">6 pers</option>
             </select>
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
-            <button onClick={checkIfOpenTable}>sök ledigt bord</button>
+            <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord</button>
 
-            {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
-            {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+            {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button  className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
+            {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button  className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
             {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
 
@@ -188,8 +186,9 @@ export function Booking() {
                     <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" />
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" />
-                    <button onClick={makeBooking}>spara bokning</button>
-                    <button onClick={cancelBooking}>avbryt</button>
+                    {/* <button onClick={test}>spara bokning</button> av någon anledning strular koden om jag kör med denna knapp men om jag kör samma funktion med nedan div så fungerar det bra (!!???) */}
+                    <button className="Btn" onClick={cancelBooking}>avbryt</button>
+                    <div className="Btn" onClick={makeBooking} >spara bokning</div>
                 </form>
 
             </div>
