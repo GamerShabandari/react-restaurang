@@ -133,8 +133,14 @@
 }
 
 .GDPRContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     border: 1px solid red;
+    border-radius: 5px;
     padding: 5px;
+    margin: 17px;
 }
 
 .GDPR {

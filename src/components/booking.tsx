@@ -118,6 +118,10 @@ export function Booking() {
 
     function makeBooking() {
 
+        setShowError(false)
+        setShowEmailError(false)
+        setShowPhoneError(false)
+
         if (newUser.name === "" || newUser.lastname === "" || newUser.email === "" || newUser.phone === "") {
 
             setShowError(true)
