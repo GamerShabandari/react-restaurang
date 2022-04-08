@@ -216,10 +216,9 @@ export function Booking() {
                     <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" disabled={!GDPRstatus} />
                     <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" disabled={!GDPRstatus} />
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" disabled={!GDPRstatus} />
-                    {/* <button className="Btn" onClick={makeBooking}>boka mig</button> av någon anledning strular koden om jag kör med denna knapp men om jag kör samma funktion med nedan div så fungerar det bra (!!???) */}
                     <div className="choiceContainer">
-                        <button className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel></button>
-                        <div className="Btn" onClick={makeBooking}>boka <GiSushis></GiSushis></div>
+                        <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel></button>
+                        <button type="button" className="Btn" onClick={makeBooking}>boka <GiSushis></GiSushis></button>
                     </div>
                 </form>
             </div>
