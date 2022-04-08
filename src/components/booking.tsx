@@ -6,8 +6,8 @@ import { Bookings } from "./models/Bookings";
 import "./booking.css"
 import axios from "axios";
 import { IBooking } from "./models/IBooking";
-import { GiSushis, GiCancel } from 'react-icons/gi';
-
+import { GiConfirmed, GiCancel, GiHotMeal, GiMeal } from 'react-icons/gi';
+import { MdPersonAddAlt1, MdEmail, MdPhoneIphone } from "react-icons/md"
 
 
 export function Booking() {
@@ -191,11 +191,14 @@ export function Booking() {
                 <option value="6">6 pers</option>
             </select>
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
-            <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord</button>
+            <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
+
+
 
             {tablesAt6oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
-                {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid</button> </div>}
-                {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid</button></div>}
+                <div className="decorationLine"></div>
+                {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
+                {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
                 {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
             </div>}
 
@@ -212,14 +215,30 @@ export function Booking() {
                     <input type="checkbox" id="GDPR" onChange={handleGDPR} />
                 </div>
                 <form>
-                    <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" disabled={!GDPRstatus} />
-                    <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" disabled={!GDPRstatus} />
-                    <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" disabled={!GDPRstatus} />
-                    <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" disabled={!GDPRstatus} />
-                    {/* <button className="Btn" onClick={makeBooking}>boka mig</button> av någon anledning strular koden om jag kör med denna knapp men om jag kör samma funktion med nedan div så fungerar det bra (!!???) */}
+                    <div className="formInputContainer">
+                        <MdPersonAddAlt1></MdPersonAddAlt1>
+                        <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" disabled={!GDPRstatus} />
+                    </div>
+    
+                    <div className="formInputContainer">
+                    <MdPersonAddAlt1></MdPersonAddAlt1>
+                        <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" disabled={!GDPRstatus} />
+                    </div>
+
+                    <div className="formInputContainer">
+                        <MdEmail></MdEmail>
+                        <input type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="epost" disabled={!GDPRstatus} />
+                    </div>
+
+                    <div className="formInputContainer">
+                        <MdPhoneIphone></MdPhoneIphone>
+                        <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" disabled={!GDPRstatus} />
+
+                    </div>
+
                     <div className="choiceContainer">
-                        <button className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel></button>
-                        <div className="Btn" onClick={makeBooking}>boka <GiSushis></GiSushis></div>
+                        <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
+                        <button type="button" className="Btn" onClick={makeBooking}>boka <GiConfirmed></GiConfirmed> </button>
                     </div>
                 </form>
             </div>
