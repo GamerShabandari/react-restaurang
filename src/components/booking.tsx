@@ -6,7 +6,7 @@ import { Bookings } from "./models/Bookings";
 import "./booking.css"
 import axios from "axios";
 import { IBooking } from "./models/IBooking";
-import { GiConfirmed, GiCancel, GiHotMeal, GiMeal } from 'react-icons/gi';
+import { GiConfirmed, GiCancel, GiHotMeal, GiMeal, GiLotus } from 'react-icons/gi';
 import { MdPersonAddAlt1, MdEmail, MdPhoneIphone } from "react-icons/md";
 import { FaGlassCheers } from "react-icons/fa";
 
@@ -179,7 +179,7 @@ export function Booking() {
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
         {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
-
+            <GiLotus className="lotus"></GiLotus>
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
 
@@ -206,6 +206,7 @@ export function Booking() {
         </div>}
 
         {showUserForm && <div className="formContainer animate__animated animate__backInDown">
+            <GiLotus className="lotus"></GiLotus>
             <div>
                 <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
                 <div>
