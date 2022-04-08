@@ -6,21 +6,23 @@ import { Bookings } from "./models/Bookings";
 import "./booking.css"
 import axios from "axios";
 import { IBooking } from "./models/IBooking";
+import { GiSushis, GiCancel } from 'react-icons/gi';
+
+
 
 export function Booking() {
-
 
     ////////////// restaurang uppgifter /////////////////
     const restaurantID = "624db995d80b65d5c561f68d"
 
-    let katanaSushi = {
-        name: "Katana Sushi",
-        address: {
-            street: "Kungsgatan 1",
-            zip: "753 16",
-            city: "Uppsala"
-        }
-    };
+    // let katanaSushi = {
+    //     name: "Katana Sushi",
+    //     address: {
+    //         street: "Kungsgatan 1",
+    //         zip: "753 16",
+    //         city: "Uppsala"
+    //     }
+    // };
 
     //////////////////////////// alla state variabler ////////////////////////////////////////
     const [bookingsFromApi, setBookingsFromApi] = useState<IBooking[]>([])
@@ -206,7 +208,7 @@ export function Booking() {
                     <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <div className="GDPRContainer">
-                    <label htmlFor="GDPR" className="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt <a href="https://www.imy.se/verksamhet/dataskydd/det-har-galler-enligt-gdpr/" target="_blank">GDPR</a></label>
+                    <label htmlFor="GDPR" className="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt <a href="https://www.imy.se/verksamhet/dataskydd/det-har-galler-enligt-gdpr/" target="_blank" rel="noreferrer">GDPR</a></label>
                     <input type="checkbox" id="GDPR" onChange={handleGDPR} />
                 </div>
                 <form>
@@ -216,8 +218,8 @@ export function Booking() {
                     <input type="tel" name="phone" value={newUser.phone} onChange={handleChange} placeholder="telefon" disabled={!GDPRstatus} />
                     {/* <button onClick={test}>spara bokning</button> av någon anledning strular koden om jag kör med denna knapp men om jag kör samma funktion med nedan div så fungerar det bra (!!???) */}
                     <div className="choiceContainer">
-                        <button className="cancelBtn" onClick={cancelBooking}>avbryt</button>
-                        <div className="Btn" onClick={makeBooking} >spara bokning</div>
+                        <button className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel></button>
+                        <div className="Btn" onClick={makeBooking}>boka <GiSushis></GiSushis></div>
                     </div>
                 </form>
             </div>
