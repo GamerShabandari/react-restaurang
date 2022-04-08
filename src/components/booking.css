@@ -135,7 +135,6 @@
 .formContainer form{
     display: flex;
     flex-direction: column;
-    gap: 15px;
     width: 50%;
     margin: 0 auto;
 }
@@ -161,7 +160,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border: 1px solid red;
     border-radius: 5px;
     padding: 5px;
