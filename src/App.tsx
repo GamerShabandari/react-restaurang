@@ -1,21 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './components/home';
 import { Booking } from './components/booking';
 import { Contact } from './components/contact';
 import { Admin } from './components/admin';
+import "animate.css"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header>
+        <header className='animate__animated animate__fadeInDown'>
           <nav>
-            <h1 className='logo'>Welcome to restaurant</h1>
+            <h1 className='logo'>Katana Sushi</h1>
             <div>
-              <ul className='navigation'>
+              <ul className='navigation animate__animated animate__backInDown'>
                 <li> <Link to="/">Hem</Link> </li>
                 <li> <Link to="/booking">Boka bord</Link> </li>
                 <li> <Link to="/contact">Kontakt</Link> </li>

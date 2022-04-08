@@ -1,21 +1,29 @@
-.App {
-  text-align: center;
-}
+
  nav{
    display: flex;
-   flex-direction: column;
+   flex-direction: row;
    align-items: center;
-   justify-content: center;
-   width: 100%;
-   border: 1px solid red;
+   justify-content: space-between;
+   width: auto;
+   padding: 30px;
  }
 
  .navigation{
-   border: 1px solid blue;
    display: flex;
    flex-direction: row;
    justify-content: center;
    align-items: center;
    width: fit-content;
    gap: 20px;
+   list-style: none;
+ }
+
+ .navigation a{
+  color: #222934;
+  text-decoration: none;
+ }
+
+ .logo{
+   color: #c9464a;
+   font-size: 3rem;
  }
