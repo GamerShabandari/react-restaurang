@@ -15,7 +15,7 @@ export function Home(){
     };
 
     const defaultCenter = {
-        lat: 59.3255, lng: 17.8887,
+        lat: 59.8533, lng: 17.6356,
     };
 
     const locations = [

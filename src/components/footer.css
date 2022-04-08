@@ -23,9 +23,16 @@
 .footer-flex {
     display: flex;
     justify-content: space-around;
-    padding: 20px;
+    padding-top: 20px;
+    height: 200px;
 }
 
-.copyright {
-    padding-bottom: 20px;
+.copyright  {
+    font-size: medium;
+    color: black;
+}
+
+/*Ruby text*/
+rt {
+    font-size: medium;
 }

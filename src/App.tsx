@@ -12,10 +12,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header style={{ backgroundImage: "url(images/bamboo.png)"}}>
+        <header style={{ backgroundImage: "url(images/bamboo.png)"}}
+        className='animate__animated animate__fadeInDown'>
         <h1 className='logo' >Katana Sushi</h1>
           <nav>
-              <ul className='navigation'>
+              <ul className='navigation animate__animated animate__backInDown'>
                 <li> <Link to="/">Hem</Link> </li>
                 <li> <Link to="/booking">Boka bord</Link> </li>
                 <li> <Link to="/contact">Kontakt</Link> </li>
