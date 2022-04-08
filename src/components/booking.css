@@ -27,7 +27,12 @@
     width: 50%;
     border-radius: 5px;
     border: 1px solid #c9464a;
+    transition: 0.2s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.inputContainer:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .inputContainer input{
@@ -76,6 +81,7 @@
     align-self: center;
     transition: 0.2s all;
     margin: 7px;
+    cursor: pointer;
 }
 
 .Btn:hover{
@@ -94,6 +100,7 @@
     align-self: center;
     transition: 0.2s all;
     margin: 7px;
+    cursor: pointer;
 }
 
 .cancelBtn:hover{
@@ -111,6 +118,11 @@
     text-align: center;
     border: 1px solid #c9464a;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+
+.formContainer:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .choiceContainer{
@@ -158,6 +170,10 @@
 .GDPR {
     color: #c9464a;
     font-weight: 500;
+}
+
+.GDPR a{
+    color: #c9464a;
 }
 
 @media screen and (min-width: 1000px) {
