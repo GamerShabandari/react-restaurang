@@ -7,7 +7,8 @@ import "./booking.css"
 import axios from "axios";
 import { IBooking } from "./models/IBooking";
 import { GiConfirmed, GiCancel, GiHotMeal, GiMeal } from 'react-icons/gi';
-import { MdPersonAddAlt1, MdEmail, MdPhoneIphone } from "react-icons/md"
+import { MdPersonAddAlt1, MdEmail, MdPhoneIphone } from "react-icons/md";
+import { FaGlassCheers } from "react-icons/fa";
 
 
 export function Booking() {
@@ -219,9 +220,9 @@ export function Booking() {
                         <MdPersonAddAlt1></MdPersonAddAlt1>
                         <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" disabled={!GDPRstatus} />
                     </div>
-    
+
                     <div className="formInputContainer">
-                    <MdPersonAddAlt1></MdPersonAddAlt1>
+                        <MdPersonAddAlt1></MdPersonAddAlt1>
                         <input type="text" name="lastname" value={newUser.lastname} onChange={handleChange} placeholder="efternamn" disabled={!GDPRstatus} />
                     </div>
 
@@ -246,6 +247,6 @@ export function Booking() {
             {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
             {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav siffor</div>}
         </div>}
-        {showBookingDone && <div className="animate__animated animate__backInDown">Din bokning är nu klar, vi ses!</div>}
+        {showBookingDone && <div className="bookingDone animate__animated animate__backInDown">Din bokning är nu klar, vi ses! <FaGlassCheers></FaGlassCheers> </div>}
     </main>)
 }
