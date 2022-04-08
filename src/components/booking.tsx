@@ -6,7 +6,7 @@ import { Bookings } from "./models/Bookings";
 import "./booking.css"
 import axios from "axios";
 import { IBooking } from "./models/IBooking";
-import { GiSushis, GiCancel, GiHotMeal, GiMeal } from 'react-icons/gi';
+import { GiConfirmed, GiCancel, GiHotMeal, GiMeal } from 'react-icons/gi';
 import { MdPersonAddAlt1, MdEmail, MdPhoneIphone } from "react-icons/md"
 
 
@@ -238,7 +238,7 @@ export function Booking() {
 
                     <div className="choiceContainer">
                         <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
-                        <button type="button" className="Btn" onClick={makeBooking}>boka <GiSushis></GiSushis> </button>
+                        <button type="button" className="Btn" onClick={makeBooking}>boka <GiConfirmed></GiConfirmed> </button>
                     </div>
                 </form>
             </div>

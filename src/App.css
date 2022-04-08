@@ -1,9 +1,10 @@
 
  nav{
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    align-items: center;
    justify-content: space-between;
+   flex-wrap: wrap;
    width: auto;
    padding: 30px;
  }
@@ -16,14 +17,24 @@
    width: fit-content;
    gap: 20px;
    list-style: none;
+   margin: 0;
+   padding: 10px;
  }
 
  .navigation a{
   color: #222934;
   text-decoration: none;
+  transition: 0.2s;
+ }
+
+ .navigation a:hover{
+   text-decoration: underline;
  }
 
  .logo{
+   display: flex;
+   justify-content: center;
+   align-items: center;
    color: #c9464a;
-   font-size: 3rem;
+   font-size: 3.5rem;
  }
