@@ -9,7 +9,9 @@ import { IBooking } from "./models/IBooking";
 
 export function Booking() {
 
-    let restaurantID = "624db995d80b65d5c561f68d"
+
+    ////////////// restaurang uppgifter /////////////////
+    const restaurantID = "624db995d80b65d5c561f68d"
 
     let katanaSushi = {
         name: "Katana Sushi",
@@ -20,6 +22,7 @@ export function Booking() {
         }
     };
 
+    //////////////////////////// alla state variabler ////////////////////////////////////////
     const [bookingsFromApi, setBookingsFromApi] = useState<IBooking[]>([])
 
     const [tablesAt6oClock, SetTablesAt6oClock] = useState<number>(-1);
@@ -36,8 +39,6 @@ export function Booking() {
         phone: ""
     })
 
-
-
     const [showError, setShowError] = useState(false);
     const [showRequiredError, setShowRequiredError] = useState(false);
     const [showEmailError, setShowEmailError] = useState(false);
@@ -48,7 +49,7 @@ export function Booking() {
 
     const [GDPRstatus, setGDPRstatus] = useState(false)
 
-
+    //////////////////////////// useEffect som hämtar alla bokningar från API ////////////////////////////////////////
     useEffect(() => {
         axios.get<IBooking[]>("https://school-restaurant-api.azurewebsites.net/booking/restaurant/624db995d80b65d5c561f68d")
             .then(response => {
@@ -56,7 +57,8 @@ export function Booking() {
             })
     }, [])
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //funktion som kollar om det finns lediga bord det datum gästen har valt, presenterar resultat via state variabler, validerar också att gäst valt både datum samt antal gäster //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function checkIfOpenTable() {
 
         if (chosenDate === "" || chosenAmountOfGuests === "") {
@@ -88,34 +90,42 @@ export function Booking() {
 
     }
 
+    //////////////////////////// lagrar vald datum och tid ////////////////////////////////////////
     function choseTimeForDinner(time: string) {
         setChosenTime(time)
         setShowUserForm(true)
     }
 
+    //////////////////////////// hanterar vald datum och uppdaterar statevariabel ////////////////////////////////////////
     function handleChosenDate(e: ChangeEvent<HTMLInputElement>) {
         setChosenDate(e.target.value)
     }
 
+    //////////////////////////// hanterar vald antal gäster och uppdaterar statevariabel ////////////////////////////////////////
     function handleChosenAmountOfGuests(e: ChangeEvent<HTMLSelectElement>) {
         setChosenAmountOfGuests(e.target.value)
     }
 
+    //////////////////////////// avbryter bokningen ////////////////////////////////////////
     function cancelBooking() {
         setShowUserForm(false)
     }
 
+    //////////////////////////// hanterar formulär för alla kunduppgifter, uppdaterar statevariabel ////////////////////////////////////////
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         let name = e.target.name;
 
         setNewUser({ ...newUser, [name]: e.target.value })
     }
 
+    //////////////////////////// håller koll på om kund godkänt GDPR checkbox eller ej, uppdaterar statevariabel ////////////////////////////////////////
     function handleGDPR(e: ChangeEvent<HTMLInputElement>) {
-        console.log(e.target.checked);
+
         setGDPRstatus(e.target.checked)
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //skapar bokning, validrerar först kunduppgifter. skapar sedan objekt som pushas till API, uppdaterar statevariabler samt varnar om något går snett med bokningen //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function makeBooking() {
 
         setShowError(false)
@@ -162,8 +172,7 @@ export function Booking() {
             })
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
         {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
@@ -197,7 +206,7 @@ export function Booking() {
                     <p>Dina val: bord för {chosenAmountOfGuests} personer klockan {chosenTime} - {chosenDate}</p>
                 </div>
                 <div className="GDPRContainer">
-                    <label htmlFor="GDPR" className="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt GDPR</label>
+                    <label htmlFor="GDPR" className="GDPR">Jag godkänner att ni lagrar mina uppgifter enligt <a href="https://www.imy.se/verksamhet/dataskydd/det-har-galler-enligt-gdpr/" target="_blank">GDPR</a></label>
                     <input type="checkbox" id="GDPR" onChange={handleGDPR} />
                 </div>
                 <form>
