@@ -6,7 +6,7 @@ import { Booking } from './components/booking';
 import { Contact } from './components/contact';
 import { Admin } from './components/admin';
 import { GiSamuraiHelmet, GiSushis } from "react-icons/gi";
-import { MdOutlineHome, MdAddShoppingCart, MdCall, MdOutlineAdminPanelSettings } from "react-icons/md"
+import { MdOutlineHome, MdCall, MdOutlineAdminPanelSettings } from "react-icons/md"
 import "animate.css"
 
 function App() {
