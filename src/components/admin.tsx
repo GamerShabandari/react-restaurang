@@ -1,5 +1,9 @@
-export function Admin (){
-    return (<>
-        <div>Admin Works</div>
-    </>)
+
+export function Admin() {
+  return (
+    <div>
+      
+    </div>
+  )
 }
+
