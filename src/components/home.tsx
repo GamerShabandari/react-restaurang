@@ -1,9 +1,7 @@
 import './home.css';
 import { Fragment } from "react";
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-
 import 'animate.css';
-
 
 export function Home(){
 
@@ -34,7 +32,6 @@ export function Home(){
                 mapContainerStyle={mapStyles}
                 zoom={13}
                 center={defaultCenter}>
-
                 {
                     locations.map(item => {
                         return 
@@ -178,9 +175,8 @@ export function Home(){
           {Map()}
           </div>
           <div style={{ backgroundImage: "url(images/door.png)" }}className='container-door'>
-          </div>{/*container-openhour*/}
+          </div>
       </section>
-
      
     </Fragment>
     )
