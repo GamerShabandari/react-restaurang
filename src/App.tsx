@@ -15,7 +15,9 @@ function App() {
       <BrowserRouter>
         <header className='animate__animated animate__fadeInDown'>
           <nav>
-            <h1 className='logo'>Katana<GiSamuraiHelmet></GiSamuraiHelmet>Sushi</h1>
+            <Link className='logoLink' to="/">
+              <h1 className='logo'>Katana <GiSamuraiHelmet></GiSamuraiHelmet> Sushi</h1>
+            </Link>
             <div>
               <ul className='navigation animate__animated animate__backInDown'>
                 <li> <Link to="/">Hem<MdOutlineHome></MdOutlineHome></Link></li>
