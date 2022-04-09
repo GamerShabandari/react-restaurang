@@ -1,15 +1,12 @@
-.App {
-  text-align: center;
-}
-
-:root{
-  --mainFont: cursive;
-}
 
  nav{
    display: flex;
    flex-direction: column;
-   align-items: flex-end;
+   align-items: center;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   width: auto;
+   padding: 30px;
  }
 
  .navigation{
@@ -18,30 +15,26 @@
    justify-content: center;
    align-items: center;
    width: fit-content;
-   gap: 15px;
+   gap: 20px;
+   list-style: none;
+   margin: 0;
+   padding: 10px;
  }
 
- ul li a {
-  list-style-type: none;
-  margin-right: 20px;
-  color: black;
-  font-size: 1.6rem;
-  font-family: var(--mainFont);
+ .navigation a{
+  color: #222934;
   text-decoration: none;
+  transition: 0.2s;
  }
 
- ul li a:hover {
-   color: brown;
+ .navigation a:hover{
+   text-decoration: underline;
  }
 
- header {
-   background-repeat: no-repeat;
-   border: 1px solid rgb(73, 72, 72);
+ .logo{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #c9464a;
+   font-size: 3.5rem;
  }
- .logo {
-   font-family: var(--mainFont);
-   font-size: 4rem;
- }
-
- 
- 
