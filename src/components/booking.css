@@ -1,6 +1,5 @@
 .bookingContainer{
     width:auto;
-    background-color: #f5f7eb;
     color:#222934;
     font-weight: 300;
     min-height: 100vh;
@@ -17,6 +16,14 @@
     height: 1px;
     background-color: #c9464a;
     margin-bottom: 25px;
+}
+
+.lotus{
+    color: #c9464a;
+    font-size: 1rem;
+    position: absolute;
+    left: 5px;
+    top: 5px;
 }
 
 .bookingContainer h3{
@@ -36,6 +43,9 @@
     border: 1px solid #c9464a;
     transition: 0.2s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f7ebb8;
 }
 
 .inputContainer:hover{
@@ -130,6 +140,9 @@
     border: 1px solid #c9464a;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.2s;
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f7ebb8;
 }
 
 .formContainer:hover{
@@ -213,4 +226,13 @@
       padding: 7px;
       border-radius: 5px;
       margin: 8px;
+  }
+
+  .bookingDone{
+      font-size: 2rem;
+      background-color:#222934;
+      font-weight: 500;
+      color:#f5f7eb;
+      padding: 15px;
+      border-radius: 5px;
   }
