@@ -7,6 +7,7 @@
    flex-wrap: wrap;
    width: auto;
    padding: 30px;
+   text-decoration: none;
  }
 
  .navigation{
@@ -22,9 +23,12 @@
  }
 
  .navigation a{
+  text-align: center;
   color: #222934;
   text-decoration: none;
   transition: 0.2s;
+  font-weight: 500;
+  font-size: 1.2rem;
  }
 
  .navigation a:hover{
@@ -37,4 +41,9 @@
    align-items: center;
    color: #c9464a;
    font-size: 3.5rem;
+   letter-spacing: 7px;
  }
+ .logoLink {
+   text-decoration: none;
+ }
+
