@@ -178,7 +178,7 @@ export function Booking() {
     //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
-        {!showBookingDone && <div className="inputContainer animate__animated animate__backInDown">
+        {!showBookingDone && <div className="inputContainer animate__animated animate__fadeInDown">
             <GiLotus className="lotus"></GiLotus>
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
@@ -205,7 +205,7 @@ export function Booking() {
 
         </div>}
 
-        {showUserForm && <div className="formContainer animate__animated animate__backInDown">
+        {showUserForm && <div className="formContainer animate__animated animate__fadeInDown">
             <GiLotus className="lotus"></GiLotus>
             <div>
                 <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
@@ -248,6 +248,6 @@ export function Booking() {
             {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
             {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav siffor</div>}
         </div>}
-        {showBookingDone && <div className="bookingDone animate__animated animate__backInDown">Din bokning är nu klar, vi ses! <FaGlassCheers></FaGlassCheers> </div>}
+        {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Din bokning är nu klar, vi ses! <FaGlassCheers></FaGlassCheers> </div>}
     </main>)
 }
