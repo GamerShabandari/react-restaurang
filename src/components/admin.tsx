@@ -83,14 +83,14 @@ export function Admin() {
             <h3>Datum: {booking.date}</h3>
             <h4>Tid: {booking.time}</h4>
             <h4>Antal gäster:{booking.numberOfGuests}</h4>
-            <button onClick={() => { showDetails(i) }}>se detailjer</button>
-            <button onClick={() => { deleteBooking(booking._id, i) }}>ta bort bokning</button>
+            <button className="Btn" onClick={() => { showDetails(i) }}>se detailjer</button>
+            <button className="deleteBtn" onClick={() => { deleteBooking(booking._id, i) }}>ta bort bokning</button>
         </div>)
     })
 
     let detailsHtml = (
         <div className="detailsBox">
-            <button onClick={closeDetailsSection}>stäng</button>
+            <button className="Btn" onClick={closeDetailsSection}>stäng</button>
             <h2>Kund: {customer.name} {customer.lastname}</h2>
             <h3>Epost: {customer.email}</h3>
             <h3>Telefon: {customer.phone}</h3>
