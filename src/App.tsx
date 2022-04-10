@@ -7,7 +7,7 @@ import { Contact } from './components/contact';
 import { Admin } from './components/admin';
 import { Footer} from './components/footer';
 import { GiSamuraiHelmet, GiSushis } from "react-icons/gi";
-import { MdOutlineHome, MdAddShoppingCart, MdCall, MdOutlineAdminPanelSettings } from "react-icons/md"
+import { MdOutlineHome, MdCall, MdOutlineAdminPanelSettings } from "react-icons/md"
 import "animate.css"
 
 function App() {
@@ -16,7 +16,9 @@ function App() {
       <BrowserRouter>
         <header className='animate__animated animate__fadeInDown'>
           <nav>
-            <h1 className='logo'>Katana<GiSamuraiHelmet></GiSamuraiHelmet>Sushi</h1>
+            <Link className='logoLink' to="/">
+              <h1 className='logo'>Katana <GiSamuraiHelmet></GiSamuraiHelmet> Sushi</h1>
+            </Link>
             <div>
               <ul className='navigation animate__animated animate__backInDown'>
                 <li> <Link to="/">Hem<MdOutlineHome></MdOutlineHome></Link></li>
