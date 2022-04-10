@@ -131,6 +131,7 @@ export function Booking() {
     //skapar bokning, validrerar först kunduppgifter. skapar sedan objekt som pushas till API, uppdaterar statevariabler samt varnar om något går snett med bokningen //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function makeBooking() {
 
+
         setShowError(false)
         setShowEmailError(false)
         setShowPhoneError(false)
@@ -143,6 +144,7 @@ export function Booking() {
         }
 
         if (!/\S+@\S+\.\S+/.test(newUser.email)) {
+
 
             setShowEmailError(true)
 
@@ -217,6 +219,7 @@ export function Booking() {
                     <input type="checkbox" id="GDPR" onChange={handleGDPR} />
                 </div>
                 <form>
+
                     <div className="formInputContainer">
                         <MdPersonAddAlt1></MdPersonAddAlt1>
                         <input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="förnamn" disabled={!GDPRstatus} />
@@ -242,6 +245,7 @@ export function Booking() {
                         <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
                         <button type="button" className="Btn" onClick={makeBooking}>boka <GiConfirmed></GiConfirmed> </button>
                     </div>
+                  
                 </form>
             </div>
             {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}

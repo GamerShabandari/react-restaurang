@@ -16,12 +16,12 @@ export function Home(){
         <h2 className='food-title'>MENY</h2>
         <article className='container-menu'>
            <div>
-           <img src='images/räka.png' alt='menu picture' />
+           <img src='images/ebi.png' alt='menu picture' />
            <p>Räka</p>
            </div>
 
            <div>
-           <img src='images/sardin .png' alt='menu picture' />
+           <img src='images/sardin.png' alt='menu picture' />
            <p>Sardin </p>
            </div>
 
