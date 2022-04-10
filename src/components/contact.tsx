@@ -7,10 +7,12 @@ import { User } from "./models/User";
 export function Contact(){
 
     const [newContact, setNewContact] = useState<INewUser>({
+
         name: "",
         lastname: "",
         email: "",
         phone: "",
+
     });
 
 
@@ -24,6 +26,7 @@ export function Contact(){
     function handleSubmit() {
 
         let customercontact = new User(newContact.name, newContact.lastname, newContact.email, newContact.phone)
+
 
 
         axios.post("https://school-restaurant-api.azurewebsites.net/customer/create", customercontact, { headers: {"content-type": "application/json"}})
@@ -41,6 +44,7 @@ export function Contact(){
 
 
     return (<>
+
         <h3>Kontakta oss</h3>
         <form onSubmit={handleSubmit}>
             <div className="formInputContainer">
@@ -56,6 +60,7 @@ export function Contact(){
             <input type="text" name="phone" value={newContact.phone} onChange={handleChange} placeholder="Telefon"></input>
             </div>
             <button type="submit" className="Btn" >SKICKA</button>
+
         </form>
         <div>
         {messageSend && <h2>Ditt meddelande är skickat!</h2>}
