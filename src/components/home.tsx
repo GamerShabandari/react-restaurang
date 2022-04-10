@@ -1,54 +1,10 @@
 import './home.css';
 import { Fragment } from "react";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import 'animate.css';
 
 export function Home(){
-
-    {/*Google map karta*/} 
-    const Map = () => {
-        const mapStyles = {
-        height: "60%",
-        width: "50%"
-    };
-
-    const defaultCenter = {
-        lat: 59.8533, lng: 17.6356,
-    };
-
-    const locations = [
-        {
-            name: "Location 1",
-            location: {
-                lat: 59.3255,
-                lng: 17.8887
-            },
-        },
-    ];
-
-    return (
-        <LoadScript googleMapsApiKey='AIzaSyDyGEW9BNtdNTTs9dTsjDT1PJGmdb4e0lM'>
-            <GoogleMap
-                mapContainerStyle={mapStyles}
-                zoom={13}
-                center={defaultCenter}>
-                {
-                    locations.map(item => {
-                        return 
-                        (
-                        <Marker key={item.name} position={item.location} />
-                        )
-                    })
-                }
-            </GoogleMap>
-        </LoadScript>
-    )
-} 
-{/*Map() end*/}
-
     return (
      <Fragment>
-      
       {/*background image*/}
       <section className='menu-bg' style={{ backgroundImage: "url(images/blackwall.png)" }}>
      
@@ -168,16 +124,6 @@ export function Home(){
         </div>{/*container-food*/}
       </section>{/*container-layout*/}
       </section>{/*background image*/}
-
-      <section className='about-us' >
-          <div className='google-map' style={{ backgroundImage: "url(images/shrine.png)" }}>
-          <p>Katana sushi karta </p>
-          {Map()}
-          </div>
-          <div style={{ backgroundImage: "url(images/door.png)" }}className='container-door'>
-          </div>
-      </section>
-     
     </Fragment>
     )
 }

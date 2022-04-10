@@ -67,34 +67,10 @@ p {
     border-color: rgba(255, 217, 0, 0.644);
   }
 
-/*Google map*/
-.about-us {
-    display: flex;
-    height: 85vh;
-}
-
-/*Google map */
-.google-map {
-    width: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-/*Google map right side */
-.container-door {
-    width: 30%;
-}
-
 /*----------Tablet Landscape:811px-1026px---------------------*/
 @media screen and (min-width:811px) and ( max-width:1026px) {
     .container-layout {
         margin-left: 5px;
-    }
-
-    .about-us{
-        height:400px;
     }
 }/*Tablet Landscape:811px-1026px*/
 
@@ -102,10 +78,6 @@ p {
 @media screen and (min-width:761px) and ( max-width:810px) {
     .container-layout {
         margin-left: 5px;
-    }
-
-    .about-us{
-        height:400px;
     }
 
     .container-menu, .container-drink, .container-dessert {
@@ -131,20 +103,6 @@ p {
         width: 330px;
         border: 5px solid white;
     }
-
-    .about-us{
-        flex-direction: column;
-        height: 300px;
-    }
-
-    .google-map{
-        height: 300px;
-        width: 100%;
-    }
-
-    .container-door{
-        display: none;
-    }
 }/*Mobile 481px-760px*/
 
 /*----------Mobile max 480px---------------------*/
@@ -163,19 +121,5 @@ p {
     .booking-message {
         width: 330px;
         border: 5px solid white;
-    }
-
-    .about-us{
-        flex-direction: column;
-        height: 300px;
-    }
-
-    .google-map{
-        height: 300px;
-        width: 430px;
-    }
-
-    .container-door{
-        display: none;
     }
 }/*Mobile max 480px*/
