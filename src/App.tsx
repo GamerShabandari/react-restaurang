@@ -5,6 +5,7 @@ import { Home } from './components/home';
 import { Booking } from './components/booking';
 import { Contact } from './components/contact';
 import { Admin } from './components/admin';
+import { Footer} from './components/footer';
 import { GiSamuraiHelmet, GiSushis } from "react-icons/gi";
 import { MdOutlineHome, MdCall, MdOutlineAdminPanelSettings } from "react-icons/md"
 import "animate.css"
@@ -26,8 +27,8 @@ function App() {
                 <li> <Link to="/admin">Admin<MdOutlineAdminPanelSettings></MdOutlineAdminPanelSettings></Link></li>
               </ul>
             </div>
-
           </nav>
+          <p style={{ backgroundImage: "url(images/katana.png)"}}></p>
         </header>
         <Routes>
           <Route path='/' element={<Home></Home>}> </Route>
@@ -39,7 +40,10 @@ function App() {
           <Route path='/admin' element={<Admin></Admin>}> </Route>
 
         </Routes>
+
       </BrowserRouter>
+
+      <Footer></Footer>
 
     </div>
   );
