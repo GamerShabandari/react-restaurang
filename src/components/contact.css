@@ -12,9 +12,32 @@ input {
     height: 1.3rem;
 }
 
-button {
-    border: 0px;
-    padding: 0.5rem;
-    border-radius: 5px;
+.Btn{
 
+    background-color: #c9464a;
+    color:#f5f7eb;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: fit-content;
+    align-self: center;
+    transition: 0.2s all;
+    margin: 7px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.Btn:hover{
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.formInputContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }

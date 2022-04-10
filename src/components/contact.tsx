@@ -25,33 +25,40 @@ export function Contact(){
 
         let customercontact = new User(newContact.name, newContact.lastname, newContact.email, newContact.phone)
 
-        setMessageSend(true)
 
         axios.post("https://school-restaurant-api.azurewebsites.net/customer/create", customercontact, { headers: {"content-type": "application/json"}})
         .then(response => {
-            setMessageSend(true)
+                console.log(response.data);
+                
         })
         .catch(error => {
             alert("Det gick tyvärr inte att skicka!")
         })
         
+        setMessageSend(true)
 
     }
 
 
     return (<>
         <h3>Kontakta oss</h3>
-        <form onSubmit={handleSubmit}> 
-            <label>Förnamn:</label>
-            <input type="text" name="name" value={newContact.name} onChange={handleChange}></input>
-            <label>Efternamn:</label>
-            <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange}></input><br></br>
-            <label>E-post:</label>
-            <input type="email" name="email" value={newContact.email} onChange={handleChange}></input>
-            <label>Telefon:</label>
-            <input type="text" name="phone" value={newContact.phone} onChange={handleChange}></input>
-            <button type="submit" >Skicka meddelande!</button>
-            {messageSend && <h2>Ditt meddelande är skickat!</h2>}
+        <form onSubmit={handleSubmit}>
+            <div className="formInputContainer">
+            <input type="text" name="name" value={newContact.name} onChange={handleChange} placeholder="Förnamn"></input>
+            </div>
+            <div className="formInputContainer">
+            <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange} placeholder="Efternamn"></input><br></br>
+            </div>
+            <div className="formInputContainer">
+            <input type="email" name="email" value={newContact.email} onChange={handleChange} placeholder="E-post" ></input>
+            </div>
+            <div className="formInputContainer">
+            <input type="text" name="phone" value={newContact.phone} onChange={handleChange} placeholder="Telefon"></input>
+            </div>
+            <button type="submit" className="Btn" >SKICKA</button>
         </form>
+        <div>
+        {messageSend && <h2>Ditt meddelande är skickat!</h2>}
+        </div>
     </>)
 }
