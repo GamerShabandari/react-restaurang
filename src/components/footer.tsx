@@ -10,7 +10,7 @@ export function Footer(){
 
     return(
     <Fragment>
-        <section className='footer' style={{ backgroundImage: "url(images/whitewall.png)" }}>
+        <section className='footer'>
             <section className='footer-flex'>
             <article className='address'>
                 <p><FaMapMarkerAlt/> Kungsgatan 1 </p>
