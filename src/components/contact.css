@@ -4,7 +4,9 @@ label {
 }
 
 input {
-    margin: 1rem;
+
+
+
     border: 2px solid grey;
     border-radius: 5px;
     height: 1.3rem;
@@ -38,4 +40,6 @@ input {
     justify-content: center;
     align-items: center;
     gap: 8px;
+
 }
+
