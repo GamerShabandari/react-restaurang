@@ -6,7 +6,7 @@ export function Home(){
     return (
      <Fragment>
       {/*background image*/}
-      <section className='menu-bg' style={{ backgroundImage: "url(images/blackwall.png)" }}>
+      <section className='menu-bg' style={{ backgroundImage: "url(images/greywall.png)" }}>
      
       {/*Link to Booking*/}
       <a href='/booking' className='button-a' ><p className='animate__animated animate__bounceInLeft booking-message'>BOKA BOARD</p></a>
