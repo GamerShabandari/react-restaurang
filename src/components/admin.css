@@ -10,7 +10,7 @@
      min-height: 100vh;
      display: flex;
      flex-direction: row;
-     align-items: center;
+     align-items: flex-start;
      justify-content: center;
      flex-wrap: wrap;
      gap: 30px;
@@ -65,7 +65,10 @@
  }
  
  .Btn{
- 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
      background-color: #c9464a;
      color:#f5f7eb;
      font-size: 0.8rem;
@@ -87,6 +90,10 @@
  }
  
  .deleteBtn{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 3px;
      background-color: #222934;
      color: #f5f7eb;
      font-size: 0.8rem;
