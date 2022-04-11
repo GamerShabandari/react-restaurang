@@ -159,6 +159,11 @@ export function Booking() {
 
         }
 
+        if (newUser.phone.length < 10 || newUser.phone.length > 10 ) {
+            setShowPhoneError(true)
+            return
+        }
+
         let user = new User(newUser.name, newUser.lastname, newUser.email, newUser.phone)
 
         let booking = new Bookings(restaurantID, chosenDate, chosenTime, parseInt(chosenAmountOfGuests), user)
@@ -250,7 +255,7 @@ export function Booking() {
             </div>
             {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
             {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
-            {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav siffor</div>}
+            {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav 10 siffor</div>}
         </div>}
         {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Din bokning är nu klar, vi ses! <FaGlassCheers></FaGlassCheers> </div>}
     </main>)
