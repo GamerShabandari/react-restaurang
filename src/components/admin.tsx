@@ -6,8 +6,8 @@ import { IBooking } from "./models/IBooking"
 import "./admin.css"
 import { INewUser } from "./models/INewUser"
 import { Bookings } from "./models/Bookings"
-import { GiCancel, GiConfirmed, GiHotMeal, GiLotus, GiMeal } from "react-icons/gi"
-import { MdEmail, MdPersonAddAlt1, MdPhoneIphone } from "react-icons/md"
+import { GiCancel, GiConfirmed, GiHotMeal, GiMeal } from "react-icons/gi"
+import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote } from "react-icons/md"
 import { FaGlassCheers } from "react-icons/fa"
 import { User } from "./models/User"
 
@@ -37,7 +37,6 @@ export function Admin() {
         }
     })
 
-    ////////// statevariabler för att skapa en ny bokning från admin sidan ///////
     const [newUser, setNewUser] = useState<INewUser>({
         name: "",
         lastname: "",
@@ -58,10 +57,13 @@ export function Admin() {
     const [showPhoneError, setShowPhoneError] = useState(false);
 
     const [showUserForm, setShowUserForm] = useState(false);
+    const [showBooking, setShowBooking] = useState(true)
     const [showBookingForm, setShowBookingForm] = useState(false);
     const [showBookingDone, setShowBookingDone] = useState(false);
 
     const [GDPRstatus, setGDPRstatus] = useState(false)
+
+    const [showEditBookingForm, setShowEditBookingForm] = useState(false);
     //////////////////////////////////////////////////////////////////////////////
 
     useEffect(() => {
@@ -71,7 +73,10 @@ export function Admin() {
                 setBookingsFromApi([...response.data])
             })
 
-    }, [])
+        console.log("körde en api get for booking");
+
+
+    }, [showBookingDone])
 
     function showDetails(bookingIndex: number) {
 
@@ -86,6 +91,9 @@ export function Admin() {
                     email: response.data[0].email,
                     phone: response.data[0].phone
                 }
+
+                setShowBooking(false)
+
                 setCustomer(user)
                 let completeBooking = new Bookings(chosenBooking.restaurantId, chosenBooking.date, chosenBooking.time, chosenBooking.numberOfGuests, user);
                 setDetailedBooking(completeBooking)
@@ -105,8 +113,18 @@ export function Admin() {
             })
     }
 
+    function editBooking() {
+        
+        let bookingToEdit = detailedBooking;
+        
+
+        setShowEditBookingForm(true)
+
+    }
+
     function closeDetailsSection() {
         setShowDetailsSection(false)
+        setShowBooking(true)
     }
 
     function showBookingField() {
@@ -226,7 +244,7 @@ export function Admin() {
 
         }
 
-        if (newUser.phone.length < 10 || newUser.phone.length > 10 ) {
+        if (newUser.phone.length < 10 || newUser.phone.length > 10) {
             setShowPhoneError(true)
             return
         }
@@ -250,19 +268,20 @@ export function Admin() {
     }
 
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
-        return (<div className="bookingBox" key={i}>
+        return (<div className="bookingBox animate__animated animate__fadeIn" key={i}>
             <h5>Bokningsnr: {booking._id}</h5>
             <h3>Datum: {booking.date}</h3>
             <h4>Tid: {booking.time}</h4>
             <h4>Antal gäster:{booking.numberOfGuests}</h4>
-            <button className="Btn" onClick={() => { showDetails(i) }}>se detailjer</button>
-            <button className="deleteBtn" onClick={() => { deleteBooking(booking._id, i) }}>ta bort bokning</button>
+            <button className="Btn" onClick={() => { showDetails(i) }}>se detailjer <MdInfoOutline></MdInfoOutline> </button>
+            <button className="deleteBtn" onClick={() => { deleteBooking(booking._id, i) }}>radera bokning<GiCancel></GiCancel></button>
         </div>)
     })
 
     let detailsHtml = (
-        <div className="detailsBox">
-            <button className="Btn" onClick={closeDetailsSection}>stäng</button>
+        <div className="detailsBox animate__animated animate__flipInX">
+            <button className="deleteBtn" onClick={closeDetailsSection}>stäng <GiCancel></GiCancel></button>
+            <button className="Btn" onClick={editBooking}>ändra bokning <MdOutlineEditNote></MdOutlineEditNote> </button>
             <h2>Kund: {customer.name} {customer.lastname}</h2>
             <h3>Epost: {customer.email}</h3>
             <h3>Telefon: {customer.phone}</h3>
@@ -271,12 +290,13 @@ export function Admin() {
             <h5>Tid: {detailedBooking.time}</h5>
         </div>)
 
+
     return (<>
 
         <section className="adminBookingSection">
-            <button onClick={showBookingField}>skapa en ny bokning</button>
+            <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
             {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
-            {showBookingForm && <div>Skapa en ny bokning åt kund
+            {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
                 <h3>Vänligen välj datum och antal gäster.</h3>
                 <input type="date" onChange={handleChosenDate} />
@@ -299,8 +319,8 @@ export function Admin() {
                     {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
                 </div>}
 
-                {showUserForm && <div className="formContainer animate__animated animate__fadeInDown">
-                    <GiLotus className="lotus"></GiLotus>
+                {showUserForm && <div className="formContainer animate__animated animate__flipInX">
+
                     <div>
                         <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
                         <div>
@@ -350,8 +370,24 @@ export function Admin() {
         <main className="adminMain">
 
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
+
+
+            {showEditBookingForm && <div> 
+                här ska vi uppdatera bokning
+                {/* förnamn<input type="text" value={detailedBooking.customer.name} /> 
+                efternamn<input type="text" value={detailedBooking.customer.lastname} /> 
+                epost<input type="text" value={detailedBooking.customer.email} /> 
+                telefon<input type="text" value={detailedBooking.customer.phone} /> 
+                datum<input type="text" value={detailedBooking.date} />  */}
+                <button>Uppdatera bokning</button>
+                <button onClick={()=>{setShowEditBookingForm(false)}}>Avbryt</button>
+                </div> } 
+
+
+
             {bookingsFromApi.length < 1 && <section className="loading">laddar...</section>}
-            {bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
+
+            {showBooking && bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
         </main>
     </>)
 }
