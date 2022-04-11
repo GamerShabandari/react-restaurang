@@ -109,6 +109,13 @@ export function Admin() {
             })
     }
 
+    function editBooking(){
+        // console.log("du vill redigera denna bokning" + detailedBooking);
+        let bookingToEdit = detailedBooking;
+        console.log("här nu" + bookingToEdit.customer.name);
+        
+    }
+
     function closeDetailsSection() {
         setShowDetailsSection(false)
         setShowBooking(true)
@@ -231,7 +238,7 @@ export function Admin() {
 
         }
 
-        if (newUser.phone.length < 10 || newUser.phone.length > 10 ) {
+        if (newUser.phone.length < 10 || newUser.phone.length > 10) {
             setShowPhoneError(true)
             return
         }
@@ -268,6 +275,7 @@ export function Admin() {
     let detailsHtml = (
         <div className="detailsBox animate__animated animate__flipInX">
             <button className="Btn" onClick={closeDetailsSection}>stäng</button>
+            <button className="Btn" onClick={editBooking}>ändra bokning</button>
             <h2>Kund: {customer.name} {customer.lastname}</h2>
             <h3>Epost: {customer.email}</h3>
             <h3>Telefon: {customer.phone}</h3>
