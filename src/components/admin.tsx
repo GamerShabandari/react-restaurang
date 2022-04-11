@@ -6,7 +6,7 @@ import { IBooking } from "./models/IBooking"
 import "./admin.css"
 import { INewUser } from "./models/INewUser"
 import { Bookings } from "./models/Bookings"
-import { GiCancel, GiConfirmed, GiHotMeal, GiLotus, GiMeal } from "react-icons/gi"
+import { GiCancel, GiConfirmed, GiHotMeal, GiMeal } from "react-icons/gi"
 import { MdEmail, MdPersonAddAlt1, MdPhoneIphone } from "react-icons/md"
 import { FaGlassCheers } from "react-icons/fa"
 import { User } from "./models/User"
@@ -72,7 +72,10 @@ export function Admin() {
                 setBookingsFromApi([...response.data])
             })
 
-    }, [])
+            console.log("körde en api get for booking");
+            
+
+    }, [showBookingDone])
 
     function showDetails(bookingIndex: number) {
 
@@ -288,7 +291,7 @@ export function Admin() {
     return (<>
 
         <section className="adminBookingSection">
-            <button onClick={showBookingField}>skapa en ny bokning åt kund</button>
+            <button className="Btn" onClick={showBookingField}>skapa en ny bokning åt kund</button>
             {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
@@ -314,7 +317,7 @@ export function Admin() {
                 </div>}
 
                 {showUserForm && <div className="formContainer animate__animated animate__flipInX">
-                    <GiLotus className="lotus"></GiLotus>
+                
                     <div>
                         <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
                         <div>
