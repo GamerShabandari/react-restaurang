@@ -58,6 +58,7 @@ export function Admin() {
     const [showPhoneError, setShowPhoneError] = useState(false);
 
     const [showUserForm, setShowUserForm] = useState(false);
+    const [showBooking, setShowBooking] = useState(true)
     const [showBookingForm, setShowBookingForm] = useState(false);
     const [showBookingDone, setShowBookingDone] = useState(false);
 
@@ -86,6 +87,9 @@ export function Admin() {
                     email: response.data[0].email,
                     phone: response.data[0].phone
                 }
+
+                setShowBooking(false)
+
                 setCustomer(user)
                 let completeBooking = new Bookings(chosenBooking.restaurantId, chosenBooking.date, chosenBooking.time, chosenBooking.numberOfGuests, user);
                 setDetailedBooking(completeBooking)
@@ -107,6 +111,7 @@ export function Admin() {
 
     function closeDetailsSection() {
         setShowDetailsSection(false)
+        setShowBooking(true)
     }
 
     function showBookingField() {
@@ -250,7 +255,7 @@ export function Admin() {
     }
 
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
-        return (<div className="bookingBox" key={i}>
+        return (<div className="bookingBox animate__animated animate__fadeIn" key={i}>
             <h5>Bokningsnr: {booking._id}</h5>
             <h3>Datum: {booking.date}</h3>
             <h4>Tid: {booking.time}</h4>
@@ -261,7 +266,7 @@ export function Admin() {
     })
 
     let detailsHtml = (
-        <div className="detailsBox">
+        <div className="detailsBox animate__animated animate__flipInX">
             <button className="Btn" onClick={closeDetailsSection}>stäng</button>
             <h2>Kund: {customer.name} {customer.lastname}</h2>
             <h3>Epost: {customer.email}</h3>
@@ -271,12 +276,13 @@ export function Admin() {
             <h5>Tid: {detailedBooking.time}</h5>
         </div>)
 
+
     return (<>
 
         <section className="adminBookingSection">
-            <button onClick={showBookingField}>skapa en ny bokning</button>
+            <button onClick={showBookingField}>skapa en ny bokning åt kund</button>
             {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
-            {showBookingForm && <div>Skapa en ny bokning åt kund
+            {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
                 <h3>Vänligen välj datum och antal gäster.</h3>
                 <input type="date" onChange={handleChosenDate} />
@@ -299,7 +305,7 @@ export function Admin() {
                     {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
                 </div>}
 
-                {showUserForm && <div className="formContainer animate__animated animate__fadeInDown">
+                {showUserForm && <div className="formContainer animate__animated animate__flipInX">
                     <GiLotus className="lotus"></GiLotus>
                     <div>
                         <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
@@ -351,7 +357,7 @@ export function Admin() {
 
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
             {bookingsFromApi.length < 1 && <section className="loading">laddar...</section>}
-            {bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
+            {showBooking && bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
         </main>
     </>)
 }
