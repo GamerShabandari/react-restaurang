@@ -122,6 +122,7 @@ export function Admin() {
                 let completeBooking = new Bookings(chosenBooking.restaurantId, chosenBooking.date, chosenBooking.time, chosenBooking.numberOfGuests, user);
                 setDetailedBooking(completeBooking)
                 setShowDetailsSection(true)
+            
             })
     }
 
