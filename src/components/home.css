@@ -1,11 +1,11 @@
 
-/*Meny*/
 .container-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: auto;
     margin-bottom: 50px;
+    min-height: 100vh;
    
 }
 

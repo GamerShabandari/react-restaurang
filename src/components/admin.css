@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: center;
     padding: 20px;
+    min-height: 100vh;
  }
  
  .adminBookingsContainer{
@@ -145,6 +146,10 @@
      font-size: 2rem;
      padding: 10px;
      border-radius: 5px;
+ }
+
+ .loading img{
+     width: 300px;
  }
  
  .adminBookingSection{
