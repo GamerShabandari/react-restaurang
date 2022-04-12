@@ -25,7 +25,7 @@ export function Admin() {
     })
 
     const [detailedBooking, setDetailedBooking] = useState<Bookings>({
-        restaurantId: "",
+        restaurantId: "624db995d80b65d5c561f68d",
         date: "",
         time: "",
         numberOfGuests: 0,
@@ -68,7 +68,16 @@ export function Admin() {
     const [bookingToEditCustomerId, setBookingToEditCustomerId] = useState("")
     const [bookingToEdit, setBookingToEdit] = useState<IBooking>({
         _id: "",
-        restaurantId: "",
+        restaurantId: "624db995d80b65d5c561f68d",
+        date: "",
+        time: "",
+        numberOfGuests: 0,
+        customerId: ""
+    })
+
+    const [updatedBooking, setUpdatedBooking] = useState<IBooking>({
+        _id: "",
+        restaurantId: "624db995d80b65d5c561f68d",
         date: "",
         time: "",
         numberOfGuests: 0,
@@ -287,13 +296,33 @@ export function Admin() {
             })
     }
 
-    function saveUpdatedBooking(){
+    function saveUpdatedBooking() {
+
+        setUpdatedBooking({ ...updatedBooking, _id: bookingToEdit._id, customerId: bookingToEdit.customerId })
+        console.log(updatedBooking);
+        console.log(bookingToEdit);
+        
+
+
+         // skapa ett nytt IBooking objekt och post till 
+        // setNewUser({ ...newUser, [name]: e.target.value })
 
         //// uppdatera bokning mot api
 
         // nollställ state variabler för edit booking mm
 
         // stäng sedan fältet med rätt state variabel
+    }
+
+    function handleEditFormTimeAndGuestsChange(e: ChangeEvent<HTMLSelectElement>) {
+        let name = e.target.name;
+
+        setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
+    }
+
+    function handleEditFormDateChange(e: ChangeEvent<HTMLInputElement>){
+        let name = e.target.name;
+        setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -321,7 +350,7 @@ export function Admin() {
             <h5>Tid: {detailedBooking.time}</h5>
         </div>)
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
 
@@ -406,13 +435,27 @@ export function Admin() {
 
             {showEditBookingForm && <div>
                 här ska vi uppdatera bokning {bookingToEdit._id} {bookingToEdit.customerId} {bookingToEdit.numberOfGuests} {bookingToEdit.date} {bookingToEdit.time}
-                {/* förnamn<input type="text" value={detailedBooking.customer.name} /> 
-                efternamn<input type="text" value={detailedBooking.customer.lastname} /> 
-                epost<input type="text" value={detailedBooking.customer.email} /> 
-                telefon<input type="text" value={detailedBooking.customer.phone} /> 
-                datum<input type="text" value={detailedBooking.date} />  */}
+                <h3>Vänligen välj datum och antal gäster.</h3>
+
+                <input type="date" name="date" onChange={handleEditFormDateChange} />
+
+                <select name="time" onChange={handleEditFormTimeAndGuestsChange}>
+                    <option value="18:00">18:00</option>
+                    <option value="21:00">21:00</option>
+                </select>
+
+                <select name="numberOfGuests" onChange={handleEditFormTimeAndGuestsChange}>
+                    <option value="1">1 pers</option>
+                    <option value="2">2 pers</option>
+                    <option value="3">3 pers</option>
+                    <option value="4">4 pers</option>
+                    <option value="5">5 pers</option>
+                    <option value="6">6 pers</option>
+                </select>
                 <button onClick={saveUpdatedBooking} >Uppdatera bokning</button>
                 <button onClick={() => { setShowEditBookingForm(false); setShowBooking(true) }}>Avbryt</button>
+
+                {updatedBooking._id} {updatedBooking.customerId}
             </div>}
 
 
