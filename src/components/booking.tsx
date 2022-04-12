@@ -180,6 +180,10 @@ export function Booking() {
                 console.log(error);
                 alert("något gick tyvärr fel, försök igen senare.")
             })
+
+            setTimeout(()=>{
+                setShowBookingDone(false)
+            },5000)
     }
 
     //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////

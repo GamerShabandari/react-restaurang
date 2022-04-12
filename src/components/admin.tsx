@@ -64,6 +64,7 @@ export function Admin() {
     const [GDPRstatus, setGDPRstatus] = useState(false)
 
     const [showEditBookingForm, setShowEditBookingForm] = useState(false);
+    const [showBookingInputRequired, setShowBookingInputRequired] = useState(false);
     const [bookingToEditId, setBookingToEditId] = useState("")
     const [bookingToEditCustomerId, setBookingToEditCustomerId] = useState("")
     const [bookingToEdit, setBookingToEdit] = useState<IBooking>({
@@ -294,9 +295,25 @@ export function Admin() {
                 console.log(error);
                 alert("något gick tyvärr fel, försök igen senare.")
             })
+
+        setTimeout(() => {
+            setShowBookingDone(false)
+        }, 5000)
+    }
+
+    function cancelUpdateBooking() {
+        setShowEditBookingForm(false)
+        setShowBooking(true)
+        setShowEditBookingForm(false)
+        setShowBookingInputRequired(false)
     }
 
     function saveUpdatedBooking() {
+
+        if (updatedBooking.date === "" || updatedBooking.time === "" || updatedBooking.numberOfGuests === 0) {
+            setShowBookingInputRequired(true)
+            return
+        }
 
         setUpdatedBooking({ ...updatedBooking, _id: bookingToEdit._id, customerId: bookingToEdit.customerId })
 
@@ -420,7 +437,7 @@ export function Admin() {
                             </div>
 
                             <div className="choiceContainer">
-                                <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
+                                <button type="button" className="deleteBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
                                 <button type="button" className="Btn" onClick={makeBooking}>boka <GiConfirmed></GiConfirmed> </button>
                             </div>
 
@@ -438,9 +455,9 @@ export function Admin() {
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
 
 
-            {showEditBookingForm && <div>
-                här ska vi uppdatera bokning {bookingToEdit._id} {bookingToEdit.customerId} {bookingToEdit.numberOfGuests} {bookingToEdit.date} {bookingToEdit.time}
-                <h3>Vänligen välj datum och antal gäster.</h3>
+            {showEditBookingForm && <div className="adminUpdateBookingContainer animate__animated animate__flipInX">
+
+                <h3>Vänligen välj ny tid,datum och antal gäster.</h3>
 
                 <input type="date" name="date" onChange={handleEditFormDateChange} />
 
@@ -457,8 +474,9 @@ export function Admin() {
                     <option value="5">5 pers</option>
                     <option value="6">6 pers</option>
                 </select>
-                <button onClick={saveUpdatedBooking} >Uppdatera bokning</button>
-                <button onClick={() => { setShowEditBookingForm(false); setShowBooking(true) }}>Avbryt</button>
+                {showBookingInputRequired && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
+                <button className="Btn" onClick={saveUpdatedBooking} >Uppdatera bokning <GiConfirmed></GiConfirmed> </button>
+                <button className="deleteBtn" onClick={cancelUpdateBooking}>Avbryt <GiCancel></GiCancel></button>
 
                 {updatedBooking._id} {updatedBooking.customerId}
             </div>}
