@@ -116,9 +116,12 @@
  }
  
  .loading{
-     background-color: #c9464a;
-     color: #f5f7eb;
-     font-size: 2.5rem;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     color:#222934;
+     font-size: 2rem;
      padding: 10px;
      border-radius: 5px;
  }

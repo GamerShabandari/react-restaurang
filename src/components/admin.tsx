@@ -483,7 +483,7 @@ export function Admin() {
 
 
 
-            {bookingsFromApi.length < 1 && <section className="loading">laddar...</section>}
+            {bookingsFromApi.length < 1 && <section className="loading"> <img src="../../images/rocket.gif" alt="loading animation" /> laddar...</section>}
 
             {showBooking && bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
         </main>
