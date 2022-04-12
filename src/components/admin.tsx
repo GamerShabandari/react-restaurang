@@ -299,19 +299,29 @@ export function Admin() {
     function saveUpdatedBooking() {
 
         setUpdatedBooking({ ...updatedBooking, _id: bookingToEdit._id, customerId: bookingToEdit.customerId })
-        console.log(updatedBooking);
-        console.log(bookingToEdit);
+
+        // console.log(updatedBooking); // här är datum tid och antal gäster rätt
+
+        // console.log(bookingToEdit); // här är _id rätt och customerId rätt
         
+        
+        let updatedBookingToPutToAPI = {
+            _id: bookingToEdit._id,
+            restaurantId: "624db995d80b65d5c561f68d",
+            date: updatedBooking.date,
+            time: updatedBooking.time,
+            numberOfGuests: updatedBooking.numberOfGuests,
+            customerId: bookingToEdit.customerId
+        }
 
-
-         // skapa ett nytt IBooking objekt och post till 
-        // setNewUser({ ...newUser, [name]: e.target.value })
-
-        //// uppdatera bokning mot api
-
-        // nollställ state variabler för edit booking mm
-
-        // stäng sedan fältet med rätt state variabel
+        axios.put("https://school-restaurant-api.azurewebsites.net/booking/update/" + updatedBookingToPutToAPI._id, updatedBookingToPutToAPI, { headers: { "content-type": "application/json" } })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+            alert("något gick tyvärr fel, försök igen senare.")
+        })
     }
 
     function handleEditFormTimeAndGuestsChange(e: ChangeEvent<HTMLSelectElement>) {
@@ -320,7 +330,7 @@ export function Admin() {
         setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
 
-    function handleEditFormDateChange(e: ChangeEvent<HTMLInputElement>){
+    function handleEditFormDateChange(e: ChangeEvent<HTMLInputElement>) {
         let name = e.target.name;
         setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
