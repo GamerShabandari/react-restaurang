@@ -6,8 +6,8 @@ import { IBooking } from "./models/IBooking"
 import "./admin.css"
 import { INewUser } from "./models/INewUser"
 import { Bookings } from "./models/Bookings"
-import { GiCancel, GiConfirmed, GiHotMeal, GiMeal } from "react-icons/gi"
-import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote } from "react-icons/md"
+import { GiCancel, GiConfirmed, GiHotMeal, GiMeal, GiPassport } from "react-icons/gi"
+import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime } from "react-icons/md"
 import { FaGlassCheers } from "react-icons/fa"
 import { User } from "./models/User"
 
@@ -351,10 +351,11 @@ export function Admin() {
 
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
         return (<div className="bookingBox animate__animated animate__fadeIn" key={i}>
-            <h5>Bokningsnr: {booking._id}</h5>
-            <h3>Datum: {booking.date}</h3>
-            <h4>Tid: {booking.time}</h4>
-            <h4>Antal gäster:{booking.numberOfGuests}</h4>
+
+            <div className="bookingBoxDetailsField"><GiPassport></GiPassport> Bokningsnr : {booking._id}</div>
+            <div className="bookingBoxDetailsField"><MdGroups></MdGroups>Antal gäster : {booking.numberOfGuests}</div>
+            <div className="bookingBoxDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {booking.date}</div>
+            <div className="bookingBoxDetailsField"><MdAccessTime></MdAccessTime>Tid : {booking.time}</div>
             <button className="Btn" onClick={() => { showDetails(i) }}>se detailjer <MdInfoOutline></MdInfoOutline> </button>
             <button className="deleteBtn" onClick={() => { deleteBooking(booking._id, i) }}>radera bokning<GiCancel></GiCancel></button>
         </div>)
@@ -364,12 +365,13 @@ export function Admin() {
         <div className="detailsBox animate__animated animate__flipInX">
             <button className="deleteBtn" onClick={closeDetailsSection}>stäng <GiCancel></GiCancel></button>
             <button className="Btn" onClick={editBooking}>ändra bokning <MdOutlineEditNote></MdOutlineEditNote> </button>
-            <h2>Kund: {customer.name} {customer.lastname}</h2>
-            <h3>Epost: {customer.email}</h3>
-            <h3>Telefon: {customer.phone}</h3>
-            <h5>Antal gäster: {detailedBooking.numberOfGuests}</h5>
-            <h5>Datum: {detailedBooking.date}</h5>
-            <h5>Tid: {detailedBooking.time}</h5>
+            <div className="customerDetailsField"><MdPersonPin></MdPersonPin>Kund : {customer.name} {customer.lastname}</div>
+            <div className="customerDetailsField"><MdEmail></MdEmail>Epost : {customer.email}</div>
+            <div className="customerDetailsField"><MdPhoneIphone></MdPhoneIphone>Tel : {customer.phone}</div>
+            <div className="customerDetailsField"><MdGroups></MdGroups>Antal gäster : {detailedBooking.numberOfGuests}</div>
+            <div className="customerDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {detailedBooking.date}</div>
+            <div className="customerDetailsField"><MdAccessTime></MdAccessTime>Tid : {detailedBooking.time}</div>
+
         </div>)
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
