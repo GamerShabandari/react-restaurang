@@ -302,7 +302,6 @@ export function Admin() {
     }
 
     function cancelUpdateBooking() {
-        setShowEditBookingForm(false)
         setShowBooking(true)
         setShowEditBookingForm(false)
         setShowBookingInputRequired(false)
@@ -329,11 +328,19 @@ export function Admin() {
         axios.put<IBooking>("https://school-restaurant-api.azurewebsites.net/booking/update/" + updatedBookingToPutToAPI.id, updatedBookingToPutToAPI, { headers: { "content-type": "application/json" } })
             .then(response => {
                 console.log(response);
+                setShowBooking(true)
+                setShowEditBookingForm(false)
+                setShowBookingDone(true)
+
+                setTimeout(() => {
+                    setShowBookingDone(false)
+                }, 5000)
             })
             .catch(error => {
                 console.log(error);
                 alert("något gick tyvärr fel, försök igen senare.")
             })
+
     }
 
     function handleEditFormTimeAndGuestsChange(e: ChangeEvent<HTMLSelectElement>) {
@@ -479,8 +486,6 @@ export function Admin() {
                 {showBookingInputRequired && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
                 <button className="Btn" onClick={saveUpdatedBooking} >Uppdatera bokning <GiConfirmed></GiConfirmed> </button>
                 <button className="deleteBtn" onClick={cancelUpdateBooking}>Avbryt <GiCancel></GiCancel></button>
-
-                {updatedBooking._id} {updatedBooking.customerId}
             </div>}
 
 
