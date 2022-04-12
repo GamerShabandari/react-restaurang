@@ -64,6 +64,16 @@ export function Admin() {
     const [GDPRstatus, setGDPRstatus] = useState(false)
 
     const [showEditBookingForm, setShowEditBookingForm] = useState(false);
+    const [bookingToEditId, setBookingToEditId] = useState("")
+    const [bookingToEditCustomerId, setBookingToEditCustomerId] = useState("")
+    const [bookingToEdit, setBookingToEdit] = useState<IBooking>({
+        _id: "",
+        restaurantId: "",
+        date: "",
+        time: "",
+        numberOfGuests: 0,
+        customerId: ""
+    })
     //////////////////////////////////////////////////////////////////////////////
 
     useEffect(() => {
@@ -82,6 +92,8 @@ export function Admin() {
 
         let chosenBooking = bookingsFromApi[bookingIndex];
 
+        setBookingToEditId(chosenBooking._id)
+
         axios.get<INewUser[]>("https://school-restaurant-api.azurewebsites.net/customer/" + chosenBooking.customerId)
             .then(response => {
 
@@ -91,6 +103,8 @@ export function Admin() {
                     email: response.data[0].email,
                     phone: response.data[0].phone
                 }
+
+                setBookingToEditCustomerId(chosenBooking.customerId)
 
                 setShowBooking(false)
 
@@ -114,12 +128,18 @@ export function Admin() {
     }
 
     function editBooking() {
-        
-        let bookingToEdit = detailedBooking;
-        
 
+        let ToEdit = detailedBooking;
+        setBookingToEdit({
+            _id: bookingToEditId,
+            restaurantId: ToEdit.restaurantId,
+            date: ToEdit.date,
+            time: ToEdit.time,
+            numberOfGuests: ToEdit.numberOfGuests,
+            customerId: bookingToEditCustomerId
+        })
+        setShowDetailsSection(false)
         setShowEditBookingForm(true)
-
     }
 
     function closeDetailsSection() {
@@ -267,6 +287,17 @@ export function Admin() {
             })
     }
 
+    function saveUpdatedBooking(){
+
+        //// uppdatera bokning mot api
+
+        // nollställ state variabler för edit booking mm
+
+        // stäng sedan fältet med rätt state variabel
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
         return (<div className="bookingBox animate__animated animate__fadeIn" key={i}>
             <h5>Bokningsnr: {booking._id}</h5>
@@ -290,6 +321,7 @@ export function Admin() {
             <h5>Tid: {detailedBooking.time}</h5>
         </div>)
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
 
@@ -372,16 +404,16 @@ export function Admin() {
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
 
 
-            {showEditBookingForm && <div> 
-                här ska vi uppdatera bokning
+            {showEditBookingForm && <div>
+                här ska vi uppdatera bokning {bookingToEdit._id} {bookingToEdit.customerId} {bookingToEdit.numberOfGuests} {bookingToEdit.date} {bookingToEdit.time}
                 {/* förnamn<input type="text" value={detailedBooking.customer.name} /> 
                 efternamn<input type="text" value={detailedBooking.customer.lastname} /> 
                 epost<input type="text" value={detailedBooking.customer.email} /> 
                 telefon<input type="text" value={detailedBooking.customer.phone} /> 
                 datum<input type="text" value={detailedBooking.date} />  */}
-                <button>Uppdatera bokning</button>
-                <button onClick={()=>{setShowEditBookingForm(false)}}>Avbryt</button>
-                </div> } 
+                <button onClick={saveUpdatedBooking} >Uppdatera bokning</button>
+                <button onClick={() => { setShowEditBookingForm(false); setShowBooking(true) }}>Avbryt</button>
+            </div>}
 
 
 
