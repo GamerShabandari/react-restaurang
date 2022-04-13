@@ -7,7 +7,7 @@ import "./admin.css"
 import { INewUser } from "./models/INewUser"
 import { Bookings } from "./models/Bookings"
 import { GiCancel, GiConfirmed, GiHotMeal, GiMeal, GiPassport } from "react-icons/gi"
-import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime } from "react-icons/md"
+import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime, MdSearch } from "react-icons/md"
 import { FaGlassCheers } from "react-icons/fa"
 import { User } from "./models/User"
 
@@ -84,6 +84,11 @@ export function Admin() {
         numberOfGuests: 0,
         customerId: ""
     })
+
+
+    const [showSearchField, setShowSearchField] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchResults, setSearchResults] = useState<IBooking[]>([])
     //////////////////////////////////////////////////////////////////////////////
 
     useEffect(() => {
@@ -92,9 +97,6 @@ export function Admin() {
             .then(response => {
                 setBookingsFromApi([...response.data])
             })
-
-        console.log("körde en api get for booking");
-
 
     }, [showBookingDone])
 
@@ -122,7 +124,7 @@ export function Admin() {
                 let completeBooking = new Bookings(chosenBooking.restaurantId, chosenBooking.date, chosenBooking.time, chosenBooking.numberOfGuests, user);
                 setDetailedBooking(completeBooking)
                 setShowDetailsSection(true)
-            
+
             })
     }
 
@@ -355,6 +357,25 @@ export function Admin() {
         setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
 
+    function searchBookings() {
+
+        setSearchValue("")
+        let searchResultsArray: IBooking[] = [];
+
+        for (let i = 0; i < bookingsFromApi.length; i++) {
+            const booking = bookingsFromApi[i];
+
+            if (booking._id === searchValue) {
+                searchResultsArray.push(booking)
+            }
+        }
+        setSearchResults([...searchResultsArray])
+    }
+
+    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+        setSearchValue(e.target.value)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
@@ -382,12 +403,24 @@ export function Admin() {
 
         </div>)
 
+    let searchResultsHtml = searchResults.map((searchResult, index) => {
+        return (<div className="bookingBox animate__animated animate__fadeIn" key={index}>
+            <div className="bookingBoxDetailsField"><GiPassport></GiPassport> Bokningsnr : {searchResult._id}</div>
+            <div className="bookingBoxDetailsField"><MdGroups></MdGroups>Antal gäster : {searchResult.numberOfGuests}</div>
+            <div className="bookingBoxDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {searchResult.date}</div>
+            <div className="bookingBoxDetailsField"><MdAccessTime></MdAccessTime>Tid : {searchResult.time}</div>
+            <button className="Btn" onClick={() => { showDetails(index) }}>se detailjer <MdInfoOutline></MdInfoOutline> </button>
+            <button className="deleteBtn" onClick={() => { deleteBooking(searchResult._id, index) }}>radera bokning<GiCancel></GiCancel></button>
+        </div>)
+    })
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
 
         <section className="adminBookingSection">
             <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
+            <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
             {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
@@ -463,6 +496,16 @@ export function Admin() {
         <main className="adminMain">
 
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
+
+            {showSearchField && <section className="adminSearchContainer">
+
+                <input type="text" placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
+                <button onClick={searchBookings}>sök</button>
+
+                <div>
+                    {searchResultsHtml}
+                </div>
+            </section>}
 
 
             {showEditBookingForm && <div className="adminUpdateBookingContainer animate__animated animate__flipInX">
