@@ -15,8 +15,8 @@ export function Contact(){
 
     });
 
-
     const [messageSend, setMessageSend] = useState(false)
+    const [FormError, setFormError] = useState(false)
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         let name = e.target.name;
@@ -24,46 +24,52 @@ export function Contact(){
     }
 
     function handleSubmit() {
+        setFormError(false)
+
+        if (newContact.name === "" || newContact.lastname === "" || newContact.email === "" || newContact.phone === "") {
+
+            setFormError(true)
+
+            return
+        }
 
         let customercontact = new User(newContact.name, newContact.lastname, newContact.email, newContact.phone)
 
-
-
         axios.post("https://school-restaurant-api.azurewebsites.net/customer/create", customercontact, { headers: {"content-type": "application/json"}})
         .then(response => {
-                console.log(response.data);
+            setMessageSend(true)
                 
         })
         .catch(error => {
             alert("Det gick tyvärr inte att skicka!")
         })
-        
-        setMessageSend(true)
 
     }
 
 
-    return (<>
-
-        <h3>Kontakta oss</h3>
-        <form onSubmit={handleSubmit}>
-            <div className="formInputContainer">
-            <input type="text" name="name" value={newContact.name} onChange={handleChange} placeholder="Förnamn"></input>
-            </div>
-            <div className="formInputContainer">
-            <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange} placeholder="Efternamn"></input><br></br>
-            </div>
-            <div className="formInputContainer">
-            <input type="email" name="email" value={newContact.email} onChange={handleChange} placeholder="E-post" ></input>
-            </div>
-            <div className="formInputContainer">
-            <input type="text" name="phone" value={newContact.phone} onChange={handleChange} placeholder="Telefon"></input>
-            </div>
-            <button type="submit" className="Btn" >SKICKA</button>
-
-        </form>
-        <div>
-        {messageSend && <h2>Ditt meddelande är skickat!</h2>}
-        </div>
-    </>)
+    return (
+        <main className="ContactContainer">
+            <div className="ContactformContainer animate__animated animate__fadeInDown">
+                <h3>Kontakta oss</h3>
+                <form>
+                    <div className="formInputDiv">
+                    <input type="text" name="name" value={newContact.name} onChange={handleChange} placeholder="Förnamn"></input>
+                    </div>
+                    <div className="formInputDiv">
+                    <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange} placeholder="Efternamn"></input><br></br>
+                    </div>
+                    <div className="formInputDiv">
+                    <input type="email" name="email" value={newContact.email} onChange={handleChange} placeholder="E-post" ></input>
+                    </div>
+                    <div className="formInputDiv">
+                    <input type="text" name="phone" value={newContact.phone} onChange={handleChange} placeholder="Telefon"></input>
+                    </div>
+                    <button type="button" className="sendBtn" onClick={handleSubmit} >SKICKA</button>
+                </form>
+                <div>
+                {messageSend && <div className="contactDone animate__animated animate__fadeInDown">Ditt meddelande är skickat!</div>}
+                {FormError && <div className="error animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
+                </div>
+                </div>
+        </main>)
 }

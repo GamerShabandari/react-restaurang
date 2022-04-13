@@ -1,18 +1,46 @@
-
-label {
-    font-size: 1.2rem;
+.ContactContainer{
+    width:auto;
+    color:#222934;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
 }
 
-input {
+.ContactformContainer:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 
+.ContactformContainer form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    margin: 0 auto;
+}
 
-
-    border: 2px solid grey;
+.ContactformContainer form input{
+    color: #222934;
+    border: 1px solid #c9464a;
     border-radius: 5px;
-    height: 1.3rem;
+    padding: 5px;
 }
 
-.Btn{
+.ContactformContainer form input:disabled{
+    background-color: rgba(255, 255, 255, 0.162);
+    color: #22293436;
+    border: 1px solid #c9464a34;
+}
+
+.ContactformContainer form input:focus{
+    outline: none;
+}
+
+.sendBtn{
 
     background-color: #c9464a;
     color:#f5f7eb;
@@ -29,12 +57,12 @@ input {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.Btn:hover{
+.sendBtn:hover{
     transform: scale(1.1);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.formInputContainer{
+.formInputDiv{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -43,3 +71,20 @@ input {
 
 }
 
+.error{
+    background-color:#222934;
+    font-weight: 500;
+    color:#f5f7eb;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 8px;
+}
+
+.contactDone{
+    font-size: 2rem;
+    background-color:#222934;
+    font-weight: 500;
+    color:#f5f7eb;
+    padding: 15px;
+    border-radius: 5px;
+}
