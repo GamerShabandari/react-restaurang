@@ -109,6 +109,7 @@
 
 .animatedIcon{
     height: 70px;
+    filter: grayscale(100);
 }
 
 .title{

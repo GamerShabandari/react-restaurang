@@ -9,8 +9,8 @@ export function Home() {
             <div className='container-food animate__animated animate__fadeIn'>
 
                <div className='title'>
-                  <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>MENY</h2>
-                  <img src="../../images/food_animation.gif" alt="animated food icon" className='animatedIcon' />
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-2s'>MENY</h2>
+                  <img src="../../images/food_animation.gif" alt="animated food icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
 
                <article className='container-menu  animate__animated animate__fadeIn animate__delay-1s'>
@@ -78,8 +78,8 @@ export function Home() {
 
 
                <div className='title'>
-                  <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>DRYCK</h2>
-                  <img src="../../images/drinks_animation.gif" alt="animated drinks icon" className='animatedIcon' />
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-2s'>DRYCK</h2>
+                  <img src="../../images/drinks_animation.gif" alt="animated drinks icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
                
 
@@ -108,8 +108,8 @@ export function Home() {
 
 
                <div className='title'>
-                  <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>EFTERRÄTT</h2>
-                  <img src="../../images/cake_animation.gif" alt="animated cake icon" className='animatedIcon' />
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-2s'>EFTERRÄTT</h2>
+                  <img src="../../images/cake_animation.gif" alt="animated cake icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
                
 
