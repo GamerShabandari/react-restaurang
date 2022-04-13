@@ -8,6 +8,7 @@ import { Admin } from './components/admin';
 import { GiSamuraiHelmet, GiSushis } from "react-icons/gi";
 import { MdOutlineHome, MdCall, MdOutlineAdminPanelSettings } from "react-icons/md"
 import "animate.css"
+import { Footer } from './components/footer';
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
           <Route path='/admin' element={<Admin></Admin>}> </Route>
 
         </Routes>
+
+        <Footer></Footer>
       </BrowserRouter>
 
     </div>

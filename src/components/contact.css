@@ -1,3 +1,4 @@
+
 .ContactContainer{
     width:auto;
     color:#222934;
@@ -13,6 +14,7 @@
 
 .ContactformContainer:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
 }
 
 .ContactformContainer form{
@@ -88,3 +90,4 @@
     padding: 15px;
     border-radius: 5px;
 }
+
