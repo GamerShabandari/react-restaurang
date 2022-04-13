@@ -4,27 +4,33 @@
     flex-direction: column;
     align-items: center;
     width: auto;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     min-height: 100vh;
+    padding: 10px;
    
 }
 
 .container-food{
-    width: 100%;
-    height: 100%;
-    padding: 30px;
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
-.container-food h2{
+.food-title{
     color: #c9464a;
     letter-spacing: 5px;
+    font-weight: 400;
+    font-size: 2rem;
     margin: 0px;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    
 }
 
 .container-food img{
@@ -38,8 +44,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    margin: 40px;
+    padding: 10px;
+    margin: 20px;
     background-color: whitesmoke;
     color: #222934;
     border-radius: 5px;
@@ -64,22 +70,47 @@
 }
 
 .container-menu{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    /* border:#c9464a 1px dotted; */
+    /* background-color: #c9464a3b; */
+    border-radius: 5px;
 }
 
 .container-drink{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    /* border:#c9464a 1px dotted; */
+    border-radius: 5px;
 }
 
 .container-dessert{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    /* border:#c9464a 1px dotted; */
+    border-radius: 5px;
 }

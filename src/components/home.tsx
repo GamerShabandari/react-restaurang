@@ -7,8 +7,9 @@ export function Home() {
       <Fragment>
          <section className='container-layout'>
             <div className='container-food animate__animated animate__fadeIn'>
-               <h2 className='food-title  animate__animated animate__fadeIn'>MENY</h2>
-               <article className='container-menu  animate__animated animate__fadeIn animate__delay-2s'>
+
+               <article className='container-menu  animate__animated animate__fadeIn animate__delay-1s'>
+                  <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>MENY</h2>
                   <div className='foodCard'>
                      <img src='images/ebi.png' alt='menu' />
                      <p>Räka</p>
@@ -70,8 +71,9 @@ export function Home() {
                   </div>
                </article>{/*container-menu*/}
 
-               <h2 className='food-title  animate__animated animate__fadeIn'>DRYCK</h2>
+
                <article className='container-drink'>
+                  <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>DRYCK</h2>
                   <div className='foodCard'>
                      <img src='images/sakeHaku2.png' alt='drink' />
                      <p>Sake Hakutaka</p>
@@ -93,8 +95,9 @@ export function Home() {
                   </div>
                </article>{/*container-drink*/}
 
-               <h2 className='food-title  animate__animated animate__fadeIn'>EFTERRÄTT</h2>
+
                <article className='container-dessert'>
+                  <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>EFTERRÄTT</h2>
                   <div className='foodCard'>
                      <img src='images/greenteaglass.png' alt='dessert' />
                      <p>Grönt te glass</p>
