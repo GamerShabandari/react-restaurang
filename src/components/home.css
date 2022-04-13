@@ -26,14 +26,14 @@
     font-weight: 400;
     font-size: 2rem;
     margin: 0px;
-    padding: 20px;
-    border-radius: 5px;
+    padding: 0px;
+    /* border-radius: 5px;
     position: absolute;
-    top: 0px;
+    top: 0px; */
     
 }
 
-.container-food img{
+.foodCard img{
     width: 200px;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -80,8 +80,6 @@
     padding-right: 20px;
     padding-top: 60px;
     padding-bottom: 40px;
-    /* border:#c9464a 1px dotted; */
-    /* background-color: #c9464a3b; */
     border-radius: 5px;
 }
 
@@ -96,7 +94,6 @@
     padding-right: 20px;
     padding-top: 60px;
     padding-bottom: 40px;
-    /* border:#c9464a 1px dotted; */
     border-radius: 5px;
 }
 
@@ -111,11 +108,15 @@
     padding-right: 20px;
     padding-top: 60px;
     padding-bottom: 40px;
-    /* border:#c9464a 1px dotted; */
     border-radius: 5px;
 }
 
-/* .animatedIcon{
-    border: 2px solid blue;
-    height: 50px;
-} */
+.animatedIcon{
+    height: 70px;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}

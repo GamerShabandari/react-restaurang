@@ -4,15 +4,17 @@ import 'animate.css';
 export function Home() {
    return (
       <>
-         <img src="../../images/food_animation.gif" alt="animated food icon" width="70px"/>
-         <img src="../../images/drinks_animation.gif" alt="animated drinks icon" width="70px" />
-         <img src="../../images/cake_animation.gif" alt="animated cake icon" width="70px"/>
+
          <section className='container-layout'>
             <div className='container-food animate__animated animate__fadeIn'>
 
-               
-               <article className='container-menu  animate__animated animate__fadeIn animate__delay-1s'>
+               <div className='title'>
                   <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>MENY</h2>
+                  <img src="../../images/food_animation.gif" alt="animated food icon" className='animatedIcon' />
+               </div>
+
+               <article className='container-menu  animate__animated animate__fadeIn animate__delay-1s'>
+
                   <div className='foodCard'>
                      <img src='images/ebi.png' alt='menu' />
                      <p>Räka</p>
@@ -74,9 +76,15 @@ export function Home() {
                   </div>
                </article>
 
-               <img src="../../images/drinks_animation.gif" alt="animated drinks icon" />
-               <article className='container-drink'>
+
+               <div className='title'>
                   <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>DRYCK</h2>
+                  <img src="../../images/drinks_animation.gif" alt="animated drinks icon" className='animatedIcon' />
+               </div>
+               
+
+               <article className='container-drink'>
+         
                   <div className='foodCard'>
                      <img src='images/sakeHaku2.png' alt='drink' />
                      <p>Sake Hakutaka</p>
@@ -98,8 +106,15 @@ export function Home() {
                   </div>
                </article>
 
-               <article className='container-dessert'>
+
+               <div className='title'>
                   <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>EFTERRÄTT</h2>
+                  <img src="../../images/cake_animation.gif" alt="animated cake icon" className='animatedIcon' />
+               </div>
+               
+
+               <article className='container-dessert'>
+
                   <div className='foodCard'>
                      <img src='images/greenteaglass.png' alt='dessert' />
                      <p>Grönt te glass</p>
