@@ -434,7 +434,7 @@ export function Admin() {
                 <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
             </div>
 
-            {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
+            {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Uppdaterat <FaGlassCheers></FaGlassCheers> </div>}
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
                 <h3>Vänligen välj datum och antal gäster.</h3>

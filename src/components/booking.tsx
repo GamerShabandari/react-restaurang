@@ -79,7 +79,25 @@ export function Booking() {
             const order = bookingsFromApi[i];
 
             if (order.date === checkDate && order.time === "18:00") {
-                numberOfTablesAt6Left--
+
+                let tablesNeededForThisBooking: number = 0;
+                let numberOfGuests = order.numberOfGuests
+               
+                for (let i = 0; i < numberOfGuests + 1; i++) {
+                    
+                    if (numberOfGuests > 6) {
+                        tablesNeededForThisBooking ++
+                        numberOfGuests -= 6
+                    }
+                    else if (numberOfGuests <= 6){
+                        tablesNeededForThisBooking ++
+                        numberOfGuests -= numberOfGuests
+                    }
+                    
+                }
+                
+                numberOfTablesAt6Left -= tablesNeededForThisBooking
+               // numberOfTablesAt6Left--
 
             } else if (order.date === checkDate && order.time === "21:00") {
                 numberOfTablesAt9Left--
@@ -201,6 +219,13 @@ export function Booking() {
                 <option value="4">4 pers</option>
                 <option value="5">5 pers</option>
                 <option value="6">6 pers</option>
+                <option value="7">7 pers</option>
+                <option value="8">8 pers</option>
+                <option value="9">9 pers</option>
+                <option value="10">10 pers</option>
+                <option value="11">11 pers</option>
+                <option value="12">12 pers</option>
+                <option value="13">13 pers</option>
             </select>
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
