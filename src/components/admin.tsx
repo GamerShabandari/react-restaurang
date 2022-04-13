@@ -136,6 +136,18 @@ export function Admin() {
                 let updatedBookings: IBooking[] = bookingsFromApi;
                 updatedBookings.splice(index, 1);
                 setBookingsFromApi([...updatedBookings])
+                setSearchResults([...[]])
+                setSearchValue("")
+                setShowSearchField(false);
+                setShowBooking(true)
+                setShowBookingDone(true)
+
+                setTimeout(() => {
+                    setShowBookingDone(false)
+                }, 5000)
+
+
+
 
             })
     }
@@ -293,15 +305,14 @@ export function Admin() {
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
             .then(response => {
                 setShowBookingDone(true)
+                setTimeout(() => {
+                    setShowBookingDone(false)
+                }, 5000)
             })
             .catch(error => {
                 console.log(error);
                 alert("något gick tyvärr fel, försök igen senare.")
             })
-
-        setTimeout(() => {
-            setShowBookingDone(false)
-        }, 5000)
     }
 
     function cancelUpdateBooking() {
@@ -409,7 +420,6 @@ export function Admin() {
             <div className="bookingBoxDetailsField"><MdGroups></MdGroups>Antal gäster : {searchResult.numberOfGuests}</div>
             <div className="bookingBoxDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {searchResult.date}</div>
             <div className="bookingBoxDetailsField"><MdAccessTime></MdAccessTime>Tid : {searchResult.time}</div>
-            <button className="Btn" onClick={() => { showDetails(index) }}>se detailjer <MdInfoOutline></MdInfoOutline> </button>
             <button className="deleteBtn" onClick={() => { deleteBooking(searchResult._id, index) }}>radera bokning<GiCancel></GiCancel></button>
         </div>)
     })
@@ -499,8 +509,8 @@ export function Admin() {
 
             {showSearchField && <section className="adminSearchContainer">
 
-                <input type="text" placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
-                <button onClick={searchBookings}>sök</button>
+                <input className="searchInput" type="text"  placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
+                <button className="Btn" onClick={searchBookings}>sök<MdSearch></MdSearch> </button>
 
                 <div>
                     {searchResultsHtml}

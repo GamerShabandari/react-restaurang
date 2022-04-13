@@ -69,6 +69,7 @@
      transition: 0.2s;
      overflow: hidden;
      background-color: #f5f7eb;
+     
  }
  
  .detailsBox:hover{
@@ -189,4 +190,28 @@
     transition: 0.2s;
     overflow: hidden;
     background-color: #f5f7eb;
+    height: fit-content;
  }
+
+ .adminSearchContainer{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 5px;
+     border: #c9464a 2px dotted;
+     border-radius: 5px;
+     width: auto;
+     height: fit-content;
+     padding: 20px;
+ }
+
+ .searchInput{
+    color: #222934;
+    border: 1px solid #c9464a;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.searchInput:focus{
+    outline: none;
+}
