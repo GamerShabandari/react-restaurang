@@ -27,10 +27,6 @@
     font-size: 2rem;
     margin: 0px;
     padding: 0px;
-    /* border-radius: 5px;
-    position: absolute;
-    top: 0px; */
-    
 }
 
 .foodCard img{
@@ -46,7 +42,7 @@
     justify-content: center;
     padding: 10px;
     margin: 20px;
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.7);
     color: #222934;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
