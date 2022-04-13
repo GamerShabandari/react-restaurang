@@ -146,8 +146,7 @@
      justify-content: center;
      color:#222934;
      font-size: 2rem;
-     padding: 10px;
-     border-radius: 5px;
+     height: fit-content;
  }
 
  .loading img{
