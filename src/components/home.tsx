@@ -1,13 +1,16 @@
 import './home.css';
-import { Fragment } from "react";
 import 'animate.css';
 
 export function Home() {
    return (
-      <Fragment>
+      <>
+         <img src="../../images/food_animation.gif" alt="animated food icon" width="70px"/>
+         <img src="../../images/drinks_animation.gif" alt="animated drinks icon" width="70px" />
+         <img src="../../images/cake_animation.gif" alt="animated cake icon" width="70px"/>
          <section className='container-layout'>
             <div className='container-food animate__animated animate__fadeIn'>
 
+               
                <article className='container-menu  animate__animated animate__fadeIn animate__delay-1s'>
                   <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>MENY</h2>
                   <div className='foodCard'>
@@ -69,9 +72,9 @@ export function Home() {
                      <img src='images/bento.png' alt='menu' />
                      <p>Teishoku</p>
                   </div>
-               </article>{/*container-menu*/}
+               </article>
 
-
+               <img src="../../images/drinks_animation.gif" alt="animated drinks icon" />
                <article className='container-drink'>
                   <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>DRYCK</h2>
                   <div className='foodCard'>
@@ -93,8 +96,7 @@ export function Home() {
                      <img src='images/macha.png' alt='drink' />
                      <p>Macha Te</p>
                   </div>
-               </article>{/*container-drink*/}
-
+               </article>
 
                <article className='container-dessert'>
                   <h2 className='food-title  animate__animated animate__fadeIn animate__delay-2s'>EFTERRÄTT</h2>
@@ -117,10 +119,10 @@ export function Home() {
                      <img src='images/cherrymochi.png' alt='dessert' />
                      <p>Sakura mochi</p>
                   </div>
-               </article>{/*container-dessert*/}
-            </div>{/*container-food*/}
-         </section>{/*container-layout*/}
+               </article>
+            </div>
+         </section>
 
-      </Fragment>
+      </>
    )
 }
