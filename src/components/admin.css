@@ -198,11 +198,11 @@
      flex-direction: column;
      align-items: center;
      gap: 5px;
-     border: #c9464a 2px dotted;
+     border: #c9464a 1px dotted;
      border-radius: 5px;
      width: auto;
      height: fit-content;
-     padding: 20px;
+     padding: 50px;
  }
 
  .searchInput{
@@ -214,4 +214,10 @@
 
 .searchInput:focus{
     outline: none;
+}
+
+.adminMainBtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

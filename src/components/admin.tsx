@@ -415,7 +415,7 @@ export function Admin() {
         </div>)
 
     let searchResultsHtml = searchResults.map((searchResult, index) => {
-        return (<div className="bookingBox animate__animated animate__fadeIn" key={index}>
+        return (<div className="bookingBox animate__animated animate__flipInX" key={index}>
             <div className="bookingBoxDetailsField"><GiPassport></GiPassport> Bokningsnr : {searchResult._id}</div>
             <div className="bookingBoxDetailsField"><MdGroups></MdGroups>Antal gäster : {searchResult.numberOfGuests}</div>
             <div className="bookingBoxDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {searchResult.date}</div>
@@ -429,8 +429,11 @@ export function Admin() {
     return (<>
 
         <section className="adminBookingSection">
-            <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
-            <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
+            <div className="adminMainBtns">
+                <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
+                <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
+            </div>
+
             {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
@@ -507,9 +510,9 @@ export function Admin() {
 
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
 
-            {showSearchField && <section className="adminSearchContainer">
+            {showSearchField && <section className="adminSearchContainer animate__animated animate__flipInX">
 
-                <input className="searchInput" type="text"  placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
+                <input className="searchInput" type="text" placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
                 <button className="Btn" onClick={searchBookings}>sök<MdSearch></MdSearch> </button>
 
                 <div>
