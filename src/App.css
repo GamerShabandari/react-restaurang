@@ -8,6 +8,7 @@
    width: auto;
    padding: 30px;
    text-decoration: none;
+   font-family: 'Nunito';
  }
 
  .navigation{
@@ -42,6 +43,7 @@
    color: #c9464a;
    font-size: 3.5rem;
    letter-spacing: 7px;
+   font-weight: 300;
  }
  .logoLink {
    text-decoration: none;

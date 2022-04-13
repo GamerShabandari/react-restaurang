@@ -6,8 +6,7 @@
     width: auto;
     margin-bottom: 10px;
     min-height: 100vh;
-    padding: 10px;
-   
+    font-family: 'Nunito';
 }
 
 .container-food{
@@ -17,7 +16,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 .food-title{
@@ -74,9 +72,10 @@
     margin-bottom: 50px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 60px;
+    padding-top: 10px;
     padding-bottom: 40px;
     border-radius: 5px;
+
 }
 
 .container-drink{
@@ -88,7 +87,7 @@
     margin-bottom: 50px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 60px;
+    padding-top: 10px;
     padding-bottom: 40px;
     border-radius: 5px;
 }
@@ -102,7 +101,7 @@
     margin-bottom: 50px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 60px;
+    padding-top: 10px;
     padding-bottom: 40px;
     border-radius: 5px;
 }

@@ -8,12 +8,15 @@
     height: fit-content;
     width: auto;
     padding: 20px;
+    font-family: 'Nunito';
 }
 
 .katana{
     font-size: 5rem;
+    font-family: 'Nunito';
 }
 
 .openhour-title{
     list-style: none;
+    font-family: 'Nunito';
 }
