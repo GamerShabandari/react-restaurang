@@ -7,8 +7,7 @@ import "./admin.css"
 import { INewUser } from "./models/INewUser"
 import { Bookings } from "./models/Bookings"
 import { GiCancel, GiConfirmed, GiHotMeal, GiMeal, GiPassport } from "react-icons/gi"
-import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime, MdSearch } from "react-icons/md"
-import { FaGlassCheers } from "react-icons/fa"
+import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime, MdSearch, MdOutlineUpdate } from "react-icons/md"
 import { User } from "./models/User"
 
 export function Admin() {
@@ -434,7 +433,7 @@ export function Admin() {
                 <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
             </div>
 
-            {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Uppdaterat <FaGlassCheers></FaGlassCheers> </div>}
+            {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Uppdaterat <MdOutlineUpdate></MdOutlineUpdate> </div>}
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
                 <h3>Vänligen välj datum och antal gäster.</h3>
