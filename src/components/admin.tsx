@@ -570,14 +570,16 @@ export function Admin() {
                     <option value="21:00">21:00</option>
                 </select>
 
-                <select name="numberOfGuests" onChange={handleEditFormTimeAndGuestsChange}>
+                <input name="numberOfGuests" type="text" onChange={handleEditFormDateChange} placeholder="antal gäster max 90" />
+
+                {/* <select name="numberOfGuests" onChange={handleEditFormTimeAndGuestsChange}>
                     <option value="1">1 pers</option>
                     <option value="2">2 pers</option>
                     <option value="3">3 pers</option>
                     <option value="4">4 pers</option>
                     <option value="5">5 pers</option>
                     <option value="6">6 pers</option>
-                </select>
+                </select> */}
                 {showBookingInputRequired && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
                 <button className="Btn" onClick={saveUpdatedBooking} >Uppdatera bokning <GiConfirmed></GiConfirmed> </button>
                 <button className="deleteBtn" onClick={cancelUpdateBooking}>Avbryt <GiCancel></GiCancel></button>
