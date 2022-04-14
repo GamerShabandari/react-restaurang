@@ -64,7 +64,7 @@ export function Booking() {
     //funktion som kollar om det finns lediga bord det datum gästen har valt, presenterar resultat via state variabler, validerar också att gäst valt både datum samt antal gäster //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function checkIfOpenTable() {
 
-        if (chosenDate === "" || chosenAmountOfGuests === "") {
+        if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests)> 90) {
 
             setShowRequiredError(true)
             return
@@ -82,15 +82,15 @@ export function Booking() {
             if (order.date === checkDate && order.time === "18:00") {
 
                 let tablesNeededForThisBooking: number = 1;
-                let count = 0
-                let numberOfGuests = order.numberOfGuests
+                let assesInTheChairs:number = 0
+                let numberOfGuests:number = order.numberOfGuests
 
                 for (let i = 0; i < numberOfGuests; i++) {
 
-                    count++
-                    if (count === 7) {
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
                         tablesNeededForThisBooking++
-                        count = 0
+                        assesInTheChairs = 1
                     }
 
                 }
@@ -100,15 +100,15 @@ export function Booking() {
             } else if (order.date === checkDate && order.time === "21:00") {
 
                 let tablesNeededForThisBooking: number = 1;
-                let count = 0
-                let numberOfGuests = order.numberOfGuests
+                let assesInTheChairs:number = 0
+                let numberOfGuests:number = order.numberOfGuests
 
                 for (let i = 0; i < numberOfGuests; i++) {
 
-                    count++
-                    if (count === 7) {
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
                         tablesNeededForThisBooking++
-                        count = 0
+                        assesInTheChairs = 1
                     }
 
                 }
@@ -136,7 +136,7 @@ export function Booking() {
     }
 
     //////////////////////////// hanterar vald antal gäster och uppdaterar statevariabel ////////////////////////////////////////
-    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLSelectElement>) {
+    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLInputElement>) {
         setChosenAmountOfGuests(e.target.value)
     }
 
@@ -225,7 +225,9 @@ export function Booking() {
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
 
-            <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
+            <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90"/>
+
+            {/* <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
                 <option value="1">1 pers</option>
                 <option value="2">2 pers</option>
                 <option value="3">3 pers</option>
@@ -239,7 +241,7 @@ export function Booking() {
                 <option value="11">11 pers</option>
                 <option value="12">12 pers</option>
                 <option value="13">13 pers</option>
-            </select>
+            </select> */}
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
 
