@@ -3,6 +3,8 @@
     flex-direction: row;
     justify-content: center;
     padding: 20px;
+    min-height: 100vh;
+    font-family: 'Nunito';
  }
  
  .adminBookingsContainer{
@@ -68,6 +70,7 @@
      transition: 0.2s;
      overflow: hidden;
      background-color: #f5f7eb;
+     
  }
  
  .detailsBox:hover{
@@ -143,8 +146,11 @@
      justify-content: center;
      color:#222934;
      font-size: 2rem;
-     padding: 10px;
-     border-radius: 5px;
+     height: fit-content;
+ }
+
+ .loading img{
+     width: 300px;
  }
  
  .adminBookingSection{
@@ -184,4 +190,34 @@
     transition: 0.2s;
     overflow: hidden;
     background-color: #f5f7eb;
+    height: fit-content;
  }
+
+ .adminSearchContainer{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 5px;
+     border: #c9464a 1px dotted;
+     border-radius: 5px;
+     width: auto;
+     height: fit-content;
+     padding: 50px;
+ }
+
+ .searchInput{
+    color: #222934;
+    border: 1px solid #c9464a;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.searchInput:focus{
+    outline: none;
+}
+
+.adminMainBtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
