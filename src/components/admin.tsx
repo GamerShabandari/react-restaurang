@@ -558,7 +558,6 @@ export function Admin() {
                 </div>
             </section>}
 
-
             {showEditBookingForm && <div className="adminUpdateBookingContainer animate__animated animate__flipInX">
 
                 <h3>Vänligen välj ny tid,datum och antal gäster.</h3>
@@ -570,20 +569,12 @@ export function Admin() {
                     <option value="21:00">21:00</option>
                 </select>
 
-                <select name="numberOfGuests" onChange={handleEditFormTimeAndGuestsChange}>
-                    <option value="1">1 pers</option>
-                    <option value="2">2 pers</option>
-                    <option value="3">3 pers</option>
-                    <option value="4">4 pers</option>
-                    <option value="5">5 pers</option>
-                    <option value="6">6 pers</option>
-                </select>
+                <input name="numberOfGuests" type="text" onChange={handleEditFormDateChange} placeholder="antal gäster max 90" />
+
                 {showBookingInputRequired && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
                 <button className="Btn" onClick={saveUpdatedBooking} >Uppdatera bokning <GiConfirmed></GiConfirmed> </button>
                 <button className="deleteBtn" onClick={cancelUpdateBooking}>Avbryt <GiCancel></GiCancel></button>
             </div>}
-
-
 
             {bookingsFromApi.length < 1 && <section className="loading"> <img src="../../images/rocket.gif" alt="loading animation" /> laddar...</section>}
 
