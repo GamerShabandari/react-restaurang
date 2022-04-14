@@ -70,6 +70,8 @@ export function Booking() {
             return
         }
 
+        let amountOfTablesThisBookingWillNeed = Math.ceil(Number(chosenAmountOfGuests) / 6)
+
         let checkDate: string = chosenDate
 
         let numberOfTablesAt6Left: number = 15
@@ -97,6 +99,12 @@ export function Booking() {
 
                 numberOfTablesAt6Left -= tablesNeededForThisBooking
 
+                if (amountOfTablesThisBookingWillNeed > numberOfTablesAt6Left) {
+                    numberOfTablesAt6Left = 0
+                }
+
+
+
             } else if (order.date === checkDate && order.time === "21:00") {
 
                 let tablesNeededForThisBooking: number = 1;
@@ -115,12 +123,19 @@ export function Booking() {
 
                 numberOfTablesAt9Left -= tablesNeededForThisBooking
 
+                if (amountOfTablesThisBookingWillNeed > numberOfTablesAt9Left) {
+                    numberOfTablesAt9Left = 0
+                }
+
             }
         }
+
+
 
         SetTablesAt6oClock(numberOfTablesAt6Left)
         SetTablesAt9oClock(numberOfTablesAt9Left)
         setShowRequiredError(false)
+
 
     }
 
