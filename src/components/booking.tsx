@@ -64,7 +64,7 @@ export function Booking() {
     //funktion som kollar om det finns lediga bord det datum gästen har valt, presenterar resultat via state variabler, validerar också att gäst valt både datum samt antal gäster //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function checkIfOpenTable() {
 
-        if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests)> 90) {
+        if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests) > 90) {
 
             setShowRequiredError(true)
             return
@@ -82,8 +82,8 @@ export function Booking() {
             if (order.date === checkDate && order.time === "18:00") {
 
                 let tablesNeededForThisBooking: number = 1;
-                let assesInTheChairs:number = 0
-                let numberOfGuests:number = order.numberOfGuests
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
 
                 for (let i = 0; i < numberOfGuests; i++) {
 
@@ -100,8 +100,8 @@ export function Booking() {
             } else if (order.date === checkDate && order.time === "21:00") {
 
                 let tablesNeededForThisBooking: number = 1;
-                let assesInTheChairs:number = 0
-                let numberOfGuests:number = order.numberOfGuests
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
 
                 for (let i = 0; i < numberOfGuests; i++) {
 
@@ -224,35 +224,19 @@ export function Booking() {
             <GiLotus className="lotus"></GiLotus>
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
+            <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90" />
 
-            <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90"/>
-
-            {/* <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
-                <option value="1">1 pers</option>
-                <option value="2">2 pers</option>
-                <option value="3">3 pers</option>
-                <option value="4">4 pers</option>
-                <option value="5">5 pers</option>
-                <option value="6">6 pers</option>
-                <option value="7">7 pers</option>
-                <option value="8">8 pers</option>
-                <option value="9">9 pers</option>
-                <option value="10">10 pers</option>
-                <option value="11">11 pers</option>
-                <option value="12">12 pers</option>
-                <option value="13">13 pers</option>
-            </select> */}
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
 
 
 
-            {tablesAt6oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
+            {tablesAt6oClock > 0 || tablesAt9oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
                 <div className="decorationLine"></div>
                 {tablesAt6oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
                 {tablesAt9oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
-                {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
             </div>}
+            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
         </div>}
 

@@ -195,7 +195,7 @@ export function Admin() {
         setGDPRstatus(false)
     }
 
-    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLSelectElement>) {
+    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLInputElement>) {
         setChosenAmountOfGuests(e.target.value)
     }
 
@@ -438,24 +438,17 @@ export function Admin() {
 
                 <h3>Vänligen välj datum och antal gäster.</h3>
                 <input type="date" onChange={handleChosenDate} />
+                <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90" />
 
-                <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
-                    <option value="1">1 pers</option>
-                    <option value="2">2 pers</option>
-                    <option value="3">3 pers</option>
-                    <option value="4">4 pers</option>
-                    <option value="5">5 pers</option>
-                    <option value="6">6 pers</option>
-                </select>
                 {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
-                <button type="button" className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
+                <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
 
-                {tablesAt6oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
+                {tablesAt6oClock > 0 || tablesAt9oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
                     <div className="decorationLine"></div>
-                    {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
-                    {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
-                    {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
+                    {tablesAt6oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
+                    {tablesAt9oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
                 </div>}
+                {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
                 {showUserForm && <div className="formContainer animate__animated animate__flipInX">
 
