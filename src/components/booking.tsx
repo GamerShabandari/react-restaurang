@@ -236,7 +236,6 @@ export function Booking() {
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
         {!showBookingDone && <div className="inputContainer animate__animated animate__fadeInDown">
-            <GiLotus className="lotus"></GiLotus>
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
             <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90" />
@@ -256,7 +255,6 @@ export function Booking() {
         </div>}
 
         {showUserForm && <div className="formContainer animate__animated animate__fadeInDown">
-            <GiLotus className="lotus"></GiLotus>
             <div>
                 <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
                 <div>
