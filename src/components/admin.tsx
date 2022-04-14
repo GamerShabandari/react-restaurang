@@ -205,7 +205,7 @@ export function Admin() {
 
     function checkIfOpenTable() {
 
-        if (chosenDate === "" || chosenAmountOfGuests === "") {
+        if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests) > 90) {
 
             setShowRequiredError(true)
             return
@@ -219,11 +219,42 @@ export function Admin() {
         for (let i = 0; i < bookingsFromApi.length; i++) {
             const order = bookingsFromApi[i];
 
+
             if (order.date === checkDate && order.time === "18:00") {
-                numberOfTablesAt6Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
+                        tablesNeededForThisBooking++
+                        assesInTheChairs = 1
+                    }
+
+                }
+
+                numberOfTablesAt6Left -= tablesNeededForThisBooking
 
             } else if (order.date === checkDate && order.time === "21:00") {
-                numberOfTablesAt9Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
+                        tablesNeededForThisBooking++
+                        assesInTheChairs = 1
+                    }
+
+                }
+
+                numberOfTablesAt9Left -= tablesNeededForThisBooking
 
             }
         }
@@ -443,7 +474,7 @@ export function Admin() {
                 {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
                 <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
 
-                {tablesAt6oClock > 0 || tablesAt9oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
+                {(tablesAt6oClock > 0 || tablesAt9oClock > 0) && <div className="tablesContainer animate__animated animate__fadeIn">
                     <div className="decorationLine"></div>
                     {tablesAt6oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
                     {tablesAt9oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
