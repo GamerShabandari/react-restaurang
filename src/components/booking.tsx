@@ -78,29 +78,42 @@ export function Booking() {
         for (let i = 0; i < bookingsFromApi.length; i++) {
             const order = bookingsFromApi[i];
 
+
             if (order.date === checkDate && order.time === "18:00") {
 
-                let tablesNeededForThisBooking: number = 0;
+                let tablesNeededForThisBooking: number = 1;
+                let count = 0
                 let numberOfGuests = order.numberOfGuests
-               
-                for (let i = 0; i < numberOfGuests + 1; i++) {
-                    
-                    if (numberOfGuests > 6) {
-                        tablesNeededForThisBooking ++
-                        numberOfGuests -= 6
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    count++
+                    if (count === 7) {
+                        tablesNeededForThisBooking++
+                        count = 0
                     }
-                    else if (numberOfGuests <= 6){
-                        tablesNeededForThisBooking ++
-                        numberOfGuests -= numberOfGuests
-                    }
-                    
+
                 }
-                
+
                 numberOfTablesAt6Left -= tablesNeededForThisBooking
-               // numberOfTablesAt6Left--
 
             } else if (order.date === checkDate && order.time === "21:00") {
-                numberOfTablesAt9Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let count = 0
+                let numberOfGuests = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    count++
+                    if (count === 7) {
+                        tablesNeededForThisBooking++
+                        count = 0
+                    }
+
+                }
+
+                numberOfTablesAt9Left -= tablesNeededForThisBooking
 
             }
         }
@@ -177,7 +190,7 @@ export function Booking() {
 
         }
 
-        if (newUser.phone.length < 10 || newUser.phone.length > 10 ) {
+        if (newUser.phone.length < 10 || newUser.phone.length > 10) {
             setShowPhoneError(true)
             return
         }
@@ -199,9 +212,9 @@ export function Booking() {
                 alert("något gick tyvärr fel, försök igen senare.")
             })
 
-            setTimeout(()=>{
-                setShowBookingDone(false)
-            },5000)
+        setTimeout(() => {
+            setShowBookingDone(false)
+        }, 5000)
     }
 
     //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////
@@ -279,7 +292,7 @@ export function Booking() {
                         <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
                         <button type="button" className="Btn" onClick={makeBooking}>boka <GiConfirmed></GiConfirmed> </button>
                     </div>
-                  
+
                 </form>
             </div>
             {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
