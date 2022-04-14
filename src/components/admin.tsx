@@ -7,8 +7,7 @@ import "./admin.css"
 import { INewUser } from "./models/INewUser"
 import { Bookings } from "./models/Bookings"
 import { GiCancel, GiConfirmed, GiHotMeal, GiMeal, GiPassport } from "react-icons/gi"
-import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime } from "react-icons/md"
-import { FaGlassCheers } from "react-icons/fa"
+import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime, MdSearch, MdOutlineUpdate } from "react-icons/md"
 import { User } from "./models/User"
 
 export function Admin() {
@@ -84,6 +83,11 @@ export function Admin() {
         numberOfGuests: 0,
         customerId: ""
     })
+
+
+    const [showSearchField, setShowSearchField] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchResults, setSearchResults] = useState<IBooking[]>([])
     //////////////////////////////////////////////////////////////////////////////
 
     useEffect(() => {
@@ -92,9 +96,6 @@ export function Admin() {
             .then(response => {
                 setBookingsFromApi([...response.data])
             })
-
-        console.log("körde en api get for booking");
-
 
     }, [showBookingDone])
 
@@ -122,6 +123,7 @@ export function Admin() {
                 let completeBooking = new Bookings(chosenBooking.restaurantId, chosenBooking.date, chosenBooking.time, chosenBooking.numberOfGuests, user);
                 setDetailedBooking(completeBooking)
                 setShowDetailsSection(true)
+
             })
     }
 
@@ -133,6 +135,18 @@ export function Admin() {
                 let updatedBookings: IBooking[] = bookingsFromApi;
                 updatedBookings.splice(index, 1);
                 setBookingsFromApi([...updatedBookings])
+                setSearchResults([...[]])
+                setSearchValue("")
+                setShowSearchField(false);
+                setShowBooking(true)
+                setShowBookingDone(true)
+
+                setTimeout(() => {
+                    setShowBookingDone(false)
+                }, 5000)
+
+
+
 
             })
     }
@@ -181,7 +195,7 @@ export function Admin() {
         setGDPRstatus(false)
     }
 
-    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLSelectElement>) {
+    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLInputElement>) {
         setChosenAmountOfGuests(e.target.value)
     }
 
@@ -191,11 +205,13 @@ export function Admin() {
 
     function checkIfOpenTable() {
 
-        if (chosenDate === "" || chosenAmountOfGuests === "") {
+        if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests) > 90) {
 
             setShowRequiredError(true)
             return
         }
+
+        let amountOfTablesThisBookingWillNeed = Math.ceil(Number(chosenAmountOfGuests) / 6)
 
         let checkDate: string = chosenDate
 
@@ -205,18 +221,62 @@ export function Admin() {
         for (let i = 0; i < bookingsFromApi.length; i++) {
             const order = bookingsFromApi[i];
 
+
             if (order.date === checkDate && order.time === "18:00") {
-                numberOfTablesAt6Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
+                        tablesNeededForThisBooking++
+                        assesInTheChairs = 1
+                    }
+
+                }
+
+                numberOfTablesAt6Left -= tablesNeededForThisBooking
+
+                if (amountOfTablesThisBookingWillNeed > numberOfTablesAt6Left) {
+                    numberOfTablesAt6Left = 0
+                }
+
+
 
             } else if (order.date === checkDate && order.time === "21:00") {
-                numberOfTablesAt9Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
+                        tablesNeededForThisBooking++
+                        assesInTheChairs = 1
+                    }
+
+                }
+
+                numberOfTablesAt9Left -= tablesNeededForThisBooking
+
+                if (amountOfTablesThisBookingWillNeed > numberOfTablesAt9Left) {
+                    numberOfTablesAt9Left = 0
+                }
 
             }
         }
 
+
+
         SetTablesAt6oClock(numberOfTablesAt6Left)
         SetTablesAt9oClock(numberOfTablesAt9Left)
         setShowRequiredError(false)
+
 
     }
 
@@ -290,15 +350,14 @@ export function Admin() {
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
             .then(response => {
                 setShowBookingDone(true)
+                setTimeout(() => {
+                    setShowBookingDone(false)
+                }, 5000)
             })
             .catch(error => {
                 console.log(error);
                 alert("något gick tyvärr fel, försök igen senare.")
             })
-
-        setTimeout(() => {
-            setShowBookingDone(false)
-        }, 5000)
     }
 
     function cancelUpdateBooking() {
@@ -354,6 +413,25 @@ export function Admin() {
         setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
 
+    function searchBookings() {
+
+        setSearchValue("")
+        let searchResultsArray: IBooking[] = [];
+
+        for (let i = 0; i < bookingsFromApi.length; i++) {
+            const booking = bookingsFromApi[i];
+
+            if (booking._id === searchValue) {
+                searchResultsArray.push(booking)
+            }
+        }
+        setSearchResults([...searchResultsArray])
+    }
+
+    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+        setSearchValue(e.target.value)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
@@ -381,35 +459,42 @@ export function Admin() {
 
         </div>)
 
+    let searchResultsHtml = searchResults.map((searchResult, index) => {
+        return (<div className="bookingBox animate__animated animate__flipInX" key={index}>
+            <div className="bookingBoxDetailsField"><GiPassport></GiPassport> Bokningsnr : {searchResult._id}</div>
+            <div className="bookingBoxDetailsField"><MdGroups></MdGroups>Antal gäster : {searchResult.numberOfGuests}</div>
+            <div className="bookingBoxDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {searchResult.date}</div>
+            <div className="bookingBoxDetailsField"><MdAccessTime></MdAccessTime>Tid : {searchResult.time}</div>
+            <button className="deleteBtn" onClick={() => { deleteBooking(searchResult._id, index) }}>radera bokning<GiCancel></GiCancel></button>
+        </div>)
+    })
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (<>
 
         <section className="adminBookingSection">
-            <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
-            {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Bokning klar! <FaGlassCheers></FaGlassCheers> </div>}
+            <div className="adminMainBtns">
+                <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
+                <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
+            </div>
+
+            {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Uppdaterat <MdOutlineUpdate></MdOutlineUpdate> </div>}
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
                 <h3>Vänligen välj datum och antal gäster.</h3>
                 <input type="date" onChange={handleChosenDate} />
+                <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90" />
 
-                <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
-                    <option value="1">1 pers</option>
-                    <option value="2">2 pers</option>
-                    <option value="3">3 pers</option>
-                    <option value="4">4 pers</option>
-                    <option value="5">5 pers</option>
-                    <option value="6">6 pers</option>
-                </select>
                 {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
-                <button type="button" className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
+                <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
 
-                {tablesAt6oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
+                {(tablesAt6oClock > 0 || tablesAt9oClock > 0) && <div className="tablesContainer animate__animated animate__fadeIn">
                     <div className="decorationLine"></div>
-                    {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
-                    {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
-                    {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
+                    {tablesAt6oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
+                    {tablesAt9oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
                 </div>}
+                {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
                 {showUserForm && <div className="formContainer animate__animated animate__flipInX">
 
@@ -462,6 +547,16 @@ export function Admin() {
         <main className="adminMain">
 
             {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
+
+            {showSearchField && <section className="adminSearchContainer animate__animated animate__flipInX">
+
+                <input className="searchInput" type="text" placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
+                <button className="Btn" onClick={searchBookings}>sök<MdSearch></MdSearch> </button>
+
+                <div>
+                    {searchResultsHtml}
+                </div>
+            </section>}
 
 
             {showEditBookingForm && <div className="adminUpdateBookingContainer animate__animated animate__flipInX">

@@ -64,11 +64,13 @@ export function Booking() {
     //funktion som kollar om det finns lediga bord det datum gästen har valt, presenterar resultat via state variabler, validerar också att gäst valt både datum samt antal gäster //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function checkIfOpenTable() {
 
-        if (chosenDate === "" || chosenAmountOfGuests === "") {
+        if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests) > 90) {
 
             setShowRequiredError(true)
             return
         }
+
+        let amountOfTablesThisBookingWillNeed = Math.ceil(Number(chosenAmountOfGuests) / 6)
 
         let checkDate: string = chosenDate
 
@@ -78,18 +80,62 @@ export function Booking() {
         for (let i = 0; i < bookingsFromApi.length; i++) {
             const order = bookingsFromApi[i];
 
+
             if (order.date === checkDate && order.time === "18:00") {
-                numberOfTablesAt6Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
+                        tablesNeededForThisBooking++
+                        assesInTheChairs = 1
+                    }
+
+                }
+
+                numberOfTablesAt6Left -= tablesNeededForThisBooking
+
+                if (amountOfTablesThisBookingWillNeed > numberOfTablesAt6Left) {
+                    numberOfTablesAt6Left = 0
+                }
+
+
 
             } else if (order.date === checkDate && order.time === "21:00") {
-                numberOfTablesAt9Left--
+
+                let tablesNeededForThisBooking: number = 1;
+                let assesInTheChairs: number = 0
+                let numberOfGuests: number = order.numberOfGuests
+
+                for (let i = 0; i < numberOfGuests; i++) {
+
+                    assesInTheChairs++
+                    if (assesInTheChairs === 7) {
+                        tablesNeededForThisBooking++
+                        assesInTheChairs = 1
+                    }
+
+                }
+
+                numberOfTablesAt9Left -= tablesNeededForThisBooking
+
+                if (amountOfTablesThisBookingWillNeed > numberOfTablesAt9Left) {
+                    numberOfTablesAt9Left = 0
+                }
 
             }
         }
 
+
+
         SetTablesAt6oClock(numberOfTablesAt6Left)
         SetTablesAt9oClock(numberOfTablesAt9Left)
         setShowRequiredError(false)
+
 
     }
 
@@ -105,7 +151,7 @@ export function Booking() {
     }
 
     //////////////////////////// hanterar vald antal gäster och uppdaterar statevariabel ////////////////////////////////////////
-    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLSelectElement>) {
+    function handleChosenAmountOfGuests(e: ChangeEvent<HTMLInputElement>) {
         setChosenAmountOfGuests(e.target.value)
     }
 
@@ -159,7 +205,7 @@ export function Booking() {
 
         }
 
-        if (newUser.phone.length < 10 || newUser.phone.length > 10 ) {
+        if (newUser.phone.length < 10 || newUser.phone.length > 10) {
             setShowPhoneError(true)
             return
         }
@@ -181,9 +227,9 @@ export function Booking() {
                 alert("något gick tyvärr fel, försök igen senare.")
             })
 
-            setTimeout(()=>{
-                setShowBookingDone(false)
-            },5000)
+        setTimeout(() => {
+            setShowBookingDone(false)
+        }, 5000)
     }
 
     //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////
@@ -193,26 +239,19 @@ export function Booking() {
             <GiLotus className="lotus"></GiLotus>
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
+            <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90" />
 
-            <select name="amountOfGuests" onChange={handleChosenAmountOfGuests}>
-                <option value="1">1 pers</option>
-                <option value="2">2 pers</option>
-                <option value="3">3 pers</option>
-                <option value="4">4 pers</option>
-                <option value="5">5 pers</option>
-                <option value="6">6 pers</option>
-            </select>
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
 
 
 
-            {tablesAt6oClock > 0 && <div className="tablesContainer animate__animated animate__fadeIn">
+            {(tablesAt6oClock > 0 || tablesAt9oClock > 0) && <div className="tablesContainer animate__animated animate__fadeIn">
                 <div className="decorationLine"></div>
-                {tablesAt6oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
-                {tablesAt9oClock > 0 && <div className="animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
-                {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
+                {tablesAt6oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt6oClock} lediga bord kl 18.<button className="Btn" onClick={() => { choseTimeForDinner("18:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button> </div>}
+                {tablesAt9oClock > 0 && <div className="tablesLeft animate__animated animate__fadeIn">Det finns {tablesAt9oClock} lediga bord kl 21.<button className="Btn" onClick={() => { choseTimeForDinner("21:00") }}>Välj denna tid <GiHotMeal></GiHotMeal> </button></div>}
             </div>}
+            {tablesAt6oClock === 0 && tablesAt9oClock === 0 && <div className="warning animate__animated animate__headShake">Det fanns tyvärr inga lediga bord det datumet, vänligen prova ett annat datum.</div>}
 
         </div>}
 
@@ -254,7 +293,7 @@ export function Booking() {
                         <button type="button" className="cancelBtn" onClick={cancelBooking}>avbryt <GiCancel></GiCancel> </button>
                         <button type="button" className="Btn" onClick={makeBooking}>boka <GiConfirmed></GiConfirmed> </button>
                     </div>
-                  
+
                 </form>
             </div>
             {showError && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
