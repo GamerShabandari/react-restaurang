@@ -9,11 +9,11 @@ export function Home() {
             <div className='container-food animate__animated animate__fadeIn'>
 
                <div className='title'>
-                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-2s'>MENY</h2>
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>MENY</h2>
                   <img src="../../images/food_animation.gif" alt="animated food icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
 
-               <article className='container-menu  animate__animated animate__fadeIn animate__delay-1s'>
+               <article className='container-menu  animate__animated animate__fadeIn'>
 
                   <div className='foodCard'>
                      <img src='images/ebi.png' alt='menu' />
@@ -78,12 +78,12 @@ export function Home() {
 
 
                <div className='title'>
-                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-2s'>DRYCK</h2>
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>DRYCK</h2>
                   <img src="../../images/drinks_animation.gif" alt="animated drinks icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
                
 
-               <article className='container-drink'>
+               <article className='container-drink animate__animated animate__fadeIn'>
          
                   <div className='foodCard'>
                      <img src='images/sakeHaku2.png' alt='drink' />
@@ -108,12 +108,12 @@ export function Home() {
 
 
                <div className='title'>
-                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-2s'>EFTERRÄTT</h2>
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>EFTERRÄTT</h2>
                   <img src="../../images/cake_animation.gif" alt="animated cake icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
                
 
-               <article className='container-dessert'>
+               <article className='container-dessert animate__animated animate__fadeIn'>
 
                   <div className='foodCard'>
                      <img src='images/greenteaglass.png' alt='dessert' />
