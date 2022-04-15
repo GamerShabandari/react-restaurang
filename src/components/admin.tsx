@@ -368,6 +368,8 @@ export function Admin() {
 
     function saveUpdatedBooking() {
 
+        setShowBookingInputRequired(false)
+
         if (updatedBooking.date === "" || updatedBooking.time === "" || updatedBooking.numberOfGuests === 0) {
             setShowBookingInputRequired(true)
             return
@@ -441,7 +443,7 @@ export function Admin() {
             <div className="bookingBoxDetailsField"><MdGroups></MdGroups>Antal gäster : {booking.numberOfGuests}</div>
             <div className="bookingBoxDetailsField"><MdOutlineDateRange></MdOutlineDateRange>Datum : {booking.date}</div>
             <div className="bookingBoxDetailsField"><MdAccessTime></MdAccessTime>Tid : {booking.time}</div>
-            <button className="Btn" onClick={() => { showDetails(i) }}>se detailjer <MdInfoOutline></MdInfoOutline> </button>
+            <button className="Btn" onClick={() => { showDetails(i) }}>se detaljer <MdInfoOutline></MdInfoOutline> </button>
             <button className="deleteBtn" onClick={() => { deleteBooking(booking._id, i) }}>radera bokning<GiCancel></GiCancel></button>
         </div>)
     })
