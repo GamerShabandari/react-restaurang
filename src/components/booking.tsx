@@ -6,7 +6,7 @@ import { Bookings } from "./models/Bookings";
 import "./booking.css"
 import axios from "axios";
 import { IBooking } from "./models/IBooking";
-import { GiConfirmed, GiCancel, GiHotMeal, GiMeal, GiLotus } from 'react-icons/gi';
+import { GiConfirmed, GiCancel, GiHotMeal, GiMeal } from 'react-icons/gi';
 import { MdPersonAddAlt1, MdEmail, MdPhoneIphone } from "react-icons/md";
 import { FaGlassCheers } from "react-icons/fa";
 
@@ -221,21 +221,20 @@ export function Booking() {
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
             .then(response => {
                 setShowBookingDone(true)
+                setTimeout(() => {
+                    setShowBookingDone(false)
+                }, 5000)
             })
             .catch(error => {
                 console.log(error);
                 alert("något gick tyvärr fel, försök igen senare.")
             })
-
-        setTimeout(() => {
-            setShowBookingDone(false)
-        }, 5000)
     }
 
     //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
-        {!showBookingDone && <div className="inputContainer animate__animated animate__fadeInDown">
+        {!showBookingDone && <div className="inputContainer animate__animated animate__flipInX">
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
             <input type="text" onChange={handleChosenAmountOfGuests} value={chosenAmountOfGuests} placeholder="antal gäster max 90" />
@@ -254,7 +253,7 @@ export function Booking() {
 
         </div>}
 
-        {showUserForm && <div className="formContainer animate__animated animate__fadeInDown">
+        {showUserForm && <div className="formContainer animate__animated animate__flipInX">
             <div>
                 <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
                 <div>
