@@ -11,6 +11,7 @@
     border: #c9464a 1px solid;
     font-family: 'Nunito';
     padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .decorationLine{
@@ -38,9 +39,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30px;
+    padding: 10px;
     gap: 15px;
-    width: 400px;
+    width: fit-content;
     border-radius: 5px;
     border: 1px solid #c9464a;
     transition: 0.2s;
@@ -137,7 +138,7 @@
 }
 
 .formContainer{
-    width: 50%;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -204,7 +205,7 @@
     border: 1px solid red;
     border-radius: 5px;
     padding: 5px;
-    margin: 17px;
+    margin: 10px;
 }
 
 .GDPR {
