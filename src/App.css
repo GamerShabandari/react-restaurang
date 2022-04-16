@@ -69,3 +69,24 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
    width: 130px;
    height: 130px;
  }
+
+ @media screen and (max-width: 1000px) {
+  .logo {
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #c9464a;
+   font-size: 2rem;
+   letter-spacing: 7px;
+   font-weight: 300;
+  }
+
+  .navigation a{
+    text-align: center;
+    color: #f5f7eb;
+    text-decoration: none;
+    transition: 0.2s;
+    font-weight: 500;
+    font-size: 1rem;
+   }
+}
