@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-    /* padding: 20px; */
+    border: #c9464a 1px solid;
     font-family: 'Nunito';
 }
 

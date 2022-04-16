@@ -473,7 +473,7 @@ export function Admin() {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    return (<>
+    return (<div className="adminPageContainer">
 
         <section className="adminBookingSection">
             <div className="adminMainBtns">
@@ -582,5 +582,5 @@ export function Admin() {
 
             {showBooking && bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
         </main>
-    </>)
+    </div>)
 }
