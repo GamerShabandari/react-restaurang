@@ -14,6 +14,7 @@
     justify-content: flex-start;
     gap: 20px;
     padding: 20px;
+    padding-top: 40px;
     font-family: 'Nunito';
     border: 1px solid #c9464a;
     transition: 0.2s;

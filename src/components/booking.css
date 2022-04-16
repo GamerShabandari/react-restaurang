@@ -10,6 +10,7 @@
     gap: 20px;
     border: #c9464a 1px solid;
     font-family: 'Nunito';
+    padding-top: 40px;
 }
 
 .decorationLine{
@@ -224,7 +225,7 @@
       gap: 20px;
       min-height: 100vh;
       width: auto;
-      padding: 30px;
+      padding: 40px;
     }
   }
 

@@ -17,62 +17,62 @@ export function Home() {
 
                   <div className='foodCard'>
                      <img src='images/ebi.png' alt='menu' />
-                     <p>Räka</p>
+                     <p>Räka <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/sardin.png' alt='menu' />
-                     <p>Sardin </p>
+                     <p>Sardin <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/tonfisk.png' alt='menu' />
-                     <p>Tonfisk</p>
+                     <p>Tonfisk <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/sill.png' alt='menu' width="150" height="150" />
-                     <p>Sill</p>
+                     <p>Sill <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/makrill.png' alt='menu' />
-                     <p>Makrill</p>
+                     <p>Makrill <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/flundra.png' alt='menu' />
-                     <p>Flundra </p>
+                     <p>Flundra <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/kai.png' alt='menu' />
-                     <p>Ark shell</p>
+                     <p>Ark shell <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/skal.png' alt='menu' width="150" height="150" />
-                     <p>Skal </p>
+                     <p>Skal <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/temari.png' alt='menu' />
-                     <p>Temari sushi</p>
+                     <p>Temari sushi <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/rollsushi.png' alt='menu' />
-                     <p>Roll sushi</p>
+                     <p>Roll sushi <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/flowersushi.png' alt='menu' />
-                     <p>Deco sushi</p>
+                     <p>Deco sushi <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/bento.png' alt='menu' />
-                     <p>Teishoku</p>
+                     <p>Teishoku <h5>pris: 100kr</h5> </p>
                   </div>
                </article>
 
@@ -81,28 +81,28 @@ export function Home() {
                   <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>DRYCK</h2>
                   <img src="../../images/drinks_animation.gif" alt="animated drinks icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
-               
+
 
                <article className='container-drink animate__animated animate__fadeIn'>
-         
+
                   <div className='foodCard'>
                      <img src='images/sakeHaku2.png' alt='drink' />
-                     <p>Sake Hakutaka</p>
+                     <p>Sake Hakutaka <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/saketaru.png' alt='drink' />
-                     <p>Tunna sake</p>
+                     <p>Tunna sake <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/beer.png' alt='drink' />
-                     <p>Asahi öl</p>
+                     <p>Asahi öl <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/macha.png' alt='drink' />
-                     <p>Macha Te</p>
+                     <p>Macha Te <h5>pris: 100kr</h5> </p>
                   </div>
                </article>
 
@@ -111,28 +111,28 @@ export function Home() {
                   <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>EFTERRÄTT</h2>
                   <img src="../../images/cake_animation.gif" alt="animated cake icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
-               
+
 
                <article className='container-dessert animate__animated animate__fadeIn'>
 
                   <div className='foodCard'>
                      <img src='images/greenteaglass.png' alt='dessert' />
-                     <p>Grönt te glass</p>
+                     <p>Grönt te glass <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/greencake.png' alt='dessert' />
-                     <p>Macha roll</p>
+                     <p>Macha roll <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/fruits.png' alt='dessert' />
-                     <p>Frukt parfait</p>
+                     <p>Frukt parfait <h5>pris: 100kr</h5> </p>
                   </div>
 
                   <div className='foodCard'>
                      <img src='images/cherrymochi.png' alt='dessert' />
-                     <p>Sakura mochi</p>
+                     <p>Sakura mochi <h5>pris: 100kr</h5> </p>
                   </div>
                </article>
             </div>

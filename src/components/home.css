@@ -4,10 +4,11 @@
     flex-direction: column;
     align-items: center;
     width: auto;
-    margin-bottom: 10px;
+    margin: 0;
     min-height: 100vh;
     font-family: 'Nunito';
     border: 1px solid #c9464a;
+    padding-top: 40px;
 }
 
 .container-food{
@@ -57,6 +58,11 @@
 }
 
 .foodCard p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     color: #c9464a;
     font-size: 1.2rem;
     font-weight: 200;
@@ -64,6 +70,16 @@
     text-align: center;
     padding: 5px;
     margin: 0px;
+}
+
+.foodCard p h5{
+    margin: 0;
+    padding: 0;
+    font-weight: 200;
+    font-size: 1.2rem;
+    color: #222934;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .container-menu{
