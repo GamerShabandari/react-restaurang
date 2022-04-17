@@ -204,7 +204,7 @@
      flex-direction: column;
      align-items: center;
      gap: 5px;
-     border: #c9464a 1px dotted;
+     border: #c9464a 2px dotted;
      border-radius: 5px;
      width: auto;
      height: fit-content;

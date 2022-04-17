@@ -61,15 +61,18 @@ export function Booking() {
     }, [])
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //funktion som kollar om det finns lediga bord det datum gästen har valt, presenterar resultat via state variabler, validerar också att gäst valt både datum samt antal gäster //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //funktion som kollar om det finns lediga bord det datum gästen har valt, presenterar resultat via state variabler, validerar också alla val som gjorts//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function checkIfOpenTable() {
 
+
+        // validerar att inget fält är tomt samt att vald antal gäster ej överstiger 90st då max antal gäster per sittning är 90 st (15bord) 
         if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests) > 90) {
 
             setShowRequiredError(true)
             return
         }
 
+        ////////////////////// räknar ut hur många bord som behövs för att få plats med vald antal gäster, om det finns tillräckligt med lediga bord eller ej
         let amountOfTablesThisBookingWillNeed = Math.ceil(Number(chosenAmountOfGuests) / 6)
 
         let checkDate: string = chosenDate
@@ -221,6 +224,9 @@ export function Booking() {
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
             .then(response => {
                 setShowBookingDone(true)
+                setChosenDate("")
+                setChosenTime("")
+                setChosenAmountOfGuests("")
                 setTimeout(() => {
                     setShowBookingDone(false)
                 }, 5000)
@@ -234,6 +240,7 @@ export function Booking() {
     //////////////////////////////// JSX RETURN - växlar olika delar av UI baserat på olika statevariabler///////////////////////////////////////////////////////
     return (<main className="bookingContainer animate__animated animate__fadeIn">
 
+        {/* denna del visar första delen av bokningsprocessen input av datum och antal gäster följt av eventuell varning sam sedan  val av tid för sittning */}
         {!showBookingDone && <div className="inputContainer animate__animated animate__flipInX">
             <h3>Vänligen välj datum och antal gäster.</h3>
             <input type="date" onChange={handleChosenDate} />
@@ -241,7 +248,6 @@ export function Booking() {
 
             {showRequiredError && <div className="warning animate__animated animate__headShake">Du måste ange ett datum och antal gäster</div>}
             <button className="Btn" onClick={checkIfOpenTable}>sök ledigt bord <GiMeal></GiMeal> </button>
-
 
 
             {(tablesAt6oClock > 0 || tablesAt9oClock > 0) && <div className="tablesContainer animate__animated animate__fadeIn">
@@ -253,6 +259,7 @@ export function Booking() {
 
         </div>}
 
+        {/* denna del visar andra delen av bokningsprocessen, kund får fylla i sina uppgifter och bekräfta eller avbryta bokningen */}
         {showUserForm && <div className="formContainer animate__animated animate__flipInX">
             <div>
                 <h3>Fyll i resterande uppgifter för att slutföra bokning</h3>
@@ -297,6 +304,7 @@ export function Booking() {
             {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
             {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav 10 siffor</div>}
         </div>}
+        {/* nedan visar när bokning gjorts och försvinner sedan efter 5 sekunder*/}
         {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Din bokning är nu klar, vi ses! <FaGlassCheers></FaGlassCheers> </div>}
     </main>)
 }

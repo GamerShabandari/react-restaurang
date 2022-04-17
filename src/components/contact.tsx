@@ -8,6 +8,7 @@ import { User } from "./models/User";
 
 export function Contact() {
 
+   ////////////////////////// state variabler ////////////////////////////////////////////////////
     const [newContact, setNewContact] = useState<INewUser>({
 
         name: "",
@@ -22,11 +23,13 @@ export function Contact() {
     const [showEmailError, setShowEmailError] = useState(false);
     const [showPhoneError, setShowPhoneError] = useState(false);
 
+    ////////////////////////// håller reda på all input som görs i formulär //////////////////////////
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         let name = e.target.name;
         setNewContact({ ...newContact, [name]: e.target.value })
     }
 
+    ////////////////////////// validerar alla fält och sedan skickas ett kundobjekt till api //////////////////////////
     function handleSubmit() {
         setFormError(false)
         setShowEmailError(false)
@@ -83,6 +86,8 @@ export function Contact() {
 
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     return (
         <main className="ContactContainer">
             <div className="ContactformContainer animate__animated animate__fadeIn">
