@@ -1,3 +1,8 @@
+.adminPageContainer{
+    border: 1px solid #c9464a;
+    padding-top: 40px;
+}
+
 .adminMain{
     display: flex;
     flex-direction: row;
@@ -5,6 +10,9 @@
     padding: 20px;
     min-height: 100vh;
     font-family: 'Nunito';
+
+    
+
  }
  
  .adminBookingsContainer{
@@ -198,7 +206,9 @@
      flex-direction: column;
      align-items: center;
      gap: 5px;
-     border: #c9464a 1px dotted;
+
+     border: #c9464a 2px dotted;
+
      border-radius: 5px;
      width: auto;
      height: fit-content;
@@ -220,4 +230,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
+

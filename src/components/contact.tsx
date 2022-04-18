@@ -1,11 +1,14 @@
 import axios from "axios";
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
+import { MdEmail, MdPersonAddAlt1, MdPhoneIphone } from "react-icons/md";
+import { GiSamuraiHelmet, GiConfirmed } from "react-icons/gi";
 import './contact.css';
 import { INewUser } from "./models/INewUser";
 import { User } from "./models/User";
 
-export function Contact(){
+export function Contact() {
 
+   ////////////////////////// state variabler ////////////////////////////////////////////////////
     const [newContact, setNewContact] = useState<INewUser>({
 
         name: "",
@@ -18,13 +21,21 @@ export function Contact(){
     const [messageSend, setMessageSend] = useState(false)
     const [FormError, setFormError] = useState(false)
 
+    const [showEmailError, setShowEmailError] = useState(false);
+    const [showPhoneError, setShowPhoneError] = useState(false);
+
+
+    ////////////////////////// håller reda på all input som görs i formulär //////////////////////////
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         let name = e.target.name;
-        setNewContact({...newContact, [name]: e.target.value})
+        setNewContact({ ...newContact, [name]: e.target.value })
     }
 
+    ////////////////////////// validerar alla fält och sedan skickas ett kundobjekt till api //////////////////////////
     function handleSubmit() {
         setFormError(false)
+        setShowEmailError(false)
+        setShowPhoneError(false)
 
         if (newContact.name === "" || newContact.lastname === "" || newContact.email === "" || newContact.phone === "") {
 
@@ -33,43 +44,83 @@ export function Contact(){
             return
         }
 
+        if (!/\S+@\S+\.\S+/.test(newContact.email)) {
+
+
+            setShowEmailError(true)
+
+            return
+        }
+
+        if (!/^\d+$/.test(newContact.phone)) {
+
+            setShowPhoneError(true)
+
+            return
+
+        }
+
+        if (newContact.phone.length < 10 || newContact.phone.length > 10) {
+            setShowPhoneError(true)
+            return
+        }
+
         let customercontact = new User(newContact.name, newContact.lastname, newContact.email, newContact.phone)
 
-        axios.post("https://school-restaurant-api.azurewebsites.net/customer/create", customercontact, { headers: {"content-type": "application/json"}})
-        .then(response => {
-            setMessageSend(true)
-                
-        })
-        .catch(error => {
-            alert("Det gick tyvärr inte att skicka!")
-        })
+        axios.post("https://school-restaurant-api.azurewebsites.net/customer/create", customercontact, { headers: { "content-type": "application/json" } })
+            .then(response => {
+                setMessageSend(true)
+                setNewContact({
+                    name: "",
+                    lastname: "",
+                    email: "",
+                    phone: "",
+                })
+                setTimeout(() => {
+                    setMessageSend(false)
+                }, 5000)
+
+
+            })
+            .catch(error => {
+                alert("Det gick tyvärr inte att skicka!")
+            })
 
     }
 
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     return (
         <main className="ContactContainer">
-            <div className="ContactformContainer animate__animated animate__fadeInDown">
-                <h3>Kontakta oss</h3>
-                <form>
+            <div className="ContactformContainer animate__animated animate__fadeIn">
+               <img className="animatedContactIcon  animate__animated animate__fadeIn animate__delay-1s" src="../../images/contact_animation.gif" alt="contact animated icon" />
+                <h3 className="header">Fyll i dina uppgifter så kontaktar vi dig <GiSamuraiHelmet></GiSamuraiHelmet></h3>
+                <form className="formField">
                     <div className="formInputDiv">
-                    <input type="text" name="name" value={newContact.name} onChange={handleChange} placeholder="Förnamn"></input>
+                    <MdPersonAddAlt1></MdPersonAddAlt1>
+                        <input type="text" name="name" value={newContact.name} onChange={handleChange} placeholder="Förnamn"></input>
                     </div>
                     <div className="formInputDiv">
-                    <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange} placeholder="Efternamn"></input><br></br>
+                    <MdPersonAddAlt1></MdPersonAddAlt1>
+                        <input type="text" name="lastname" value={newContact.lastname} onChange={handleChange} placeholder="Efternamn"></input>
                     </div>
                     <div className="formInputDiv">
-                    <input type="email" name="email" value={newContact.email} onChange={handleChange} placeholder="E-post" ></input>
+                    <MdEmail></MdEmail>
+                        <input type="email" name="email" value={newContact.email} onChange={handleChange} placeholder="E-post" ></input>
                     </div>
                     <div className="formInputDiv">
-                    <input type="text" name="phone" value={newContact.phone} onChange={handleChange} placeholder="Telefon"></input>
+                    <MdPhoneIphone></MdPhoneIphone>
+                        <input type="text" name="phone" value={newContact.phone} onChange={handleChange} placeholder="Telefon"></input>
                     </div>
-                    <button type="button" className="sendBtn" onClick={handleSubmit} >SKICKA</button>
+                    <button type="button" className="sendBtn" onClick={handleSubmit} >SKICKA <GiConfirmed></GiConfirmed></button>
                 </form>
                 <div>
-                {messageSend && <div className="contactDone animate__animated animate__fadeInDown">Ditt meddelande är skickat!</div>}
-                {FormError && <div className="error animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
+                    {FormError && <div className="error animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
+                    {showEmailError && <div className="warning animate__animated animate__headShake">Vänligen ange en giltig email</div>}
+                    {showPhoneError && <div className="warning animate__animated animate__headShake">Telefonnummer får bara bestå utav 10 siffor</div>}
                 </div>
-                </div>
+            </div>
+            {messageSend && <div className="contactDone animate__animated animate__fadeInDown">Ditt meddelande är skickat!</div>}
+
         </main>)
 }

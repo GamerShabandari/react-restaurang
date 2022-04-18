@@ -10,9 +10,13 @@ import { GiCancel, GiConfirmed, GiHotMeal, GiMeal, GiPassport } from "react-icon
 import { MdEmail, MdPersonAddAlt1, MdPhoneIphone, MdInfoOutline, MdLibraryAdd, MdOutlineEditNote, MdPersonPin, MdGroups, MdOutlineDateRange, MdAccessTime, MdSearch, MdOutlineUpdate } from "react-icons/md"
 import { User } from "./models/User"
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export function Admin() {
 
     const restaurantID = "624db995d80b65d5c561f68d"
+
+    ////////////////////// state variabler //////////////////////
 
     const [bookingsFromApi, setBookingsFromApi] = useState<IBooking[]>([])
     const [showDetailsSection, setShowDetailsSection] = useState(false);
@@ -90,6 +94,8 @@ export function Admin() {
     const [searchResults, setSearchResults] = useState<IBooking[]>([])
     //////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////// useEffect som laddar alla bokningar i databasen, körs när komponenten laddas och vareje gång man uppdaterar/skapar/ändrar en bokning
+
     useEffect(() => {
 
         axios.get<IBooking[]>("https://school-restaurant-api.azurewebsites.net/booking/restaurant/624db995d80b65d5c561f68d")
@@ -99,6 +105,9 @@ export function Admin() {
 
     }, [showBookingDone])
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////// funktion som körs när admin klickar på en bokning för att se mer info, hämtar info om kund från databas, skapar objekt, uppdaterar state/sida
     function showDetails(bookingIndex: number) {
 
         let chosenBooking = bookingsFromApi[bookingIndex];
@@ -127,30 +136,29 @@ export function Admin() {
             })
     }
 
+    ////////////////////// funktion som körs när admin vill radera en bokning, raderar från databas och uppdaterar state/sida
     function deleteBooking(bookingId: string, index: number) {
 
         axios.delete("https://school-restaurant-api.azurewebsites.net/booking/delete/" + bookingId)
             .then(response => {
 
-                let updatedBookings: IBooking[] = bookingsFromApi;
-                updatedBookings.splice(index, 1);
-                setBookingsFromApi([...updatedBookings])
+
+
                 setSearchResults([...[]])
                 setSearchValue("")
                 setShowSearchField(false);
                 setShowBooking(true)
                 setShowBookingDone(true)
 
+
+
                 setTimeout(() => {
                     setShowBookingDone(false)
                 }, 5000)
-
-
-
-
             })
     }
 
+    ////////////////////// körs när admin vill ändra en bokning, skapar ett nytt komplett bokningsobjekt (baserat på booking och customer från api) som sedan admin kan ändra
     function editBooking() {
 
         let ToEdit = detailedBooking;
@@ -166,11 +174,13 @@ export function Admin() {
         setShowEditBookingForm(true)
     }
 
+    ////////////////////// stänger ner detalj gränssnittet för admin
     function closeDetailsSection() {
         setShowDetailsSection(false)
         setShowBooking(true)
     }
 
+    ////////////////////// visar rätt gränssnitt för admin när admin vill skapa en ny bokning
     function showBookingField() {
         setShowBookingForm(!showBookingForm)
         setShowBookingDone(false)
@@ -195,21 +205,28 @@ export function Admin() {
         setGDPRstatus(false)
     }
 
+    ////////////////////// state variabel som håller koll på antal gäster som väljs av admin vid ändringar 
+
     function handleChosenAmountOfGuests(e: ChangeEvent<HTMLInputElement>) {
         setChosenAmountOfGuests(e.target.value)
     }
-
+    ////////////////////// state variabel som håller koll på datum som väljs av admin vid ändringar 
     function handleChosenDate(e: ChangeEvent<HTMLInputElement>) {
         setChosenDate(e.target.value)
     }
 
+    ////////////////////// kollar om det finns ledigt bord på vald datum ////
     function checkIfOpenTable() {
+
+        // validerar att inget fält är tomt samt att vald antal gäster ej överstiger 90st då max antal gäster per sittning är 90 st (15bord) 
 
         if (chosenDate === "" || chosenAmountOfGuests === "" || Number(chosenAmountOfGuests) > 90) {
 
             setShowRequiredError(true)
             return
         }
+
+        ////////////////////// räknar ut hur många bord som behövs för att få plats med vald antal gäster, om det finns tillräckligt med lediga bord eller ej
 
         let amountOfTablesThisBookingWillNeed = Math.ceil(Number(chosenAmountOfGuests) / 6)
 
@@ -277,13 +294,11 @@ export function Admin() {
         SetTablesAt9oClock(numberOfTablesAt9Left)
         setShowRequiredError(false)
 
-
     }
-
+    // låter admin välja vilken sittning/tid bokningen skall göras 
     function choseTimeForDinner(time: string) {
         setChosenTime(time)
         setShowUserForm(true)
-
     }
 
     //////////////////////////// avbryter bokningen ////////////////////////////////////////
@@ -304,8 +319,8 @@ export function Admin() {
         setGDPRstatus(e.target.checked)
     }
 
+    //////////////////////////// skapar en ny bokning, validerar först att alla fält är korrekt ifyllda, skickar sedan iväg objekt till databas och uppdaterar gränssnittet 
     function makeBooking() {
-
 
         setShowError(false)
         setShowEmailError(false)
@@ -350,6 +365,11 @@ export function Admin() {
         axios.post("https://school-restaurant-api.azurewebsites.net/booking/create", booking, { headers: { "content-type": "application/json" } })
             .then(response => {
                 setShowBookingDone(true)
+
+                setChosenDate("")
+                setChosenTime("")
+                setChosenAmountOfGuests("")
+
                 setTimeout(() => {
                     setShowBookingDone(false)
                 }, 5000)
@@ -360,12 +380,14 @@ export function Admin() {
             })
     }
 
+    //////////////////////////// avbryter uppdatering av en bokning
     function cancelUpdateBooking() {
         setShowBooking(true)
         setShowEditBookingForm(false)
         setShowBookingInputRequired(false)
     }
 
+    //////////////////////////// sparar ändringar som gjorts i en befintlig bokning efter lite validering 
     function saveUpdatedBooking() {
 
         setShowBookingInputRequired(false)
@@ -404,16 +426,21 @@ export function Admin() {
 
     }
 
-    function handleEditFormTimeAndGuestsChange(e: ChangeEvent<HTMLSelectElement>) {
+    ////////////// håller reda på värdet i inputfält för när man ändrar tiden för en bokning
+    function handleEditFormTimeChange(e: ChangeEvent<HTMLSelectElement>) {
         let name = e.target.name;
 
         setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
 
-    function handleEditFormDateChange(e: ChangeEvent<HTMLInputElement>) {
+    ////////////// håller reda på värdet i inputfält för när man ändrar datum och antal gäster för en bokning
+    function handleEditFormDateAndGuestsChange(e: ChangeEvent<HTMLInputElement>) {
         let name = e.target.name;
         setUpdatedBooking({ ...updatedBooking, [name]: e.target.value })
     }
+
+
+    ///////////// låter admin söka efter bokningar baserat på bokningsnummer
 
     function searchBookings() {
 
@@ -434,8 +461,9 @@ export function Admin() {
         setSearchValue(e.target.value)
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////// 3 variabler som innehåller HTML som sedan interpoleras på sidan /////////
     let bookingsHtml = bookingsFromApi.map((booking, i) => {
         return (<div className="bookingBox animate__animated animate__fadeIn" key={i}>
 
@@ -471,17 +499,25 @@ export function Admin() {
         </div>)
     })
 
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    return (<>
+    return (<div className="adminPageContainer">
+
 
         <section className="adminBookingSection">
-            <div className="adminMainBtns">
+
+            <div className="adminMainBtns"> {/* denna del visar knappar överst och låter admin söka eller skapa bokning */}
+
                 <button className="Btn" onClick={showBookingField}>skapa bokning <MdLibraryAdd></MdLibraryAdd> </button>
                 <button className="Btn" onClick={() => { setShowBooking(!showBooking); setShowSearchField(!showSearchField) }}>sök bokning <MdSearch></MdSearch> </button>
             </div>
 
             {showBookingDone && <div className="bookingDone animate__animated animate__fadeInDown">Uppdaterat <MdOutlineUpdate></MdOutlineUpdate> </div>}
+
+
+            {/* denna del visar bokningsfältet när en ny bokning skall skapas*/}
+
             {showBookingForm && <div className="adminBookingForm animate__animated animate__flipInX">
 
                 <h3>Vänligen välj datum och antal gäster.</h3>
@@ -546,11 +582,15 @@ export function Admin() {
             </div>}
 
         </section>
-        <main className="adminMain">
 
-            {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>}
 
-            {showSearchField && <section className="adminSearchContainer animate__animated animate__flipInX">
+
+        <main className="adminMain"> {/* main delen av sidan, växlar innehåll beroende på vad admin gör för stunden */}
+
+
+            {showDetailsSection && <section className="adminDetailsContainer">{detailsHtml}</section>} {/* denna rad visar detaljvy utav den bokning admin valt */}
+
+            {showSearchField && <section className="adminSearchContainer animate__animated animate__flipInX"> {/* denna del visar sökfält samt sökresultat när admin sökt efter en specifik bokning */}
 
                 <input className="searchInput" type="text" placeholder="bokningsnummer" value={searchValue} onChange={handleSearch} />
                 <button className="Btn" onClick={searchBookings}>sök<MdSearch></MdSearch> </button>
@@ -560,27 +600,34 @@ export function Admin() {
                 </div>
             </section>}
 
-            {showEditBookingForm && <div className="adminUpdateBookingContainer animate__animated animate__flipInX">
+
+            {showEditBookingForm && <div className="adminUpdateBookingContainer animate__animated animate__flipInX"> {/* denna del visar gränssnitt när admin försöker redigera/ändra en befintlig bokning */}
 
                 <h3>Vänligen välj ny tid,datum och antal gäster.</h3>
 
-                <input type="date" name="date" onChange={handleEditFormDateChange} />
+                <input type="date" name="date" onChange={handleEditFormDateAndGuestsChange} />
 
-                <select name="time" onChange={handleEditFormTimeAndGuestsChange}>
+                <select name="time" onChange={handleEditFormTimeChange}>
                     <option value="18:00">18:00</option>
                     <option value="21:00">21:00</option>
                 </select>
 
-                <input name="numberOfGuests" type="text" onChange={handleEditFormDateChange} placeholder="antal gäster max 90" />
+
+                <input name="numberOfGuests" type="text" onChange={handleEditFormDateAndGuestsChange} placeholder="antal gäster max 90" />
+
 
                 {showBookingInputRequired && <div className="warning animate__animated animate__headShake">Alla fällt är obligatoriska</div>}
                 <button className="Btn" onClick={saveUpdatedBooking} >Uppdatera bokning <GiConfirmed></GiConfirmed> </button>
                 <button className="deleteBtn" onClick={cancelUpdateBooking}>Avbryt <GiCancel></GiCancel></button>
             </div>}
 
+
+            {/* visas om inga bokningar finns/ bokningar laddas från api */}
+
             {bookingsFromApi.length < 1 && <section className="loading"> <img src="../../images/rocket.gif" alt="loading animation" /> laddar...</section>}
 
+            {/* denna del visar alla bokningar som finns när dem finns/har hämtats från api */}
             {showBooking && bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
         </main>
-    </>)
+    </div>)
 }

@@ -1,4 +1,39 @@
 
+
+.ContactContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width:auto;
+    color:#222934;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    padding-top: 40px;
+    font-family: 'Nunito';
+    border: 1px solid #c9464a;
+    transition: 0.2s;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f7ebb8;
+}
+
+.ContactformContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 20px;
+=======
+
 .ContactContainer{
     width:auto;
     color:#222934;
@@ -12,14 +47,13 @@
     padding: 20px;
 }
 
-.ContactformContainer:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-
-}
 
 .ContactformContainer form{
     display: flex;
     flex-direction: column;
+
+    align-items: center;
+
     gap: 15px;
     width: 50%;
     margin: 0 auto;
@@ -30,6 +64,8 @@
     border: 1px solid #c9464a;
     border-radius: 5px;
     padding: 5px;
+
+    min-width: 300px;
 }
 
 .ContactformContainer form input:disabled{
@@ -38,12 +74,16 @@
     border: 1px solid #c9464a34;
 }
 
+
 .ContactformContainer form input:focus{
     outline: none;
 }
 
 .sendBtn{
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
     background-color: #c9464a;
     color:#f5f7eb;
     font-size: 0.8rem;
@@ -69,7 +109,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    width: fit-content;
+    gap: 5px;
 
 }
 
@@ -89,5 +130,18 @@
     color:#f5f7eb;
     padding: 15px;
     border-radius: 5px;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.animatedContactIcon{
+    width: 300px;
+    filter: grayscale(100%);
+
 }
 

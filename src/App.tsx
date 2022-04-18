@@ -14,10 +14,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header className='animate__animated animate__fadeInDown'>
+        <header>
           <nav>
             <Link className='logoLink' to="/">
-              <h1 className='logo'>Katana <GiSamuraiHelmet></GiSamuraiHelmet> Sushi</h1>
+              <h1 className='logo animate__animated animate__flipInX animate__delay-1s'>Katana<h1 className='
+              logoIcon'><GiSamuraiHelmet></GiSamuraiHelmet></h1> Sushi</h1>
             </Link>
             <div>
               <ul className='navigation animate__animated animate__backInDown'>
