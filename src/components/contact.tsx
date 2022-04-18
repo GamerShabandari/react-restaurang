@@ -20,8 +20,10 @@ export function Contact() {
 
     const [messageSend, setMessageSend] = useState(false)
     const [FormError, setFormError] = useState(false)
+
     const [showEmailError, setShowEmailError] = useState(false);
     const [showPhoneError, setShowPhoneError] = useState(false);
+
 
     ////////////////////////// håller reda på all input som görs i formulär //////////////////////////
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -119,5 +121,6 @@ export function Contact() {
                 </div>
             </div>
             {messageSend && <div className="contactDone animate__animated animate__fadeInDown">Ditt meddelande är skickat!</div>}
+
         </main>)
 }
