@@ -1,6 +1,6 @@
 
 import './App.css';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { HashRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home } from './components/home';
 import { Booking } from './components/booking';
 import { Contact } from './components/contact';
@@ -13,7 +13,7 @@ import { Footer } from './components/footer';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <header>
           <nav>
             <Link className='logoLink' to="/">
@@ -43,7 +43,7 @@ function App() {
         </Routes>
 
         <Footer></Footer>
-      </BrowserRouter>
+      </HashRouter>
 
     </div>
   );
