@@ -164,6 +164,16 @@ export function Booking() {
     //////////////////////////// avbryter bokningen ////////////////////////////////////////
     function cancelBooking() {
         setShowUserForm(false)
+        setShowRequiredError(false)
+        setShowEmailError(false);
+        setShowPhoneError(false);
+        setGDPRstatus(false)
+                setNewUser({
+                    name: "",
+                    lastname: "",
+                    email: "",
+                    phone: ""
+                })
     }
 
     //////////////////////////// hanterar formulär för alla kunduppgifter, uppdaterar statevariabel ////////////////////////////////////////
@@ -231,6 +241,16 @@ export function Booking() {
                 setChosenDate("")
                 setChosenTime("")
                 setChosenAmountOfGuests("")
+                SetTablesAt6oClock(-1)
+                SetTablesAt9oClock(-1)
+                setGDPRstatus(false)
+                setNewUser({
+                    name: "",
+                    lastname: "",
+                    email: "",
+                    phone: ""
+                })
+            
 
                 setTimeout(() => {
                     setShowBookingDone(false)
