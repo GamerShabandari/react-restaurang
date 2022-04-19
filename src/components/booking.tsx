@@ -164,6 +164,7 @@ export function Booking() {
     //////////////////////////// avbryter bokningen ////////////////////////////////////////
     function cancelBooking() {
         setShowUserForm(false)
+        setShowError(false)
         setShowRequiredError(false)
         setShowEmailError(false);
         setShowPhoneError(false);
