@@ -93,7 +93,7 @@ export function Contact() {
     return (
         <main className="ContactContainer">
             <div className="ContactformContainer animate__animated animate__fadeIn">
-               <img className="animatedContactIcon  animate__animated animate__fadeIn animate__delay-1s" src="../../images/contact_animation.gif" alt="contact animated icon" />
+               <img className="animatedContactIcon  animate__animated animate__fadeIn animate__delay-1s" src="images/contact_animation.gif" alt="contact animated icon" />
                 <h3 className="header">Fyll i dina uppgifter så kontaktar vi dig <GiSamuraiHelmet></GiSamuraiHelmet></h3>
                 <form className="formField">
                     <div className="formInputDiv">

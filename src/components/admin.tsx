@@ -624,7 +624,7 @@ export function Admin() {
 
             {/* visas om inga bokningar finns/ bokningar laddas från api */}
 
-            {bookingsFromApi.length < 1 && <section className="loading"> <img src="../../images/rocket.gif" alt="loading animation" /> laddar...</section>}
+            {bookingsFromApi.length < 1 && <section className="loading"> <img src="images/rocket.gif" alt="loading animation" /> laddar...</section>}
 
             {/* denna del visar alla bokningar som finns när dem finns/har hämtats från api */}
             {showBooking && bookingsFromApi.length > 0 && <section className="adminBookingsContainer">{bookingsHtml}</section>}
