@@ -9,7 +9,7 @@ export function Home() {
             <div className='container-food animate__animated animate__fadeIn'>
 
                <div className='title'>
-                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>MENY</h2>
+                  <h2 className='food-title animate__animated animate__fadeIn animate__delay-1s'>MENY </h2>
                   <img src="../../images/food_animation.gif" alt="animated food icon" className='animatedIcon animate__animated animate__fadeIn animate__delay-2s' />
                </div>
 
