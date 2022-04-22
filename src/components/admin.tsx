@@ -67,7 +67,7 @@ function Change(){
      )
      .then(data=> {
        if(data){
-         alert("Info updated successfully");
+         
          window.location.reload();
        }
      })
