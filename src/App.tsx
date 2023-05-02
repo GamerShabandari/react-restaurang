@@ -17,8 +17,8 @@ function App() {
         <header>
           <nav>
             <Link className='logoLink' to="/">
-              <h1 className='logo animate__animated animate__flipInX animate__delay-1s'>Katana<div className='
-              logoIcon'><GiSamuraiHelmet></GiSamuraiHelmet></div> Sushi</h1>
+              <h1 className='logo animate__animated animate__flipInX animate__delay-1s'><div className='
+              logoIcon'><GiSamuraiHelmet></GiSamuraiHelmet></div>Katana Sushi</h1>
             </Link>
             <div>
               <ul className='navigation animate__animated animate__backInDown'>

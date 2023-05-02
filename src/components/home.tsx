@@ -75,12 +75,6 @@ export function Home() {
                   </div>
 
                   <div className='foodCard'>
-                     <img src='images/flowersushi.png' alt='menu' />
-
-                     <div>Deco sushi <p>pris: 100kr</p> </div>
-                  </div>
-
-                  <div className='foodCard'>
                      <img src='images/bento.png' alt='menu' />
 
                      <div>Teishoku <p>pris: 100kr</p> </div>
